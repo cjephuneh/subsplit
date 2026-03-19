@@ -17,7 +17,8 @@ type Model = {
   provider: string;
   description: string;
   modelType?: string;
-  creditsPer1kTokensCents: number;
+  inputCentsPer1kTokens: number;
+  outputCentsPer1kTokens: number;
 };
 type Tx = {
   id: string;
@@ -167,9 +168,9 @@ export function DashboardClient(props: Props) {
   const selectedModel = props.models.find((m) => m.key === selectedModelKey) ?? null;
   const creditsNeeded =
     selectedModel && Number.isFinite(tokens)
-      ? Math.ceil((tokens / 1000) * selectedModel.creditsPer1kTokensCents) / 100
+      ? Math.ceil((tokens / 1000) * ((selectedModel.inputCentsPer1kTokens + selectedModel.outputCentsPer1kTokens) / 2)) / 100
       : 0;
-  const kesEstimate = Math.max(1, Math.ceil(creditsNeeded * 0.95));
+  const kesEstimate = Math.max(1, Math.ceil(creditsNeeded * 0.5));
 
   async function refreshAll() {
     const [me, txs, notifs, keyList] = await Promise.all([
@@ -479,7 +480,7 @@ export function DashboardClient(props: Props) {
                       </div>
                       <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{m.description}</div>
                       <div className="mt-3 text-xs text-zinc-600 dark:text-zinc-400">
-                        Rate: KES {Math.ceil(m.creditsPer1kTokensCents * 0.95 / 100)}/1k tokens
+                        Rate: KES {Math.ceil(((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2) * 0.5 / 100)}/1k tokens
                       </div>
                     </div>
                   ))}
@@ -577,7 +578,7 @@ export function DashboardClient(props: Props) {
                       >
                         {modelsForType.map((m) => (
                           <option key={m.key} value={m.key}>
-                            {m.name} (KES {Math.ceil(m.creditsPer1kTokensCents * 0.95 / 100)}/1k)
+                            {m.name} (KES {Math.ceil(((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2) * 0.5 / 100)}/1k)
                           </option>
                         ))}
                       </select>

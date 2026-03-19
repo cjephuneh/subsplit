@@ -13,7 +13,8 @@ type Model = {
   provider: string;
   description: string;
   modelType: string;
-  creditsPer1kTokensCents: number;
+  inputCentsPer1kTokens: number;
+  outputCentsPer1kTokens: number;
   supportsChat: boolean;
   supportsImage: boolean;
   supportsVideo: boolean;
@@ -43,7 +44,8 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
       provider: String(fd.get("provider") ?? "").trim(),
       description: String(fd.get("description") ?? "").trim(),
       modelType: String(fd.get("modelType") ?? "TEXT"),
-      creditsPer1kTokensCents: Number(fd.get("rate") ?? 260),
+      inputCentsPer1kTokens: Number(fd.get("inputRate") ?? 25),
+      outputCentsPer1kTokens: Number(fd.get("outputRate") ?? 100),
       supportsChat: Boolean(fd.get("supportsChat")),
       supportsImage: Boolean(fd.get("supportsImage")),
       supportsVideo: Boolean(fd.get("supportsVideo")),
@@ -106,7 +108,7 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
             <Input name="provider" placeholder="Provider (e.g. Anthropic)" aria-label="Provider" required />
             <Input name="description" placeholder="Short description" aria-label="Description" />
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <select
                 name="modelType"
                 className="h-11 w-full rounded-2xl border border-zinc-200 bg-white px-4 text-sm text-zinc-900 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:focus-visible:ring-zinc-600"
@@ -120,13 +122,23 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
                 <option value="EMBEDDING">EMBEDDING</option>
               </select>
               <Input
-                name="rate"
+                name="inputRate"
                 type="number"
                 inputMode="numeric"
                 min="1"
                 step="1"
-                placeholder="creditsPer1kTokensCents (e.g. 260)"
-                aria-label="Rate (centi-credits per 1k tokens)"
+                placeholder="Input rate (centi-credits per 1k)"
+                aria-label="Input rate (centi-credits per 1k prompt tokens)"
+                required
+              />
+              <Input
+                name="outputRate"
+                type="number"
+                inputMode="numeric"
+                min="1"
+                step="1"
+                placeholder="Output rate (centi-credits per 1k)"
+                aria-label="Output rate (centi-credits per 1k completion tokens)"
                 required
               />
             </div>
@@ -193,7 +205,7 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
                 </div>
                 <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{m.description}</div>
                 <div className="mt-3 text-xs text-zinc-600 dark:text-zinc-400">
-                  Rate: {(m.creditsPer1kTokensCents / 100).toFixed(2)} credits / 1k • Type: {m.modelType}
+                  Rate: Input {(m.inputCentsPer1kTokens / 100).toFixed(2)} / Output {(m.outputCentsPer1kTokens / 100).toFixed(2)} credits • Type: {m.modelType}
                 </div>
                 {m.endpointUrl ? (
                   <div className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 space-y-0.5">

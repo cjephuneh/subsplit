@@ -6,14 +6,15 @@ export const runtime = "nodejs";
 
 export default async function ModelsDocs() {
   const models = await prisma.modelOffering.findMany({
-    orderBy: [{ modelType: "asc" }, { provider: "asc" }, { creditsPer1kTokensCents: "asc" }],
+    orderBy: [{ modelType: "asc" }, { provider: "asc" }, { outputCentsPer1kTokens: "asc" }],
     select: {
       key: true,
       name: true,
       provider: true,
       modelType: true,
       description: true,
-      creditsPer1kTokensCents: true,
+      inputCentsPer1kTokens: true,
+      outputCentsPer1kTokens: true,
       supportsChat: true,
       supportsImage: true,
       supportsVideo: true,
@@ -58,7 +59,7 @@ export default async function ModelsDocs() {
                       </div>
                     </div>
                     <div className="text-sm font-semibold">
-                      {(m.creditsPer1kTokensCents / 100).toFixed(2)} credits / 1k tokens
+                      Input {(m.inputCentsPer1kTokens / 100).toFixed(2)} / Output {(m.outputCentsPer1kTokens / 100).toFixed(2)} credits / 1k tokens
                     </div>
                   </div>
 

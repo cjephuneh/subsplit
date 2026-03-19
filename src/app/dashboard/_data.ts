@@ -10,14 +10,15 @@ export async function getDashboardData(userId: string) {
 
   const [models, transactions, notifications] = await Promise.all([
     prisma.modelOffering.findMany({
-      orderBy: { creditsPer1kTokensCents: "asc" },
+      orderBy: { outputCentsPer1kTokens: "asc" },
       select: {
         key: true,
         name: true,
         provider: true,
         description: true,
         modelType: true,
-        creditsPer1kTokensCents: true,
+        inputCentsPer1kTokens: true,
+        outputCentsPer1kTokens: true,
       },
     }),
     walletId

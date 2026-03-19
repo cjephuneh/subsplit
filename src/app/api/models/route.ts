@@ -4,14 +4,15 @@ export const runtime = "nodejs";
 
 export async function GET() {
   const models = await prisma.modelOffering.findMany({
-    orderBy: { creditsPer1kTokensCents: "asc" },
+    orderBy: { outputCentsPer1kTokens: "asc" },
     select: {
       key: true,
       name: true,
       provider: true,
       modelType: true,
       description: true,
-      creditsPer1kTokensCents: true,
+      inputCentsPer1kTokens: true,
+      outputCentsPer1kTokens: true,
       supportsChat: true,
       supportsImage: true,
       supportsVideo: true,

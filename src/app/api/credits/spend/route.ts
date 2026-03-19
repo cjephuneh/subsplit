@@ -17,9 +17,9 @@ const BodySchema = z.object({
   note: z.string().max(200).optional(),
 });
 
-function costForTokensCents(input: { tokens: number; centsPer1k: number }) {
+function costForTokensCents(input: { tokens: number; blendedCentsPer1k: number }) {
   // ceil so we don't undercharge at small sizes
-  return Math.ceil((input.tokens / 1000) * input.centsPer1k);
+  return Math.ceil((input.tokens / 1000) * input.blendedCentsPer1k);
 }
 
 export async function POST(req: Request) {
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     const model = await prisma.modelOffering.findUnique({
       where: { key: body.modelKey },
-      select: { key: true, creditsPer1kTokensCents: true },
+      select: { key: true, inputCentsPer1kTokens: true, outputCentsPer1kTokens: true },
     });
     if (!model) {
       return jsonError(404, {
@@ -38,9 +38,10 @@ export async function POST(req: Request) {
       });
     }
 
+    const blendedCentsPer1k = (model.inputCentsPer1kTokens + model.outputCentsPer1kTokens) / 2;
     const costCents = costForTokensCents({
       tokens: body.tokens,
-      centsPer1k: model.creditsPer1kTokensCents,
+      blendedCentsPer1k,
     });
 
     const result = await createTransactionAndUpdateBalance({
