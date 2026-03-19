@@ -20,14 +20,14 @@ function creditsToCents(credits: number) {
   return Math.round(credits * 100);
 }
 
-function costForTokensCents(input: { tokens: number; centsPer1k: number }) {
-  return Math.ceil((input.tokens / 1000) * input.centsPer1k);
+function costForTokensCents(input: { tokens: number; blendedCentsPer1k: number }) {
+  return Math.ceil((input.tokens / 1000) * input.blendedCentsPer1k);
 }
 
 function getKesMultiplier() {
-  const raw = process.env.CREDIT_KES_MULTIPLIER ?? "0.95";
+  const raw = process.env.CREDIT_KES_MULTIPLIER ?? "0.5";
   const parsed = Number(raw);
-  if (!Number.isFinite(parsed) || parsed <= 0) return 0.95;
+  if (!Number.isFinite(parsed) || parsed <= 0) return 0.5;
   return parsed;
 }
 
@@ -65,15 +65,16 @@ export async function POST(req: Request) {
 
       const model = await prisma.modelOffering.findUnique({
         where: { key: modelKey },
-        select: { key: true, creditsPer1kTokensCents: true },
+        select: { key: true, inputCentsPer1kTokens: true, outputCentsPer1kTokens: true },
       });
       if (!model) {
         return jsonError(404, { error: "MODEL_NOT_FOUND", message: "That model is not available." });
       }
 
+      const blendedCentsPer1k = (model.inputCentsPer1kTokens + model.outputCentsPer1kTokens) / 2;
       creditsCents = costForTokensCents({
         tokens,
-        centsPer1k: model.creditsPer1kTokensCents,
+        blendedCentsPer1k,
       });
       const credits = creditsCents / 100;
       amountKes = Math.max(1, Math.ceil(credits * kesMultiplier));

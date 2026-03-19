@@ -1724,6 +1724,7 @@ export namespace Prisma {
     displayName: string | null
     passwordHash: string | null
     isAdmin: boolean | null
+    preferredCurrency: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1734,6 +1735,7 @@ export namespace Prisma {
     displayName: string | null
     passwordHash: string | null
     isAdmin: boolean | null
+    preferredCurrency: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1744,6 +1746,7 @@ export namespace Prisma {
     displayName: number
     passwordHash: number
     isAdmin: number
+    preferredCurrency: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1756,6 +1759,7 @@ export namespace Prisma {
     displayName?: true
     passwordHash?: true
     isAdmin?: true
+    preferredCurrency?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1766,6 +1770,7 @@ export namespace Prisma {
     displayName?: true
     passwordHash?: true
     isAdmin?: true
+    preferredCurrency?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1776,6 +1781,7 @@ export namespace Prisma {
     displayName?: true
     passwordHash?: true
     isAdmin?: true
+    preferredCurrency?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1859,6 +1865,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin: boolean
+    preferredCurrency: string
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1886,6 +1893,7 @@ export namespace Prisma {
     displayName?: boolean
     passwordHash?: boolean
     isAdmin?: boolean
+    preferredCurrency?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     wallet?: boolean | User$walletArgs<ExtArgs>
@@ -1902,6 +1910,7 @@ export namespace Prisma {
     displayName?: boolean
     passwordHash?: boolean
     isAdmin?: boolean
+    preferredCurrency?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1912,6 +1921,7 @@ export namespace Prisma {
     displayName?: boolean
     passwordHash?: boolean
     isAdmin?: boolean
+    preferredCurrency?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1922,11 +1932,12 @@ export namespace Prisma {
     displayName?: boolean
     passwordHash?: boolean
     isAdmin?: boolean
+    preferredCurrency?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "isAdmin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "isAdmin" | "preferredCurrency" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     wallet?: boolean | User$walletArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
@@ -1953,6 +1964,7 @@ export namespace Prisma {
       displayName: string
       passwordHash: string
       isAdmin: boolean
+      preferredCurrency: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2388,6 +2400,7 @@ export namespace Prisma {
     readonly displayName: FieldRef<"User", 'String'>
     readonly passwordHash: FieldRef<"User", 'String'>
     readonly isAdmin: FieldRef<"User", 'Boolean'>
+    readonly preferredCurrency: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -5203,11 +5216,13 @@ export namespace Prisma {
   }
 
   export type ModelOfferingAvgAggregateOutputType = {
-    creditsPer1kTokensCents: number | null
+    inputCentsPer1kTokens: number | null
+    outputCentsPer1kTokens: number | null
   }
 
   export type ModelOfferingSumAggregateOutputType = {
-    creditsPer1kTokensCents: number | null
+    inputCentsPer1kTokens: number | null
+    outputCentsPer1kTokens: number | null
   }
 
   export type ModelOfferingMinAggregateOutputType = {
@@ -5216,7 +5231,8 @@ export namespace Prisma {
     description: string | null
     provider: string | null
     modelType: $Enums.ModelType | null
-    creditsPer1kTokensCents: number | null
+    inputCentsPer1kTokens: number | null
+    outputCentsPer1kTokens: number | null
     imageUrl: string | null
     supportsChat: boolean | null
     supportsImage: boolean | null
@@ -5234,7 +5250,8 @@ export namespace Prisma {
     description: string | null
     provider: string | null
     modelType: $Enums.ModelType | null
-    creditsPer1kTokensCents: number | null
+    inputCentsPer1kTokens: number | null
+    outputCentsPer1kTokens: number | null
     imageUrl: string | null
     supportsChat: boolean | null
     supportsImage: boolean | null
@@ -5252,7 +5269,8 @@ export namespace Prisma {
     description: number
     provider: number
     modelType: number
-    creditsPer1kTokensCents: number
+    inputCentsPer1kTokens: number
+    outputCentsPer1kTokens: number
     imageUrl: number
     supportsChat: number
     supportsImage: number
@@ -5267,11 +5285,13 @@ export namespace Prisma {
 
 
   export type ModelOfferingAvgAggregateInputType = {
-    creditsPer1kTokensCents?: true
+    inputCentsPer1kTokens?: true
+    outputCentsPer1kTokens?: true
   }
 
   export type ModelOfferingSumAggregateInputType = {
-    creditsPer1kTokensCents?: true
+    inputCentsPer1kTokens?: true
+    outputCentsPer1kTokens?: true
   }
 
   export type ModelOfferingMinAggregateInputType = {
@@ -5280,7 +5300,8 @@ export namespace Prisma {
     description?: true
     provider?: true
     modelType?: true
-    creditsPer1kTokensCents?: true
+    inputCentsPer1kTokens?: true
+    outputCentsPer1kTokens?: true
     imageUrl?: true
     supportsChat?: true
     supportsImage?: true
@@ -5298,7 +5319,8 @@ export namespace Prisma {
     description?: true
     provider?: true
     modelType?: true
-    creditsPer1kTokensCents?: true
+    inputCentsPer1kTokens?: true
+    outputCentsPer1kTokens?: true
     imageUrl?: true
     supportsChat?: true
     supportsImage?: true
@@ -5316,7 +5338,8 @@ export namespace Prisma {
     description?: true
     provider?: true
     modelType?: true
-    creditsPer1kTokensCents?: true
+    inputCentsPer1kTokens?: true
+    outputCentsPer1kTokens?: true
     imageUrl?: true
     supportsChat?: true
     supportsImage?: true
@@ -5421,7 +5444,8 @@ export namespace Prisma {
     description: string
     provider: string
     modelType: $Enums.ModelType
-    creditsPer1kTokensCents: number
+    inputCentsPer1kTokens: number
+    outputCentsPer1kTokens: number
     imageUrl: string | null
     supportsChat: boolean
     supportsImage: boolean
@@ -5458,7 +5482,8 @@ export namespace Prisma {
     description?: boolean
     provider?: boolean
     modelType?: boolean
-    creditsPer1kTokensCents?: boolean
+    inputCentsPer1kTokens?: boolean
+    outputCentsPer1kTokens?: boolean
     imageUrl?: boolean
     supportsChat?: boolean
     supportsImage?: boolean
@@ -5476,7 +5501,8 @@ export namespace Prisma {
     description?: boolean
     provider?: boolean
     modelType?: boolean
-    creditsPer1kTokensCents?: boolean
+    inputCentsPer1kTokens?: boolean
+    outputCentsPer1kTokens?: boolean
     imageUrl?: boolean
     supportsChat?: boolean
     supportsImage?: boolean
@@ -5494,7 +5520,8 @@ export namespace Prisma {
     description?: boolean
     provider?: boolean
     modelType?: boolean
-    creditsPer1kTokensCents?: boolean
+    inputCentsPer1kTokens?: boolean
+    outputCentsPer1kTokens?: boolean
     imageUrl?: boolean
     supportsChat?: boolean
     supportsImage?: boolean
@@ -5512,7 +5539,8 @@ export namespace Prisma {
     description?: boolean
     provider?: boolean
     modelType?: boolean
-    creditsPer1kTokensCents?: boolean
+    inputCentsPer1kTokens?: boolean
+    outputCentsPer1kTokens?: boolean
     imageUrl?: boolean
     supportsChat?: boolean
     supportsImage?: boolean
@@ -5524,7 +5552,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ModelOfferingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "description" | "provider" | "modelType" | "creditsPer1kTokensCents" | "imageUrl" | "supportsChat" | "supportsImage" | "supportsVideo" | "endpointUrl" | "apiKey" | "deploymentName" | "createdAt" | "updatedAt", ExtArgs["result"]["modelOffering"]>
+  export type ModelOfferingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"key" | "name" | "description" | "provider" | "modelType" | "inputCentsPer1kTokens" | "outputCentsPer1kTokens" | "imageUrl" | "supportsChat" | "supportsImage" | "supportsVideo" | "endpointUrl" | "apiKey" | "deploymentName" | "createdAt" | "updatedAt", ExtArgs["result"]["modelOffering"]>
 
   export type $ModelOfferingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ModelOffering"
@@ -5535,7 +5563,8 @@ export namespace Prisma {
       description: string
       provider: string
       modelType: $Enums.ModelType
-      creditsPer1kTokensCents: number
+      inputCentsPer1kTokens: number
+      outputCentsPer1kTokens: number
       imageUrl: string | null
       supportsChat: boolean
       supportsImage: boolean
@@ -5973,7 +6002,8 @@ export namespace Prisma {
     readonly description: FieldRef<"ModelOffering", 'String'>
     readonly provider: FieldRef<"ModelOffering", 'String'>
     readonly modelType: FieldRef<"ModelOffering", 'ModelType'>
-    readonly creditsPer1kTokensCents: FieldRef<"ModelOffering", 'Int'>
+    readonly inputCentsPer1kTokens: FieldRef<"ModelOffering", 'Int'>
+    readonly outputCentsPer1kTokens: FieldRef<"ModelOffering", 'Int'>
     readonly imageUrl: FieldRef<"ModelOffering", 'String'>
     readonly supportsChat: FieldRef<"ModelOffering", 'Boolean'>
     readonly supportsImage: FieldRef<"ModelOffering", 'Boolean'>
@@ -11073,6 +11103,7 @@ export namespace Prisma {
     displayName: 'displayName',
     passwordHash: 'passwordHash',
     isAdmin: 'isAdmin',
+    preferredCurrency: 'preferredCurrency',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -11112,7 +11143,8 @@ export namespace Prisma {
     description: 'description',
     provider: 'provider',
     modelType: 'modelType',
-    creditsPer1kTokensCents: 'creditsPer1kTokensCents',
+    inputCentsPer1kTokens: 'inputCentsPer1kTokens',
+    outputCentsPer1kTokens: 'outputCentsPer1kTokens',
     imageUrl: 'imageUrl',
     supportsChat: 'supportsChat',
     supportsImage: 'supportsImage',
@@ -11305,6 +11337,7 @@ export namespace Prisma {
     displayName?: StringFilter<"User"> | string
     passwordHash?: StringFilter<"User"> | string
     isAdmin?: BoolFilter<"User"> | boolean
+    preferredCurrency?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
@@ -11320,6 +11353,7 @@ export namespace Prisma {
     displayName?: SortOrder
     passwordHash?: SortOrder
     isAdmin?: SortOrder
+    preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     wallet?: CreditWalletOrderByWithRelationInput
@@ -11338,6 +11372,7 @@ export namespace Prisma {
     displayName?: StringFilter<"User"> | string
     passwordHash?: StringFilter<"User"> | string
     isAdmin?: BoolFilter<"User"> | boolean
+    preferredCurrency?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
@@ -11353,6 +11388,7 @@ export namespace Prisma {
     displayName?: SortOrder
     passwordHash?: SortOrder
     isAdmin?: SortOrder
+    preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -11369,6 +11405,7 @@ export namespace Prisma {
     displayName?: StringWithAggregatesFilter<"User"> | string
     passwordHash?: StringWithAggregatesFilter<"User"> | string
     isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
+    preferredCurrency?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -11519,7 +11556,8 @@ export namespace Prisma {
     description?: StringFilter<"ModelOffering"> | string
     provider?: StringFilter<"ModelOffering"> | string
     modelType?: EnumModelTypeFilter<"ModelOffering"> | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFilter<"ModelOffering"> | number
+    inputCentsPer1kTokens?: IntFilter<"ModelOffering"> | number
+    outputCentsPer1kTokens?: IntFilter<"ModelOffering"> | number
     imageUrl?: StringNullableFilter<"ModelOffering"> | string | null
     supportsChat?: BoolFilter<"ModelOffering"> | boolean
     supportsImage?: BoolFilter<"ModelOffering"> | boolean
@@ -11537,7 +11575,8 @@ export namespace Prisma {
     description?: SortOrder
     provider?: SortOrder
     modelType?: SortOrder
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     supportsChat?: SortOrder
     supportsImage?: SortOrder
@@ -11558,7 +11597,8 @@ export namespace Prisma {
     description?: StringFilter<"ModelOffering"> | string
     provider?: StringFilter<"ModelOffering"> | string
     modelType?: EnumModelTypeFilter<"ModelOffering"> | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFilter<"ModelOffering"> | number
+    inputCentsPer1kTokens?: IntFilter<"ModelOffering"> | number
+    outputCentsPer1kTokens?: IntFilter<"ModelOffering"> | number
     imageUrl?: StringNullableFilter<"ModelOffering"> | string | null
     supportsChat?: BoolFilter<"ModelOffering"> | boolean
     supportsImage?: BoolFilter<"ModelOffering"> | boolean
@@ -11576,7 +11616,8 @@ export namespace Prisma {
     description?: SortOrder
     provider?: SortOrder
     modelType?: SortOrder
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
     imageUrl?: SortOrderInput | SortOrder
     supportsChat?: SortOrder
     supportsImage?: SortOrder
@@ -11602,7 +11643,8 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"ModelOffering"> | string
     provider?: StringWithAggregatesFilter<"ModelOffering"> | string
     modelType?: EnumModelTypeWithAggregatesFilter<"ModelOffering"> | $Enums.ModelType
-    creditsPer1kTokensCents?: IntWithAggregatesFilter<"ModelOffering"> | number
+    inputCentsPer1kTokens?: IntWithAggregatesFilter<"ModelOffering"> | number
+    outputCentsPer1kTokens?: IntWithAggregatesFilter<"ModelOffering"> | number
     imageUrl?: StringNullableWithAggregatesFilter<"ModelOffering"> | string | null
     supportsChat?: BoolWithAggregatesFilter<"ModelOffering"> | boolean
     supportsImage?: BoolWithAggregatesFilter<"ModelOffering"> | boolean
@@ -11972,6 +12014,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
@@ -11987,6 +12030,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
@@ -12002,6 +12046,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
@@ -12017,6 +12062,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
@@ -12032,6 +12078,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12042,6 +12089,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12052,6 +12100,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12204,7 +12253,8 @@ export namespace Prisma {
     description: string
     provider: string
     modelType?: $Enums.ModelType
-    creditsPer1kTokensCents: number
+    inputCentsPer1kTokens: number
+    outputCentsPer1kTokens: number
     imageUrl?: string | null
     supportsChat?: boolean
     supportsImage?: boolean
@@ -12222,7 +12272,8 @@ export namespace Prisma {
     description: string
     provider: string
     modelType?: $Enums.ModelType
-    creditsPer1kTokensCents: number
+    inputCentsPer1kTokens: number
+    outputCentsPer1kTokens: number
     imageUrl?: string | null
     supportsChat?: boolean
     supportsImage?: boolean
@@ -12240,7 +12291,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
     modelType?: EnumModelTypeFieldUpdateOperationsInput | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFieldUpdateOperationsInput | number
+    inputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
+    outputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     supportsChat?: BoolFieldUpdateOperationsInput | boolean
     supportsImage?: BoolFieldUpdateOperationsInput | boolean
@@ -12258,7 +12310,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
     modelType?: EnumModelTypeFieldUpdateOperationsInput | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFieldUpdateOperationsInput | number
+    inputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
+    outputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     supportsChat?: BoolFieldUpdateOperationsInput | boolean
     supportsImage?: BoolFieldUpdateOperationsInput | boolean
@@ -12276,7 +12329,8 @@ export namespace Prisma {
     description: string
     provider: string
     modelType?: $Enums.ModelType
-    creditsPer1kTokensCents: number
+    inputCentsPer1kTokens: number
+    outputCentsPer1kTokens: number
     imageUrl?: string | null
     supportsChat?: boolean
     supportsImage?: boolean
@@ -12294,7 +12348,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
     modelType?: EnumModelTypeFieldUpdateOperationsInput | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFieldUpdateOperationsInput | number
+    inputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
+    outputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     supportsChat?: BoolFieldUpdateOperationsInput | boolean
     supportsImage?: BoolFieldUpdateOperationsInput | boolean
@@ -12312,7 +12367,8 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     provider?: StringFieldUpdateOperationsInput | string
     modelType?: EnumModelTypeFieldUpdateOperationsInput | $Enums.ModelType
-    creditsPer1kTokensCents?: IntFieldUpdateOperationsInput | number
+    inputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
+    outputCentsPer1kTokens?: IntFieldUpdateOperationsInput | number
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     supportsChat?: BoolFieldUpdateOperationsInput | boolean
     supportsImage?: BoolFieldUpdateOperationsInput | boolean
@@ -12796,6 +12852,7 @@ export namespace Prisma {
     displayName?: SortOrder
     passwordHash?: SortOrder
     isAdmin?: SortOrder
+    preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12806,6 +12863,7 @@ export namespace Prisma {
     displayName?: SortOrder
     passwordHash?: SortOrder
     isAdmin?: SortOrder
+    preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12816,6 +12874,7 @@ export namespace Prisma {
     displayName?: SortOrder
     passwordHash?: SortOrder
     isAdmin?: SortOrder
+    preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13050,7 +13109,8 @@ export namespace Prisma {
     description?: SortOrder
     provider?: SortOrder
     modelType?: SortOrder
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
     imageUrl?: SortOrder
     supportsChat?: SortOrder
     supportsImage?: SortOrder
@@ -13063,7 +13123,8 @@ export namespace Prisma {
   }
 
   export type ModelOfferingAvgOrderByAggregateInput = {
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
   }
 
   export type ModelOfferingMaxOrderByAggregateInput = {
@@ -13072,7 +13133,8 @@ export namespace Prisma {
     description?: SortOrder
     provider?: SortOrder
     modelType?: SortOrder
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
     imageUrl?: SortOrder
     supportsChat?: SortOrder
     supportsImage?: SortOrder
@@ -13090,7 +13152,8 @@ export namespace Prisma {
     description?: SortOrder
     provider?: SortOrder
     modelType?: SortOrder
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
     imageUrl?: SortOrder
     supportsChat?: SortOrder
     supportsImage?: SortOrder
@@ -13103,7 +13166,8 @@ export namespace Prisma {
   }
 
   export type ModelOfferingSumOrderByAggregateInput = {
-    creditsPer1kTokensCents?: SortOrder
+    inputCentsPer1kTokens?: SortOrder
+    outputCentsPer1kTokens?: SortOrder
   }
 
   export type EnumModelTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14452,6 +14516,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     notifications?: NotificationCreateNestedManyWithoutUserInput
@@ -14466,6 +14531,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
@@ -14525,6 +14591,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notifications?: NotificationUpdateManyWithoutUserNestedInput
@@ -14539,6 +14606,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
@@ -14635,6 +14703,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
@@ -14649,6 +14718,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
@@ -14679,6 +14749,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
@@ -14693,6 +14764,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
@@ -14707,6 +14779,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
@@ -14721,6 +14794,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
@@ -14784,6 +14858,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
@@ -14798,6 +14873,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
@@ -14863,6 +14939,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
@@ -14877,6 +14954,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
@@ -14948,6 +15026,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
@@ -14962,6 +15041,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
@@ -14976,6 +15056,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
@@ -14990,6 +15071,7 @@ export namespace Prisma {
     displayName: string
     passwordHash: string
     isAdmin?: boolean
+    preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
@@ -15020,6 +15102,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
@@ -15034,6 +15117,7 @@ export namespace Prisma {
     displayName?: StringFieldUpdateOperationsInput | string
     passwordHash?: StringFieldUpdateOperationsInput | string
     isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput

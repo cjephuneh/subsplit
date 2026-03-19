@@ -123,6 +123,7 @@ exports.Prisma.UserScalarFieldEnum = {
   displayName: 'displayName',
   passwordHash: 'passwordHash',
   isAdmin: 'isAdmin',
+  preferredCurrency: 'preferredCurrency',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -153,7 +154,8 @@ exports.Prisma.ModelOfferingScalarFieldEnum = {
   description: 'description',
   provider: 'provider',
   modelType: 'modelType',
-  creditsPer1kTokensCents: 'creditsPer1kTokensCents',
+  inputCentsPer1kTokens: 'inputCentsPer1kTokens',
+  outputCentsPer1kTokens: 'outputCentsPer1kTokens',
   imageUrl: 'imageUrl',
   supportsChat: 'supportsChat',
   supportsImage: 'supportsImage',

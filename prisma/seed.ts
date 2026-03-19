@@ -15,7 +15,8 @@ async function main() {
       provider: "Azure OpenAI",
       description: "Default model. Add more models from Admin when ready.",
       modelType: "TEXT",
-      creditsPer1kTokensCents: 260,
+      inputCentsPer1kTokens: 25, // ~0.25 KES
+      outputCentsPer1kTokens: 100, // ~1.00 KES
       supportsChat: true,
       supportsImage: false,
       supportsVideo: false,
@@ -36,7 +37,8 @@ async function main() {
         provider: model.provider,
         description: model.description,
         modelType: model.modelType,
-        creditsPer1kTokensCents: model.creditsPer1kTokensCents,
+        inputCentsPer1kTokens: model.inputCentsPer1kTokens,
+        outputCentsPer1kTokens: model.outputCentsPer1kTokens,
         supportsChat: model.supportsChat,
         supportsImage: model.supportsImage,
         supportsVideo: model.supportsVideo,

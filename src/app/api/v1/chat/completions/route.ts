@@ -35,7 +35,8 @@ export async function POST(req: Request) {
         key: true,
         modelType: true,
         supportsChat: true,
-        creditsPer1kTokensCents: true,
+        inputCentsPer1kTokens: true,
+        outputCentsPer1kTokens: true,
         endpointUrl: true,
         apiKey: true,
         deploymentName: true,
@@ -69,14 +70,19 @@ export async function POST(req: Request) {
       .object({
         usage: z
           .object({
+            prompt_tokens: z.number().int().nonnegative(),
+            completion_tokens: z.number().int().nonnegative(),
             total_tokens: z.number().int().nonnegative(),
           })
           .optional(),
       })
       .safeParse(azureResponse);
 
-    const totalTokens = usage.success ? usage.data.usage?.total_tokens ?? null : null;
-    if (!totalTokens) {
+    const usageData = usage.success ? usage.data.usage : null;
+    const promptTokens = usageData?.prompt_tokens ?? null;
+    const completionTokens = usageData?.completion_tokens ?? null;
+    
+    if (promptTokens === null || completionTokens === null) {
       return jsonError(502, {
         error: "UPSTREAM_NO_USAGE",
         message: "Upstream response missing token usage; cannot charge credits safely.",
@@ -84,8 +90,10 @@ export async function POST(req: Request) {
     }
 
     const costCents = costCentsForTokens({
-      tokens: totalTokens,
-      centsPer1k: model.creditsPer1kTokensCents,
+      promptTokens,
+      completionTokens,
+      inputCentsPer1k: model.inputCentsPer1kTokens,
+      outputCentsPer1k: model.outputCentsPer1kTokens,
     });
 
     // Direct billing to the user's master wallet
@@ -117,7 +125,9 @@ export async function POST(req: Request) {
       ...responseObject,
       subsplit: {
         modelKey: model.key,
-        totalTokens,
+        promptTokens,
+        completionTokens,
+        totalTokens: promptTokens + completionTokens,
         costCents,
         walletRemainingCents: wallet.balanceCents, // Now returning wallet balance
         latencyMs: Date.now() - started,
