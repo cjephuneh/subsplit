@@ -40,11 +40,11 @@ export async function POST(req: Request) {
       select: { id: true },
     });
 
-    // Free starter credits (50.00 credits) per new user.
+    // Free starter credits (20.00 credits) per new user.
     await createTransactionAndUpdateBalance({
       userId: user.id,
       type: "TOP_UP",
-      amountCents: 100,
+      amountCents: 2000,
       note: "Welcome bonus",
     });
 

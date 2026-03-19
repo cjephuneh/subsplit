@@ -96,8 +96,17 @@ export function DashboardClient(props: Props) {
   const [lastPlaintextApiKey, setLastPlaintextApiKey] = React.useState<string | null>(null);
   const [copyStatus, setCopyStatus] = React.useState<"idle" | "copied">("idle");
   const autoKeyCreatedRef = React.useRef(false);
+  const [displayCurrency, setDisplayCurrency] = React.useState<"KES" | "USD" | "ZAR">("KES");
 
   const low = wallet.balanceCents < wallet.lowBalanceCentsThreshold;
+
+  const currencyRates = { KES: 1.0, USD: 0.0038, ZAR: 0.068 };
+  
+  function formatFiat(credits: number) {
+    const val = credits * currencyRates[displayCurrency];
+    if (displayCurrency === "KES") return `KES ${Math.ceil(val)}`;
+    return new Intl.NumberFormat("en-US", { style: "currency", currency: displayCurrency }).format(val);
+  }
 
   React.useEffect(() => {
     try {
@@ -170,7 +179,7 @@ export function DashboardClient(props: Props) {
     selectedModel && Number.isFinite(tokens)
       ? Math.ceil((tokens / 1000) * ((selectedModel.inputCentsPer1kTokens + selectedModel.outputCentsPer1kTokens) / 2)) / 100
       : 0;
-  const kesEstimate = Math.max(1, Math.ceil(creditsNeeded * 0.5));
+  const fiatEstimate = formatFiat(creditsNeeded);
 
   async function refreshAll() {
     const [me, txs, notifs, keyList] = await Promise.all([
@@ -306,7 +315,20 @@ export function DashboardClient(props: Props) {
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
         <div>
-          <div className="text-sm text-zinc-600 dark:text-zinc-400">Dashboard</div>
+          <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+            Dashboard
+            <span className="text-zinc-300 dark:text-zinc-700">•</span>
+            <select
+              value={displayCurrency}
+              onChange={(e) => setDisplayCurrency(e.target.value as any)}
+              className="bg-transparent border-none text-xs font-semibold uppercase text-zinc-900 outline-none hover:underline dark:text-zinc-50"
+              aria-label="Display currency"
+            >
+              <option value="KES">KES</option>
+              <option value="USD">USD</option>
+              <option value="ZAR">ZAR</option>
+            </select>
+          </div>
           <h1 className="mt-1 text-3xl font-semibold tracking-tight">Welcome, {props.user.displayName}</h1>
         </div>
         <div className="flex items-center gap-2">
@@ -480,7 +502,7 @@ export function DashboardClient(props: Props) {
                       </div>
                       <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">{m.description}</div>
                       <div className="mt-3 text-xs text-zinc-600 dark:text-zinc-400">
-                        Rate: KES {Math.ceil(((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2) * 0.5 / 100)}/1k tokens
+                        Rate: {formatFiat((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2 / 100)}/1k tokens
                       </div>
                     </div>
                   ))}
@@ -578,7 +600,7 @@ export function DashboardClient(props: Props) {
                       >
                         {modelsForType.map((m) => (
                           <option key={m.key} value={m.key}>
-                            {m.name} (KES {Math.ceil(((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2) * 0.5 / 100)}/1k)
+                            {m.name} ({formatFiat((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2 / 100)}/1k)
                           </option>
                         ))}
                       </select>
@@ -955,9 +977,26 @@ function UsageChart({ logs }: { logs: ApiKeyLog[] }) {
   const max = Math.max(...data.map((d) => d.count), 5);
   const height = 160;
   const width = 500;
-  const barWidth = 32;
-  const gap = 24;
-  const padding = 40;
+
+  const startPadding = 30;
+  const endPadding = 30;
+  const availableWidth = width - startPadding - endPadding;
+
+  const points = data.map((d, i) => {
+    const x = startPadding + i * (availableWidth / Math.max(1, data.length - 1));
+    const y = Math.max(10, height - (d.count / max) * (height - 30));
+    return { x, y, count: d.count, label: d.label };
+  });
+
+  let linePath = `M ${points[0].x},${points[0].y}`;
+  for (let i = 0; i < points.length - 1; i++) {
+    const current = points[i];
+    const next = points[i + 1];
+    const controlPointX = (current.x + next.x) / 2;
+    linePath += ` C ${controlPointX},${current.y} ${controlPointX},${next.y} ${next.x},${next.y}`;
+  }
+
+  const areaPath = `${linePath} L ${points[points.length - 1].x},${height} L ${points[0].x},${height} Z`;
 
   return (
     <div className="group relative mt-4 overflow-hidden rounded-[2.5rem] border border-zinc-200 bg-white p-8 shadow-sm transition-all hover:shadow-md dark:border-zinc-800 dark:bg-zinc-950">
@@ -975,16 +1014,21 @@ function UsageChart({ logs }: { logs: ApiKeyLog[] }) {
       <div className="relative h-[160px] w-full">
         <svg viewBox={`0 0 ${width} ${height}`} className="h-full w-full overflow-visible" preserveAspectRatio="none">
           <defs>
-            <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#8b5cf6" />
-              <stop offset="100%" stopColor="#6366f1" />
+            <linearGradient id="lineGradient" x1="0" y1="0" x2="100%" y2="0">
+              <stop offset="0%" stopColor="#ec4899" />
+              <stop offset="50%" stopColor="#8b5cf6" />
+              <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
-            <filter id="barShadow">
-              <feDropShadow dx="0" dy="2" stdDeviation="3" floodOpacity="0.1" />
+            <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="100%">
+              <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.0" />
+            </linearGradient>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
-          {/* Grid lines */}
           {[0, 0.5, 1].map((p) => (
             <line
               key={p}
@@ -997,43 +1041,49 @@ function UsageChart({ logs }: { logs: ApiKeyLog[] }) {
             />
           ))}
 
-          {data.map((d, i) => {
-            const barHeight = Math.max((d.count / max) * height, 6);
-            const x = i * (barWidth + gap) + padding / 2;
-            return (
-              <g key={d.date} className="cursor-default transition-all duration-300">
-                <rect
-                  x={x}
-                  y={height - barHeight}
-                  width={barWidth}
-                  height={barHeight}
-                  rx={barWidth / 2}
-                  className="fill-[url(#barGradient)] transition-all duration-500 group/bar hover:brightness-110"
-                  style={{ filter: "url(#barShadow)" }}
-                />
+          <path d={areaPath} fill="url(#areaGradient)" className="transition-all duration-700" />
+          <path 
+            d={linePath} 
+            fill="none" 
+            stroke="url(#lineGradient)" 
+            strokeWidth="4" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            filter="url(#glow)" 
+            className="transition-all duration-700" 
+          />
+
+          {points.map((p, i) => (
+            <g key={i} className="group/node cursor-default">
+              <rect x={p.x - 20} y={0} width={40} height={height} fill="transparent" />
+              
+              <circle
+                cx={p.x}
+                cy={p.y}
+                r="5"
+                className="fill-white stroke-[url(#lineGradient)] stroke-[3px] opacity-0 transition-all duration-300 group-hover/node:opacity-100 group-hover/node:scale-125 dark:fill-zinc-950"
+              />
+              <text
+                x={p.x}
+                y={height + 25}
+                textAnchor="middle"
+                className="fill-zinc-400 text-[10px] font-bold uppercase tracking-wider dark:fill-zinc-600"
+              >
+                {p.label}
+              </text>
+              <g className="opacity-0 transition-all duration-300 group-hover/node:opacity-100 group-hover/node:-translate-y-2 pointer-events-none">
+                <rect x={p.x - 20} y={p.y - 36} width={40} height={20} rx={6} className="fill-zinc-900 shadow-md dark:fill-zinc-100" />
                 <text
-                  x={x + barWidth / 2}
-                  y={height + 25}
+                  x={p.x}
+                  y={p.y - 22}
                   textAnchor="middle"
-                  className="fill-zinc-400 text-[10px] font-bold uppercase tracking-wider dark:fill-zinc-600"
+                  className="fill-white text-[11px] font-black dark:fill-zinc-900"
                 >
-                  {d.label}
+                  {p.count}
                 </text>
-                {d.count > 0 && (
-                  <g className="opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                    <text
-                      x={x + barWidth / 2}
-                      y={height - barHeight - 12}
-                      textAnchor="middle"
-                      className="fill-zinc-900 text-[11px] font-black dark:fill-zinc-100"
-                    >
-                      {d.count}
-                    </text>
-                  </g>
-                )}
               </g>
-            );
-          })}
+            </g>
+          ))}
         </svg>
       </div>
     </div>

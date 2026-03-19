@@ -22,6 +22,19 @@ async function main() {
       supportsVideo: false,
       imageUrl: "/models/gpt-4.png",
     },
+    {
+      key: "grok-4",
+      name: "Grok 4",
+      provider: "xAI",
+      description: "Fast and witty model from xAI.",
+      modelType: "TEXT",
+      inputCentsPer1kTokens: 15,
+      outputCentsPer1kTokens: 60,
+      supportsChat: true,
+      supportsImage: false,
+      supportsVideo: false,
+      imageUrl: "/models/grok.png",
+    },
   ] as const;
 
   // Remove any old seed models so the UI only shows what's actually available.

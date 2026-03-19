@@ -25,9 +25,9 @@ function costForTokensCents(input: { tokens: number; blendedCentsPer1k: number }
 }
 
 function getKesMultiplier() {
-  const raw = process.env.CREDIT_KES_MULTIPLIER ?? "0.5";
+  const raw = process.env.CREDIT_KES_MULTIPLIER ?? "1.0";
   const parsed = Number(raw);
-  if (!Number.isFinite(parsed) || parsed <= 0) return 0.5;
+  if (!Number.isFinite(parsed) || parsed <= 0) return 1.0;
   return parsed;
 }
 
