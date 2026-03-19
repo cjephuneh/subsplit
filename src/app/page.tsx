@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeDollarSign, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Wallet, ShieldCheck, Terminal, Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
@@ -27,17 +27,15 @@ function Hero() {
     <section className="relative mx-auto max-w-6xl px-4 pt-16 pb-10 sm:px-6 sm:pt-20">
       <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-2 text-sm text-zinc-700 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200">
         <Sparkles size={16} aria-hidden="true" />
-        Tokenized AI credits, simplified
+        Tokenized AI access, secured.
       </div>
       <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:items-center">
         <div className="space-y-6">
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-5xl">
-            Buy AI credits cheaper, split with friends, and never run out mid‑prompt.
+            Buy AI credits with as low as 100 KES from M-Pesa or bank.
           </h1>
           <p className="max-w-xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-            Subsplit turns your Azure-backed capacity into a clean credit wallet.
-            Purchase, loan, and track usage across models like <span className="font-medium">Empeza</span> and{" "}
-            <span className="font-medium">Raja</span>—with low-balance alerts built in.
+            Subsplit provides a drop-in API gateway. Access <span className="font-medium">GPT-4</span>, <span className="font-medium">Claude 3.5 Sonnet</span>, and <span className="font-medium">Grok</span> with a single balance—featuring automatic leak protection and low-balance alerts.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
@@ -57,7 +55,7 @@ function Hero() {
             </Link>
           </div>
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
-            Transparent ledger. Instant balance updates. No surprises.
+            Sign up today and get a $1 welcome bonus to start immediately.
           </p>
         </div>
         <HeroCard />
@@ -83,12 +81,13 @@ function HeroCard() {
         </div>
       </div>
       <div className="mt-6 grid gap-3">
-        <MiniRow label="Model" value="Raja" />
-        <MiniRow label="Cost" value="2.40 credits / 1k tokens" />
-        <MiniRow label="Recent" value="Spend • 0.86 credits" />
+        <MiniRow label="Model" value="Claude 3.5 Sonnet" />
+        <MiniRow label="Rate" value="KES 450 / 1M tokens" />
+        <MiniRow label="Recent" value="Chat Completion • OpenAI API" />
       </div>
-      <div className="mt-6 rounded-2xl border border-zinc-200 bg-white p-4 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
-        Low-balance alerts kick in automatically when you drop below your threshold.
+      <div className="mt-6 flex items-center gap-2 rounded-2xl border border-zinc-200 bg-white p-4 text-sm text-zinc-700 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200">
+        <ShieldCheck className="text-emerald-500" size={18} />
+        Active keys are automatically revoked if leaked to public repositories.
       </div>
     </div>
   );
@@ -106,19 +105,19 @@ function MiniRow({ label, value }: { label: string; value: string }) {
 function ValueProps() {
   const items = [
     {
-      icon: <BadgeDollarSign size={18} aria-hidden="true" />,
-      title: "Cheaper credits, clear pricing",
-      desc: "Use your own supply (e.g., Azure credits) to offer lower local pricing while keeping a clean ledger per user.",
+      icon: <Wallet size={18} aria-hidden="true" />,
+      title: "Unified Wallet Billing",
+      desc: "Stop tracking individual key quotas. All your API keys draw seamlessly from one master balance.",
+    },
+    {
+      icon: <Terminal size={18} aria-hidden="true" />,
+      title: "Drop-in OpenAI Replacement",
+      desc: "Use our /v1/chat/completions endpoint directly in your existing OpenAI SDKs without changing your code.",
     },
     {
       icon: <ShieldCheck size={18} aria-hidden="true" />,
-      title: "Ledger-first (auditable)",
-      desc: "Every top-up, spend, and loan is recorded. You always know what happened and when.",
-    },
-    {
-      icon: <Sparkles size={18} aria-hidden="true" />,
-      title: "Model selection built-in",
-      desc: "Choose Empeza or Raja based on cost vs quality and see per-1k token pricing.",
+      title: "Automated Leak Protection",
+      desc: "If your active API keys are ever pushed to GitHub, our systems automatically revoke them to protect your balance.",
     },
   ] as const;
 
@@ -153,10 +152,10 @@ function Pricing() {
         <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
           <div className="space-y-2">
             <h2 className="text-2xl font-semibold tracking-tight">
-              Start with Subsplit today
+              Start building with Subsplit today
             </h2>
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              Create an account, top up your wallet, pick a model, and track every transaction.
+              Create an account, claim your $1 welcome bonus, and experience seamless AI access. Buy credits with as low as 100 KES from M-Pesa or bank.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">

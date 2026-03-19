@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
         const apiKey = await prisma.apiKey.findFirst({
             where: { prefix: tokenPrefix, keyHash, revokedAt: null },
-            select: { id: true, userId: true, label: true },
+            select: { id: true, userId: true, label: true, prefix: true },
         });
 
         if (!apiKey) {
