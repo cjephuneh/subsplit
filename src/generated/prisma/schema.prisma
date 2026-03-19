@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum CreditTransactionType {
+  TOP_UP
+  SPEND
+  LOAN_OUT
+  LOAN_IN
+  REPAY_OUT
+  REPAY_IN
+  ADJUSTMENT
+}
+
+enum NotificationType {
+  LOW_BALANCE
+  SYSTEM
+}
+
+enum ApiKeyEnvironment {
+  PRODUCTION
+  SANDBOX
+}
+
+enum PaymentProvider {
+  MPESA_DARAJA
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ModelType {
+  TEXT
+  VOICE
+  IMAGE
+  VIDEO
+  EMBEDDING
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  displayName  String
+  passwordHash String
+  isAdmin      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  wallet          CreditWallet?
+  notifications   Notification[]
+  apiKeys         ApiKey[]
+  apiKeyUsageLogs ApiKeyUsageLog[]
+  payments        Payment[]
+}
+
+model CreditWallet {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  balanceCents             Int      @default(0) // credits are stored in "centi-credits" for precision (1 credit = 100)
+  lowBalanceCentsThreshold Int      @default(10000) // 100 credits
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+
+  user         User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions CreditTransaction[]
+
+  @@index([userId])
+}
+
+model CreditTransaction {
+  id                 String                @id @default(cuid())
+  walletId           String
+  type               CreditTransactionType
+  amountCents        Int
+  modelKey           String?
+  note               String?
+  counterpartyUserId String?
+  createdAt          DateTime              @default(now())
+
+  wallet CreditWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId, createdAt])
+  @@index([type, createdAt])
+}
+
+model ModelOffering {
+  key                     String    @id
+  name                    String
+  description             String
+  provider                String
+  modelType               ModelType @default(TEXT)
+  creditsPer1kTokensCents Int // how many centi-credits per 1k tokens
+  imageUrl                String?
+  supportsChat            Boolean   @default(true)
+  supportsImage           Boolean   @default(false)
+  supportsVideo           Boolean   @default(false)
+  endpointUrl             String? // per-model base URL (e.g. https://…/openai/v1/)
+  apiKey                  String? // per-model provider API key
+  deploymentName          String? // deployment or model identifier used in upstream calls
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([type, createdAt])
+}
+
+model ApiKey {
+  id              String            @id @default(cuid())
+  userId          String
+  environment     ApiKeyEnvironment @default(PRODUCTION)
+  label           String
+  prefix          String
+  keyHash         String
+  quotaCents      Int               @default(0) // credits allocated to this key (centi-credits)
+  usedCents       Int               @default(0) // credits spent by this key (centi-credits)
+  defaultModelKey String?
+  lastUsedAt      DateTime?
+  revokedAt       DateTime?
+  createdAt       DateTime          @default(now())
+
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  usageLogs ApiKeyUsageLog[]
+
+  @@index([userId, createdAt])
+  @@index([prefix])
+}
+
+model ApiKeyUsageLog {
+  id        String   @id @default(cuid())
+  apiKeyId  String
+  userId    String
+  method    String
+  path      String
+  modelKey  String?
+  status    Int
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  apiKey ApiKey @relation(fields: [apiKeyId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([apiKeyId, createdAt])
+  @@index([modelKey, createdAt])
+}
+
+model Payment {
+  id                String            @id @default(cuid())
+  userId            String
+  provider          PaymentProvider
+  status            PaymentStatus     @default(PENDING)
+  environment       ApiKeyEnvironment @default(PRODUCTION)
+  amountCents       Int
+  currency          String            @default("KES")
+  phoneNumber       String
+  creditsCents      Int
+  metadataJson      String?
+  providerRef       String? // CheckoutRequestID or equivalent
+  merchantRequestId String?
+  mpesaReceipt      String?
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([status, createdAt])
+  @@index([providerRef])
+}

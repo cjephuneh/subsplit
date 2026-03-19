@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Subsplit">
+  <defs>
+    <linearGradient id="g" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6366F1"/>
+      <stop offset="0.5" stop-color="#D946EF"/>
+      <stop offset="1" stop-color="#10B981"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="128" fill="#09090B"/>
+  <rect x="245" y="96" width="22" height="320" rx="11" fill="#09090B"/>
+  <path
+    d="M160 170c0-42 34-74 76-74h104c22 0 40 18 40 40s-18 40-40 40H244c-14 0-24 10-24 22s10 22 24 22h36c62 0 112 44 112 104s-50 112-112 112H172c-22 0-40-18-40-40s18-40 40-40h108c18 0 32-12 32-28s-14-28-32-28h-44c-58 0-76-40-76-72z"
+    fill="url(#g)"/>
+</svg>
+
