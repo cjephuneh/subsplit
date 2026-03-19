@@ -86,7 +86,7 @@ export function AuthCard({ mode }: Props) {
   }
 
   return (
-    <Card className="p-1">
+    <Card className="p-6 sm:p-8">
       <CardHeader>
         <CardTitle>{copy.title}</CardTitle>
         <CardDescription>{copy.desc}</CardDescription>
