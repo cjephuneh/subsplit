@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const modelKey = body.defaultModelKey ?? "gpt-4";
     const model = await prisma.modelOffering.findUnique({
       where: { key: modelKey },
-      select: { key: true, creditsPer1kTokensCents: true },
+      select: { key: true },
     });
     if (!model) {
       return jsonError(404, { error: "MODEL_NOT_FOUND", message: "That default model is not available." });

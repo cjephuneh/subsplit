@@ -34,17 +34,19 @@ export async function GET() {
       modelKeys.length > 0
         ? await prisma.modelOffering.findMany({
             where: { key: { in: modelKeys } },
-            select: { key: true, creditsPer1kTokensCents: true },
+            select: { key: true, inputCentsPer1kTokens: true, outputCentsPer1kTokens: true },
           })
         : [];
 
-    const centsPer1kByModelKey = new Map(models.map((m) => [m.key, m.creditsPer1kTokensCents]));
+    const centsPer1kByModelKey = new Map(
+      models.map((m) => [m.key, Math.floor((m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2)]),
+    );
 
     const enriched = keys.map((k) => {
       const remainingCents = Math.max(0, k.quotaCents - k.usedCents);
       const centsPer1kTokens = k.defaultModelKey ? centsPer1kByModelKey.get(k.defaultModelKey) ?? null : null;
       const tokensLeft = centsPer1kTokens
-        ? estimateTokensLeft({ remainingCents, centsPer1kTokens })
+        ? estimateTokensLeft({ remainingCents, blendedCentsPer1kTokens: centsPer1kTokens })
         : null;
       return { ...k, remainingCents, tokensLeft };
     });
