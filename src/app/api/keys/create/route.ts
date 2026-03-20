@@ -11,7 +11,7 @@ export const runtime = "nodejs";
 
 const BodySchema = z.object({
   label: z.string().min(2).max(40),
-  credits: z.number().min(0).max(1_000_000).default(0),
+  credits: z.number().min(1).max(1_000_000),
   defaultModelKey: z.string().min(1).max(80).optional(),
 });
 
@@ -20,25 +20,32 @@ export async function POST(req: Request) {
     const user = await requireSessionUser();
     const body = await parseJson(req, BodySchema);
 
-    // Removed payment requirement to allow initial welcome bonus usage.
-
     const modelKey = body.defaultModelKey ?? "gpt-4";
     const model = await prisma.modelOffering.findUnique({
       where: { key: modelKey },
-      select: { key: true },
+      select: { key: true, creditsPer1kTokensCents: true },
     });
     if (!model) {
       return jsonError(404, { error: "MODEL_NOT_FOUND", message: "That default model is not available." });
     }
 
-    // Note: No transaction here anymore because usage is billed direct from wallet.
-    // quotaCents is 0 because we don't "pre-allocate" parts of the wallet to specific keys.
+    const quotaCents = creditsToCents(body.credits);
+
+    // Allocate wallet credits into the API key quota.
+    await createTransactionAndUpdateBalance({
+      userId: user.id,
+      type: "ADJUSTMENT",
+      amountCents: -quotaCents,
+      modelKey: model.key,
+      note: `API key quota allocation: ${body.credits.toFixed(2)} credits`,
+    });
+    await postBalanceSideEffects(user.id);
 
     const created = await createApiKey({
       userId: user.id,
       environment: "PRODUCTION",
       label: body.label,
-      quotaCents: 0,
+      quotaCents,
       defaultModelKey: model.key,
     });
 

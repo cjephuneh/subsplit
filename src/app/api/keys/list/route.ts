@@ -26,21 +26,28 @@ export async function GET() {
       },
     });
 
-    const modelKeys = Array.from(new Set(keys.map((k) => k.defaultModelKey).filter(Boolean))) as string[];
-        const models = modelKeys.length
-          ? await prisma.modelOffering.findMany({
-              where: { key: { in: modelKeys } },
-              select: { key: true, inputCentsPer1kTokens: true, outputCentsPer1kTokens: true },
-            })
-          : [];
-        const rateByKey = new Map(models.map((m) => [m.key, (m.inputCentsPer1kTokens + m.outputCentsPer1kTokens) / 2]));
-    
-        const enriched = keys.map((k) => {
-          const remainingCents = Math.max(0, k.quotaCents - k.usedCents);
-          const rate = (k.defaultModelKey && rateByKey.get(k.defaultModelKey)) || null;
-          const tokensLeft = rate ? estimateTokensLeft({ remainingCents, blendedCentsPer1kTokens: rate }) : null;
-          return { ...k, remainingCents, tokensLeft };
-        });
+    const modelKeys = Array.from(
+      new Set(keys.map((k) => k.defaultModelKey).filter((v): v is string => typeof v === "string" && v.length > 0)),
+    );
+
+    const models =
+      modelKeys.length > 0
+        ? await prisma.modelOffering.findMany({
+            where: { key: { in: modelKeys } },
+            select: { key: true, creditsPer1kTokensCents: true },
+          })
+        : [];
+
+    const centsPer1kByModelKey = new Map(models.map((m) => [m.key, m.creditsPer1kTokensCents]));
+
+    const enriched = keys.map((k) => {
+      const remainingCents = Math.max(0, k.quotaCents - k.usedCents);
+      const centsPer1kTokens = k.defaultModelKey ? centsPer1kByModelKey.get(k.defaultModelKey) ?? null : null;
+      const tokensLeft = centsPer1kTokens
+        ? estimateTokensLeft({ remainingCents, centsPer1kTokens })
+        : null;
+      return { ...k, remainingCents, tokensLeft };
+    });
 
     return Response.json({ keys: enriched });
   } catch (err) {
