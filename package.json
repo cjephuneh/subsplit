@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node ./node_modules/prisma/build/index.js generate && node ./node_modules/prisma/build/index.js db push && next build",
+    "build": "node ./node_modules/prisma/build/index.js generate && node ./node_modules/prisma/build/index.js db push && node ./node_modules/next/dist/bin/next build",
     "start": "sh -c 'if [ ! -f .next/BUILD_ID ]; then npm run build; fi; node ./node_modules/next/dist/bin/next start -p ${PORT:-8080}'",
     "lint": "eslint",
     "test": "vitest",
