@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "node ./node_modules/next/dist/bin/next dev . -p ${PORT:-8080}",
     "build": "node ./node_modules/prisma/build/index.js generate && node ./node_modules/prisma/build/index.js db push && node ./node_modules/next/dist/bin/next build",
     "build": "node ./node_modules/prisma/build/index.js generate && node ./node_modules/prisma/build/index.js db push && node ./node_modules/next/dist/bin/next build .",
     "start": "sh -c 'npm run build && node ./node_modules/next/dist/bin/next start . -p ${PORT:-8080}'",
