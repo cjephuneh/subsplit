@@ -5,10 +5,10 @@
 4 silly config load:file:/Users/mac/Documents/code/subsplit/.npmrc
 5 silly config load:file:/Users/mac/.npmrc
 6 silly config load:file:/usr/local/etc/npmrc
-7 verbose title npm run dev --help
-8 verbose argv "run" "dev" "--" "--help"
-9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T10_50_51_700Z-
-10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T10_50_51_700Z-debug-0.log
+7 verbose title npm run build
+8 verbose argv "run" "build" "--loglevel" "silent"
+9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T14_56_55_181Z-
+10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T14_56_55_181Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mac/Documents/code/subsplit
