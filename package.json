@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node ./node_modules/next/dist/bin/next dev . -p ${PORT:-8080}",
     "build": "node ./node_modules/next/dist/bin/next build .",
-    "start": "sh -c 'npm rebuild better-sqlite3 --build-from-source && node ./node_modules/next/dist/bin/next start . -p ${PORT:-8080}'",
+    "start": "node ./node_modules/next/dist/bin/next start . -p ${PORT:-8080}",
     "lint": "eslint",
     "test": "vitest",
     "test:ci": "vitest run --coverage",
