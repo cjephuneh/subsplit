@@ -7,8 +7,8 @@
 6 silly config load:file:/usr/local/etc/npmrc
 7 verbose title npm test
 8 verbose argv "test" "--loglevel" "silent"
-9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-20T11_54_50_477Z-
-10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-20T11_54_50_477Z-debug-0.log
+9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T10_26_48_689Z-
+10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-03-23T10_26_48_689Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mac/Documents/code/subsplit
