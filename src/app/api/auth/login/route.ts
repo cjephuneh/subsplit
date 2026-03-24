@@ -54,6 +54,18 @@ export async function POST(req: Request) {
         context: { issues: err.issues },
       });
     }
+    if (err instanceof Error && err.message.includes("Missing AUTH_SECRET")) {
+      return jsonError(500, {
+        error: "MISSING_AUTH_SECRET",
+        message: "Server is missing AUTH_SECRET configuration.",
+      });
+    }
+    if (err instanceof Error && err.message.includes("ERR_DLOPEN_FAILED")) {
+      return jsonError(500, {
+        error: "NATIVE_MODULE_ERROR",
+        message: "Native database module failed to load on this host.",
+      });
+    }
     return jsonError(500, {
       error: "SERVER_ERROR",
       message: "Something went wrong.",
