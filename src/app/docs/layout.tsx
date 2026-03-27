@@ -3,10 +3,8 @@ import Image from "next/image";
 
 const nav = [
   { href: "/docs", label: "Overview" },
-  { href: "/docs/setup", label: "Setup (.env)" },
   { href: "/docs/api", label: "API" },
   { href: "/docs/models", label: "Models" },
-  { href: "/docs/payments/mpesa", label: "Payments (M-Pesa)" },
 ] as const;
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {

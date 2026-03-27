@@ -24,19 +24,10 @@ function costForTokensCents(input: { tokens: number; blendedCentsPer1k: number }
   return Math.ceil((input.tokens / 1000) * input.blendedCentsPer1k);
 }
 
-function getKesMultiplier() {
-  const raw = process.env.CREDIT_KES_MULTIPLIER ?? "1.0";
-  const parsed = Number(raw);
-  if (!Number.isFinite(parsed) || parsed <= 0) return 1.0;
-  return parsed;
-}
-
 export async function POST(req: Request) {
   try {
     const user = await requireSessionUser();
     const body = await parseJson(req, BodySchema);
-
-    const kesMultiplier = getKesMultiplier();
 
     let creditsCents: number;
     let amountKes: number;
@@ -51,8 +42,8 @@ export async function POST(req: Request) {
         });
       }
       creditsCents = creditsToCents(credits);
-      amountKes = Math.max(1, Math.ceil(credits * kesMultiplier));
-      metadata = { intent: "TOPUP", pricing: `${kesMultiplier} KES per credit` };
+      amountKes = Math.max(1, Math.ceil(credits));
+      metadata = { intent: "TOPUP", pricing: "1 KES per credit" };
     } else {
       const modelKey = body.modelKey;
       const tokens = body.tokens;
@@ -77,12 +68,12 @@ export async function POST(req: Request) {
         blendedCentsPer1k,
       });
       const credits = creditsCents / 100;
-      amountKes = Math.max(1, Math.ceil(credits * kesMultiplier));
+      amountKes = Math.max(1, Math.ceil(credits));
       metadata = {
         intent: "SPEND",
         modelKey: model.key,
         tokens,
-        pricing: `${kesMultiplier} KES per credit`,
+        pricing: "1 KES per credit",
       };
     }
 

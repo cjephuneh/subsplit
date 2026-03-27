@@ -88,7 +88,8 @@ export type ApiKeyEnvironment = (typeof ApiKeyEnvironment)[keyof typeof ApiKeyEn
 
 
 export const PaymentProvider: {
-  MPESA_DARAJA: 'MPESA_DARAJA'
+  MPESA_DARAJA: 'MPESA_DARAJA',
+  PAYSTACK: 'PAYSTACK'
 };
 
 export type PaymentProvider = (typeof PaymentProvider)[keyof typeof PaymentProvider]

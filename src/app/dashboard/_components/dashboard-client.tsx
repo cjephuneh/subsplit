@@ -95,6 +95,8 @@ export function DashboardClient(props: Props) {
   const [oneTimeApiKey, setOneTimeApiKey] = React.useState<string | null>(null);
   const [lastPlaintextApiKey, setLastPlaintextApiKey] = React.useState<string | null>(null);
   const [copyStatus, setCopyStatus] = React.useState<"idle" | "copied">("idle");
+  const [createdKeyCopyStatus, setCreatedKeyCopyStatus] = React.useState<"idle" | "copied">("idle");
+  const [paymentBanner, setPaymentBanner] = React.useState<string | null>(null);
   const autoKeyCreatedRef = React.useRef(false);
   const [displayCurrency, setDisplayCurrency] = React.useState<"KES" | "USD" | "ZAR">("KES");
 
@@ -170,9 +172,33 @@ export function DashboardClient(props: Props) {
   }, [copyStatus]);
 
   React.useEffect(() => {
+    if (createdKeyCopyStatus !== "copied") return;
+    const t = window.setTimeout(() => setCreatedKeyCopyStatus("idle"), 1200);
+    return () => window.clearTimeout(t);
+  }, [createdKeyCopyStatus]);
+
+  React.useEffect(() => {
     const first = props.models.find((m) => (m.modelType ?? "TEXT") === selectedModelType);
     if (first) setSelectedModelKey(first.key);
   }, [selectedModelType, props.models]);
+
+  React.useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    const paystack = sp.get("paystack");
+    if (!paystack) return;
+    if (paystack === "success") {
+      setMpesaMessage("Card payment confirmed. Wallet topped up.");
+      setPaymentBanner("Card payment confirmed. Wallet topped up.");
+    } else if (paystack === "failed") {
+      setMpesaMessage("Card payment failed.");
+      setPaymentBanner("Card payment failed.");
+    } else if (paystack === "error") {
+      setMpesaMessage("Card payment verification failed.");
+      setPaymentBanner("Card payment verification failed.");
+    }
+    setPage("wallet");
+    void refreshAll();
+  }, []);
 
   const selectedModel = props.models.find((m) => m.key === selectedModelKey) ?? null;
   const creditsNeeded =
@@ -209,8 +235,13 @@ export function DashboardClient(props: Props) {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(input),
     });
-    const json = (await res.json().catch(() => null)) as { apiKey?: string; message?: string } | null;
-    if (!res.ok) throw new Error(json?.message ?? "Unable to create key.");
+    const json = (await res.json().catch(() => null)) as
+      | { apiKey?: string; message?: string; context?: { issues?: Array<{ message?: string }> } }
+      | null;
+    if (!res.ok) {
+      const firstIssue = json?.context?.issues?.[0]?.message;
+      throw new Error(firstIssue ?? json?.message ?? "Unable to create key.");
+    }
     return json?.apiKey ?? null;
   }
 
@@ -265,15 +296,20 @@ export function DashboardClient(props: Props) {
           setMpesaMessage(
             "Payment confirmed. Wallet topped up.",
           );
+          setPaymentBanner("M-Pesa payment confirmed. Wallet topped up.");
           if (qj.apiKey) setOneTimeApiKey(qj.apiKey);
           break;
         }
         if (qj?.status === "FAILED") {
-          setMpesaMessage(qj?.result?.ResultDesc ?? "Payment failed or was cancelled.");
+          const failedMessage = qj?.result?.ResultDesc ?? "Payment failed or was cancelled.";
+          setMpesaMessage(failedMessage);
+          setPaymentBanner(failedMessage);
           break;
         }
         if (qj?.status === "PENDING") {
-          setMpesaMessage(qj?.result?.ResultDesc ?? "Payment is still processing…");
+          const pendingMessage = qj?.result?.ResultDesc ?? "Payment is still processing…";
+          setMpesaMessage(pendingMessage);
+          setPaymentBanner(pendingMessage);
         }
       }
     }
@@ -360,6 +396,12 @@ export function DashboardClient(props: Props) {
           </form>
         </div>
       </div>
+
+      {paymentBanner ? (
+        <div className="mt-4 rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
+          {paymentBanner}
+        </div>
+      ) : null}
 
       <div className="mt-8 grid gap-4 lg:grid-cols-[240px_1fr]">
         <aside className="h-fit rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
@@ -564,7 +606,12 @@ export function DashboardClient(props: Props) {
                     setCreatedKey(null);
                     const form = new FormData(e.currentTarget);
                     const label = String(form.get("label") ?? "");
-                    const defaultModelKey = String(form.get("defaultModelKey") ?? "");
+                    const defaultModelKey = String(form.get("defaultModelKey") ?? "").trim();
+                    if (!defaultModelKey) {
+                      setCreatedKey("Pick a default model first.");
+                      setIsBusy(false);
+                      return;
+                    }
                     try {
                       // Note: credits 0 because it's now direct wallet billing
                       const key = await createKey({ label, credits: 0, defaultModelKey });
@@ -627,9 +674,10 @@ export function DashboardClient(props: Props) {
                           aria-label="Copy created key"
                           onClick={async () => {
                             await navigator.clipboard.writeText(createdKey);
+                            setCreatedKeyCopyStatus("copied");
                           }}
                         >
-                          Copy key
+                          {createdKeyCopyStatus === "copied" ? "Copied" : "Copy key"}
                         </Button>
                       </div>
                     </div>
@@ -753,6 +801,17 @@ export function DashboardClient(props: Props) {
         >
           {checkoutStep === "choose" ? (
             <div className="space-y-2">
+              <Input
+                name="topupCreditsChoice"
+                type="number"
+                inputMode="decimal"
+                step="1"
+                min="1"
+                value={String(topupCreditsDraft)}
+                onChange={(e) => setTopupCreditsDraft(Number(e.target.value))}
+                placeholder="Top-up credits (e.g. 100)"
+                aria-label="Top-up credits"
+              />
               <Button
                 type="button"
                 className="w-full"
@@ -763,9 +822,37 @@ export function DashboardClient(props: Props) {
                 <Receipt size={16} aria-hidden="true" />
                 M-Pesa
               </Button>
-              <Button type="button" className="w-full" variant="secondary" disabled aria-label="Card coming soon">
+              <Button
+                type="button"
+                className="w-full"
+                variant="secondary"
+                disabled={isBusy}
+                aria-label="Top up with card"
+                onClick={async () => {
+                  setIsBusy(true);
+                  setMpesaMessage(null);
+                  try {
+                    const res = await fetch("/api/payments/paystack/initialize", {
+                      method: "POST",
+                      headers: { "content-type": "application/json" },
+                      body: JSON.stringify({ credits: topupCreditsDraft }),
+                    });
+                    const json = (await res.json().catch(() => null)) as
+                      | { authorizationUrl?: string; message?: string }
+                      | null;
+                    if (!res.ok || !json?.authorizationUrl) {
+                      throw new Error(json?.message ?? "Unable to start card checkout.");
+                    }
+                    window.location.href = json.authorizationUrl;
+                  } catch (err) {
+                    setMpesaMessage(err instanceof Error ? err.message : "Unable to start card checkout.");
+                  } finally {
+                    setIsBusy(false);
+                  }
+                }}
+              >
                 <CreditCard size={16} aria-hidden="true" />
-                Card (coming soon)
+                Card
               </Button>
             </div>
           ) : null}
@@ -806,7 +893,14 @@ export function DashboardClient(props: Props) {
               />
 
               <Button type="submit" disabled={isBusy} className="w-full" aria-label="Send STK push">
-                Send STK push
+                {isBusy ? (
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                    Sending…
+                  </span>
+                ) : (
+                  "Send STK push"
+                )}
               </Button>
 
               {mpesaMessage ? (

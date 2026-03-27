@@ -29,6 +29,7 @@ enum ApiKeyEnvironment {
 
 enum PaymentProvider {
   MPESA_DARAJA
+  PAYSTACK
 }
 
 enum PaymentStatus {

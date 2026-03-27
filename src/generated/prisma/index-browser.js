@@ -261,7 +261,8 @@ exports.ApiKeyEnvironment = exports.$Enums.ApiKeyEnvironment = {
 };
 
 exports.PaymentProvider = exports.$Enums.PaymentProvider = {
-  MPESA_DARAJA: 'MPESA_DARAJA'
+  MPESA_DARAJA: 'MPESA_DARAJA',
+  PAYSTACK: 'PAYSTACK'
 };
 
 exports.PaymentStatus = exports.$Enums.PaymentStatus = {

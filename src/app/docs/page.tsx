@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Code2, KeyRound, Layers3, Receipt } from "lucide-react";
+import { Code2, KeyRound, Layers3 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -47,18 +47,6 @@ export default function DocsHome() {
           icon={<Code2 size={18} aria-hidden="true" />}
           title="API"
           desc="How to use keys, estimate costs, and read your ledger."
-        />
-        <DocCard
-          href="/docs/setup"
-          icon={<Receipt size={18} aria-hidden="true" />}
-          title="Setup (.env)"
-          desc="Operator setup for payments + callback URL."
-        />
-        <DocCard
-          href="/docs/payments/mpesa"
-          icon={<Receipt size={18} aria-hidden="true" />}
-          title="Payments (M‑Pesa)"
-          desc="Clean overview of the checkout flow."
         />
       </div>
 
