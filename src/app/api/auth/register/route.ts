@@ -59,6 +59,7 @@ export async function POST(req: Request) {
     });
     return res;
   } catch (err) {
+    console.error("REGISTER_ERROR", err);
     if (err instanceof z.ZodError) {
       return jsonError(400, {
         error: "BAD_INPUT",
@@ -72,7 +73,12 @@ export async function POST(req: Request) {
         message: "Server is missing AUTH_SECRET configuration.",
       });
     }
-    if (err instanceof Error && err.message.includes("ERR_DLOPEN_FAILED")) {
+    if (
+      err instanceof Error &&
+      (err.message.includes("ERR_DLOPEN_FAILED") ||
+        err.message.includes("better_sqlite3") ||
+        err.message.includes("Module did not self-register"))
+    ) {
       return jsonError(500, {
         error: "NATIVE_MODULE_ERROR",
         message: "Native database module failed to load on this host.",
