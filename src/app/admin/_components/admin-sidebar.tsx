@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Layers3, Users, KeyRound, ArrowLeft } from "lucide-react";
+import { LayoutDashboard, Layers3, LifeBuoy, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const items = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/models", label: "Models", icon: Layers3 },
+    { href: "/admin/support", label: "Support", icon: LifeBuoy },
 ];
 
 export function AdminSidebar() {

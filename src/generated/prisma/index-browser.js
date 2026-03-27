@@ -223,6 +223,24 @@ exports.Prisma.PaymentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SupportTicketScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  status: 'status',
+  subject: 'subject',
+  message: 'message',
+  requestId: 'requestId',
+  contextJson: 'contextJson',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AppConfigScalarFieldEnum = {
+  key: 'key',
+  value: 'value',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -272,6 +290,13 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   CANCELLED: 'CANCELLED'
 };
 
+exports.SupportTicketStatus = exports.$Enums.SupportTicketStatus = {
+  OPEN: 'OPEN',
+  INVESTIGATING: 'INVESTIGATING',
+  RESOLVED: 'RESOLVED',
+  CLOSED: 'CLOSED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   CreditWallet: 'CreditWallet',
@@ -280,7 +305,9 @@ exports.Prisma.ModelName = {
   Notification: 'Notification',
   ApiKey: 'ApiKey',
   ApiKeyUsageLog: 'ApiKeyUsageLog',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  SupportTicket: 'SupportTicket',
+  AppConfig: 'AppConfig'
 };
 
 /**

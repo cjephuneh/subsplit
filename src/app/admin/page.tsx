@@ -1,3 +1,4 @@
+import * as React from "react";
 import { prisma } from "@/server/db";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -184,7 +185,7 @@ function StatsCard({
 }: {
     title: string;
     value: number;
-    icon: any;
+    icon: React.ComponentType<{ className?: string }>;
     description: string
 }) {
     return (

@@ -55,7 +55,7 @@ function Hero() {
             </Link>
           </div>
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
-            Sign up today and get a $1 welcome bonus to start immediately.
+            Sign up today and get a Kes 20 welcome bonus to start immediately.
           </p>
         </div>
         <HeroCard />
@@ -155,7 +155,7 @@ function Pricing() {
               Start building with Subsplit today
             </h2>
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              Create an account, claim your $1 welcome bonus, and experience seamless AI access. Buy credits with as low as 100 KES from M-Pesa or bank.
+              Create an account, claim your Kes 20 welcome bonus, and experience seamless AI access. Buy credits with as low as 100 KES from M-Pesa or bank.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row">
@@ -186,6 +186,9 @@ function Footer() {
       <div className="flex flex-col items-start justify-between gap-3 border-t border-zinc-200/70 pt-8 dark:border-zinc-800/70 sm:flex-row sm:items-center">
         <div>© {new Date().getFullYear()} Subsplit</div>
         <div className="flex items-center gap-4">
+          <Link href="/contact" className="hover:underline" aria-label="Contact Subsplit">
+            Contact us
+          </Link>
           <Link href="/auth/login" className="hover:underline">
             Sign in
           </Link>

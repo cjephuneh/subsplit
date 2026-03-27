@@ -57,6 +57,15 @@ type ApiKeyLog = {
   createdAt: string | Date;
   apiKey: { label: string; prefix: string };
 };
+type SupportTicket = {
+  id: string;
+  status: "OPEN" | "INVESTIGATING" | "RESOLVED" | "CLOSED";
+  subject: string;
+  message: string;
+  requestId: string | null;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+};
 
 type Props = {
   user: User;
@@ -66,7 +75,7 @@ type Props = {
   initialNotifications: Notif[];
 };
 
-type Page = "keys" | "wallet" | "marketplace" | "logs";
+type Page = "keys" | "wallet" | "marketplace" | "logs" | "support";
 type CheckoutStep = "choose" | "mpesa";
 
 export function DashboardClient(props: Props) {
@@ -76,6 +85,7 @@ export function DashboardClient(props: Props) {
   const [notifications, setNotifications] = React.useState(props.initialNotifications);
   const [keys, setKeys] = React.useState<ApiKeyInfo[]>([]);
   const [logs, setLogs] = React.useState<ApiKeyLog[]>([]);
+  const [tickets, setTickets] = React.useState<SupportTicket[]>([]);
   const [createdKey, setCreatedKey] = React.useState<string | null>(null);
 
   const [selectedModelType, setSelectedModelType] = React.useState<string>("TEXT");
@@ -227,6 +237,13 @@ export function DashboardClient(props: Props) {
     if (!res.ok) return;
     const json = (await res.json()) as { logs: ApiKeyLog[] };
     setLogs(json.logs);
+  }
+
+  async function refreshTickets() {
+    const res = await fetch("/api/support/tickets/list?limit=25", { cache: "no-store" });
+    const json = (await res.json().catch(() => null)) as { tickets?: SupportTicket[]; message?: string } | null;
+    if (!res.ok) throw new Error(json?.message ?? "Unable to load tickets.");
+    setTickets(json?.tickets ?? []);
   }
 
   async function createKey(input: { label: string; credits: number; defaultModelKey: string }) {
@@ -422,6 +439,19 @@ export function DashboardClient(props: Props) {
             }}
           >
             Usage logs
+          </NavButton>
+          <NavButton
+            active={page === "support"}
+            onClick={async () => {
+              setPage("support");
+              try {
+                await refreshTickets();
+              } catch (err) {
+                setMpesaMessage(err instanceof Error ? err.message : "Unable to load support tickets.");
+              }
+            }}
+          >
+            Support
           </NavButton>
         </aside>
 
@@ -749,6 +779,113 @@ export function DashboardClient(props: Props) {
                 </div>
               </CardContent>
             </Card>
+          ) : null}
+
+          {page === "support" ? (
+            <div className="space-y-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Report an issue</CardTitle>
+                  <CardDescription>Include a request ID if you have one. We’ll also attach your recent usage logs.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form
+                    className="space-y-3"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      if (isBusy) return;
+                      setIsBusy(true);
+                      setMpesaMessage(null);
+                      try {
+                        const fd = new FormData(e.currentTarget);
+                        const subject = String(fd.get("subject") ?? "").trim();
+                        const requestId = String(fd.get("requestId") ?? "").trim();
+                        const message = String(fd.get("message") ?? "").trim();
+
+                        const res = await fetch("/api/support/tickets/create", {
+                          method: "POST",
+                          headers: { "content-type": "application/json" },
+                          body: JSON.stringify({
+                            subject,
+                            message,
+                            requestId: requestId.length ? requestId : undefined,
+                          }),
+                        });
+                        const json = (await res.json().catch(() => null)) as { message?: string } | null;
+                        if (!res.ok) throw new Error(json?.message ?? "Unable to create ticket.");
+                        (e.currentTarget as HTMLFormElement).reset();
+                        setMpesaMessage("Ticket submitted. We’ll reach out by email.");
+                        await refreshTickets();
+                      } catch (err) {
+                        setMpesaMessage(err instanceof Error ? err.message : "Unable to submit ticket.");
+                      } finally {
+                        setIsBusy(false);
+                      }
+                    }}
+                  >
+                    <Input
+                      name="subject"
+                      placeholder="Subject (e.g. Payment confirmed but wallet not updated)"
+                      aria-label="Ticket subject"
+                      required
+                    />
+                    <Input name="requestId" placeholder="Request ID (optional)" aria-label="Request ID" />
+                    <textarea
+                      name="message"
+                      className="min-h-28 w-full rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm text-zinc-900 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:focus-visible:ring-zinc-600"
+                      placeholder="Describe what happened, steps to reproduce, and what you expected."
+                      aria-label="Ticket message"
+                      required
+                    />
+                    <Button type="submit" disabled={isBusy} aria-label="Submit support ticket">
+                      Submit ticket
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Your tickets</CardTitle>
+                  <CardDescription>{tickets.length} total</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    {tickets.map((t) => (
+                      <div
+                        key={t.id}
+                        className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm dark:border-zinc-800 dark:bg-zinc-950"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="font-medium truncate">{t.subject}</div>
+                            <div className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+                              {t.requestId ? `Request: ${t.requestId} • ` : ""}
+                              {new Date(t.createdAt).toLocaleString()}
+                            </div>
+                          </div>
+                          <Badge
+                            variant={
+                              t.status === "OPEN"
+                                ? "warning"
+                                : t.status === "RESOLVED"
+                                  ? "success"
+                                  : "default"
+                            }
+                          >
+                            {t.status}
+                          </Badge>
+                        </div>
+                        <div className="mt-2 text-xs text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap">{t.message}</div>
+                      </div>
+                    ))}
+                    {tickets.length === 0 ? (
+                      <div className="py-8 text-center text-sm text-zinc-600 dark:text-zinc-400">No tickets yet.</div>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ) : null}
 
           {page === "logs" ? (

@@ -29,6 +29,15 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
   const [isBusy, setIsBusy] = React.useState(false);
   const [message, setMessage] = React.useState<string | null>(null);
 
+  const contactEmail = "calebjephuneh@gmail.com";
+  const whatsappUrl = "https://wa.me/254708419386";
+  const partnerMailto = `mailto:${contactEmail}?subject=${encodeURIComponent("Partner with Subsplit — Hackathon / Collaboration")}&body=${encodeURIComponent(
+    "Hi Subsplit team,\n\nWe'd like to partner with you on:\n- Hackathon sponsorship / credits\n- Community workshop\n- API integration partnership\n\nDetails:\n- Organization:\n- Dates:\n- Expected participants:\n- What you need from Subsplit:\n\nThanks,\n",
+  )}`;
+  const creditsMailto = `mailto:${contactEmail}?subject=${encodeURIComponent("Request credits — Subsplit")}&body=${encodeURIComponent(
+    "Hi Subsplit team,\n\nI'd like to request credits for:\n- Project / use case:\n- Expected monthly usage:\n- Timeline:\n- Contact info:\n\nThanks,\n",
+  )}`;
+
   async function refresh() {
     const res = await fetch("/api/admin/models", { cache: "no-store" });
     const json = (await res.json().catch(() => null)) as { models?: Model[]; message?: string } | null;
@@ -77,6 +86,99 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
           Add the models you actually have access to. The marketplace + spend selector will only show what exists here.
         </p>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Contact & partnerships</CardTitle>
+          <CardDescription>Make it easy for people to reach you, partner, or request credits.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="rounded-3xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="text-sm font-semibold">Contact us</div>
+              <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
+                Email:{" "}
+                <a
+                  className="font-medium underline underline-offset-4"
+                  href={`mailto:${contactEmail}`}
+                  aria-label="Email Subsplit"
+                >
+                  {contactEmail}
+                </a>
+              </div>
+              <div className="mt-1 text-sm text-zinc-700 dark:text-zinc-300">
+                WhatsApp:{" "}
+                <a
+                  className="font-medium underline underline-offset-4"
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open WhatsApp chat"
+                >
+                  wa.me/+254708419386
+                </a>
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="h-9 rounded-full text-xs"
+                  aria-label="Email contact"
+                  onClick={() => {
+                    window.location.href = `mailto:${contactEmail}`;
+                  }}
+                >
+                  Email
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="h-9 rounded-full text-xs"
+                  aria-label="WhatsApp contact"
+                  onClick={() => {
+                    window.open(whatsappUrl, "_blank", "noreferrer");
+                  }}
+                >
+                  WhatsApp
+                </Button>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+              <div className="text-sm font-semibold">Work with us</div>
+              <div className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">
+                Want a hackathon partnership or need credits for a project? Send a pre-filled request and we’ll reply fast.
+              </div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  className="h-9 rounded-full text-xs"
+                  aria-label="Partner with us for hackathon"
+                  onClick={() => {
+                    window.location.href = partnerMailto;
+                  }}
+                >
+                  Partner with us
+                </Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="h-9 rounded-full text-xs"
+                  aria-label="Request credits"
+                  onClick={() => {
+                    window.location.href = creditsMailto;
+                  }}
+                >
+                  Request credits
+                </Button>
+              </div>
+              <div className="mt-3 text-xs text-zinc-600 dark:text-zinc-400">
+                Tip: include dates, expected participants, and your budget/needs.
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>

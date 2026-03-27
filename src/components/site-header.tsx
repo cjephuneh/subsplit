@@ -36,6 +36,11 @@ export async function SiteHeader() {
               Sandbox
             </Button>
           </Link>
+          <Link href="/contact">
+            <Button variant="ghost" size="sm" aria-label="Open contact page">
+              Contact
+            </Button>
+          </Link>
           {user ? (
             <Link href="/dashboard">
               <Button size="sm" aria-label="Go to dashboard">

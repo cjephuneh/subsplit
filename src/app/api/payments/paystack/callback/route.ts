@@ -5,11 +5,21 @@ import { verifyPaystack } from "@/server/paystack";
 
 export const runtime = "nodejs";
 
+function getRedirectBaseUrl(fallbackOrigin: string) {
+  const configured = process.env.APP_BASE_URL?.trim();
+  if (!configured) return fallbackOrigin;
+  return configured.replace(/\/+$/, "");
+}
+
+function redirectToDashboard(origin: string, status: string) {
+  return Response.redirect(new URL(`/dashboard?paystack=${encodeURIComponent(status)}`, getRedirectBaseUrl(origin)));
+}
+
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const reference = url.searchParams.get("reference");
   if (!reference) {
-    return Response.redirect(new URL("/dashboard?paystack=missing_reference", url.origin));
+    return redirectToDashboard(url.origin, "missing_reference");
   }
 
   try {
@@ -18,11 +28,11 @@ export async function GET(req: Request) {
       select: { id: true, userId: true, status: true, creditsCents: true, environment: true },
     });
     if (!payment) {
-      return Response.redirect(new URL("/dashboard?paystack=payment_not_found", url.origin));
+      return redirectToDashboard(url.origin, "payment_not_found");
     }
 
     if (payment.status === "COMPLETED") {
-      return Response.redirect(new URL("/dashboard?paystack=success", url.origin));
+      return redirectToDashboard(url.origin, "success");
     }
 
     const verified = await verifyPaystack(reference);
@@ -33,7 +43,7 @@ export async function GET(req: Request) {
         where: { id: payment.id },
         data: { status: "FAILED", metadataJson: JSON.stringify({ verify: verified }) },
       });
-      return Response.redirect(new URL("/dashboard?paystack=failed", url.origin));
+      return redirectToDashboard(url.origin, "failed");
     }
 
     await prisma.payment.update({
@@ -61,9 +71,9 @@ export async function GET(req: Request) {
       });
     }
 
-    return Response.redirect(new URL("/dashboard?paystack=success", url.origin));
+    return redirectToDashboard(url.origin, "success");
   } catch {
-    return Response.redirect(new URL("/dashboard?paystack=error", url.origin));
+    return redirectToDashboard(url.origin, "error");
   }
 }
 
