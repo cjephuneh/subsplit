@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = (process.env.APP_BASE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
+  const base = (process.env.APP_BASE_URL ?? "http://subsplit.co").replace(/\/+$/, "");
   const now = new Date();
 
   const routes = ["/", "/docs", "/docs/api", "/docs/models", "/contact"];

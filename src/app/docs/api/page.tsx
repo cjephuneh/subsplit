@@ -24,7 +24,7 @@ export default function ApiDocs() {
         </p>
         <pre className="overflow-auto rounded-3xl border border-zinc-200 bg-zinc-50 p-4 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
           <code>{`curl -sS \\
-  -X POST "http://localhost:3000/api/v1/chat/completions" \\
+  -X POST "http://subsplit.co/api/v1/chat/completions" \\
   -H "content-type: application/json" \\
   -H "authorization: Bearer ss_live_YOUR_KEY" \\
   -d '{
@@ -43,7 +43,7 @@ export default function ApiDocs() {
             - Method: <span className="font-mono">POST</span>
           </div>
           <div>
-            - URL: <span className="font-mono">http://localhost:3000/api/v1/chat/completions</span>
+            - URL: <span className="font-mono">http://subsplit.co/api/v1/chat/completions</span>
           </div>
           <div>
             - Headers:

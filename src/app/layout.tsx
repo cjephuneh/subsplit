@@ -4,7 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  metadataBase: new URL((process.env.APP_BASE_URL ?? "http://localhost:3000").replace(/\/+$/, "")),
+  metadataBase: new URL((process.env.APP_BASE_URL ?? "http://subsplit.co").replace(/\/+$/, "")),
   applicationName: "Subsplit",
   title: {
     default: "Subsplit — Cheaper AI credits",

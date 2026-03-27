@@ -28,9 +28,9 @@ export function activate(context: vscode.ExtensionContext) {
             async message => {
                 switch (message.command) {
                     case 'login':
-                        vscode.env.openExternal(vscode.Uri.parse('http://localhost:3000/dashboard'));
+                        vscode.env.openExternal(vscode.Uri.parse('http://subsplit.co/dashboard'));
                         
-                        const key = await vscode.window.showInputBox({
+                        const key = await vscode.window.showInputBox({  
                             prompt: 'Paste your Subsplit API Key',
                             password: true,
                             ignoreFocusOut: true

@@ -136,7 +136,7 @@ export async function POST(req: Request) {
         return jsonError(500, {
           error: "MISCONFIGURED",
           message:
-            "Missing APP_BASE_URL. Set APP_BASE_URL to your public domain (or http://localhost:3000 for local dev).",
+            "Missing APP_BASE_URL. Set APP_BASE_URL to your public domain (or http://subsplit.co for local dev).",
         });
       }
       if (err.message.startsWith("Daraja auth failed")) {

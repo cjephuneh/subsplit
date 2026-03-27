@@ -22,7 +22,7 @@ async function runTest() {
 
     // 3. Trigger the revocation API (simulate finding it on GitHub)
     console.log("Simulating leak report to /api/v1/keys/leak-revoke...");
-    const response = await fetch("http://localhost:3000/api/v1/keys/leak-revoke", {
+    const response = await fetch("http://subsplit.co/api/v1/keys/leak-revoke", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ key: keyObj.key })

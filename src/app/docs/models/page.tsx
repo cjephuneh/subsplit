@@ -87,7 +87,7 @@ function titleCase(s: string) {
 }
 
 function getSnippets(modelKey: string) {
-  const baseUrl = "https://your-subsplit-api.com/api/v1"; // Placeholder, usually dynamic or env-based
+  const baseUrl = "https://subsplit.co/api/v1"; // Placeholder, usually dynamic or env-based
 
   return {
     python: `from openai import OpenAI
