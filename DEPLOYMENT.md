@@ -102,3 +102,12 @@ The important part is: **same table names and columns** as this app’s Prisma s
 
 - **Do not commit** real passwords or connection strings; use App Service / Key Vault / GitHub secrets.
 - If the app fails to start with a database error, verify **`DATABASE_URL`**, firewall rules, and **`sslmode=require`** for Azure Postgres.
+
+### Login fails with `P1010` / “denied access on the database `dev.db`”
+
+That means **Azure still has `DATABASE_URL=file:./dev.db`** (or an old deployment built for SQLite). This project expects **PostgreSQL** only.
+
+1. In **Azure Portal** → your Web App → **Environment variables** (or Configuration), delete or replace `DATABASE_URL` with your **Azure Database for PostgreSQL** connection string, e.g. `postgresql://USER:PASSWORD@HOST.postgres.database.azure.com:5432/DATABASE?sslmode=require`.
+2. Ensure the **Postgres firewall** allows your App Service (or “Azure services” / outbound IPs).
+3. **Redeploy** the latest app (so Prisma client + `prisma migrate deploy` match Postgres).
+4. Restart the Web App after changing variables.
