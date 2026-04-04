@@ -21,12 +21,26 @@ Set this as **`DATABASE_URL`** in your Web App **Configuration** → **Applicati
 
 On first deploy (or from a machine that can reach the DB):
 
+**Use your real Azure Postgres URL**, not the words `USER`, `HOST`, or `DATABASE`. Copy it from **Azure Portal → your PostgreSQL server → Connect** (or build it from server name, admin login, password, and database name). If Prisma prints `at HOST:5432`, you still have placeholders in the URL.
+
 ```bash
-export DATABASE_URL="postgresql://..."
 npm ci
 npm run prisma:generate
+export DATABASE_URL="postgresql://<admin>:<password>@<server>.postgres.database.azure.com:5432/<dbname>?sslmode=verify-full"
 npm run prisma:deploy
-npm run prisma:seed   # optional: seed default models
+```
+
+Encode special characters in the password (e.g. `#` → `%23`). Then optionally:
+
+```bash
+npm run prisma:seed
+```
+
+If your project `.env` already has a correct `DATABASE_URL`, you can load it (avoid pasting `# optional:` lines into the shell — that causes `command not found: #`):
+
+```bash
+set -a && source .env && set +a
+npm run prisma:deploy
 ```
 
 In **GitHub Actions**, the workflow runs `prisma:deploy` against a **temporary CI Postgres** before `build` (so the build is valid). That does **not** create tables on **Azure**.
@@ -40,8 +54,8 @@ To apply migrations to your **Azure** database on every deploy, add a repository
 3. From your machine, with **both** `DATABASE_URL` (Postgres) and optional `SQLITE_SOURCE` set:
 
 ```bash
-export DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require"
-export SQLITE_SOURCE="dev.db"   # or file:./dev.db
+export DATABASE_URL="postgresql://<admin>:<password>@<server>.postgres.database.azure.com:5432/<dbname>?sslmode=verify-full"
+export SQLITE_SOURCE="dev.db"
 npm run migrate:sqlite-to-pg
 ```
 
