@@ -41,9 +41,17 @@ export type ModelEndpointOverride = {
   deployment: string;
 };
 
+export type AzureChatRouting = {
+  /** Admin "deployment name" — must match Azure Portal deployment name when using shared endpoint. */
+  catalogDeploymentName?: string | null;
+  /** Subsplit model key from the API body (e.g. gpt-5-chat); used as Azure deployment name if set and catalog name is empty. */
+  requestModelKey?: string;
+};
+
 export async function azureChatCompletions(
   input: ChatCompletionsRequest,
   override?: ModelEndpointOverride | null,
+  routing?: AzureChatRouting | null,
 ) {
   // If the model has its own endpoint config, use the OpenAI-compatible path
   if (override?.endpoint && override?.apiKey) {
@@ -73,14 +81,19 @@ export async function azureChatCompletions(
     return json;
   }
 
-  // Fallback: use the system-level Azure OpenAI config from .env
+  // Fallback: same Azure resource/key as .env, but deployment can come from the catalog or request model key.
   const cfg = getAzureEvalConfig();
   if (!cfg) {
     throw new Error("MODEL_CONFIG_MISSING: No endpoint configured for this model in DB, and no system-level .env fallback found.");
   }
 
+  const deployment =
+    routing?.catalogDeploymentName?.trim() ||
+    routing?.requestModelKey?.trim() ||
+    cfg.deployment;
+
   const url = new URL(
-    `/openai/deployments/${encodeURIComponent(cfg.deployment)}/chat/completions`,
+    `/openai/deployments/${encodeURIComponent(deployment)}/chat/completions`,
     cfg.endpoint,
   );
   url.searchParams.set("api-version", cfg.apiVersion);

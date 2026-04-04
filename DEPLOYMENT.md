@@ -1,53 +1,104 @@
-# Deploying Subsplit AI to Azure App Service (Linux)
+# Deploying Subsplit (Azure App Service + PostgreSQL)
 
-Deploying a Next.js application with a local SQLite database to Azure App Service is very straightforward when using a **Linux App Service Plan**. 
+Subsplit uses **PostgreSQL** (recommended: **Azure Database for PostgreSQL**). The app connects with `DATABASE_URL` and Prisma.
 
-By default, Azure App Service mounts a persistent `/home` directory for your application files `/home/site/wwwroot`. This means your SQLite database will persist across app restarts as long as it's stored in your project directory.
+## 1. Azure PostgreSQL
 
-Here is the step-by-step guide to deploying Subsplit.
+1. Create an **Azure Database for PostgreSQL Flexible Server**.
+2. Allow your App Service outbound IPs (or use **Azure private connectivity** if applicable).
+3. Create a database (e.g. `postgres` or `subsplit`).
+4. Build the connection string:
 
-## Step 1: Create the Azure Web App
-1. Go to the Azure Portal and click **Create a resource** -> **Web App**.
-2. **Basics Tab:**
-   - **Publish:** Code
-   - **Runtime stack:** Node 20 LTS
-   - **Operating System:** Linux
-   - **Region:** (Choose closest to your users)
-   - **Pricing Plan:** Basic B1 or higher is recommended to ensure you have enough memory to build the Next.js app.
-
-## Step 2: Configure Environment Variables in Azure
-Before pushing your code, you need to set up your environment variables exactly as they are in your `.env` file.
-1. In your Web App, go to **Settings** -> **Environment variables**.
-2. Add all the keys from your local `.env`, for example:
-   - `DATABASE_URL` = `file:./prod.db`
-   - `NEXT_PUBLIC_BASE_URL` = `https://your-app-name.azurewebsites.net`
-   - `AZURE_OPENAI_API_KEY`, etc.
-   - `MPESA_CONSUMER_KEY`, etc.
-
-## Step 3: Setup Deployment Center (GitHub Actions)
-The easiest way to deploy is to link your GitHub repository. Azure will automatically create a GitHub Action workflow to build and deploy your app.
-
-1. Go to **Deployment Center** in the Azure Portal for your Web App.
-2. Under **Source**, select **GitHub**.
-3. Authorize Azure and select your Subsplit repository and branch.
-4. Click **Save**. This will automatically generate a `.github/workflows` YAML file in your repository and trigger the first build.
-
-## Step 4: Add Prisma Setup to package.json
-By default, Azure Oryx (the build system) will run `npm install` and `npm run build`. However, because Next.js needs the Prisma Client generated, and you need to push the DB schema, we should update your `package.json` to handle this automatically during deployment.
-
-Inside your `package.json`, update your build script to:
-```json
-"scripts": {
-  "build": "prisma generate && prisma db push && next build",
-  "start": "next start"
-}
+```text
+postgresql://USER:PASSWORD@YOUR_HOST.postgres.database.azure.com:5432/DATABASE?sslmode=require
 ```
-*Note: Make sure your `DATABASE_URL` is configured in Azure before the build runs, otherwise `prisma db push` might fail.*
 
-## Step 5: Start the App
-Azure runs the `npm start` command automatically for Node.js apps. Once the GitHub Action completes successfully, your site will be live at `https://your-app-name.azurewebsites.net`!
+Set this as **`DATABASE_URL`** in your Web App **Configuration** → **Application settings**.
 
-### Important Notes about SQLite on Azure App Service
-- **Scale Out:** Do not "Scale Out" your App Service to multiple instances. SQLite expects a single machine to read/write the file. If you need multiple scale-out instances later, you will need to migrate your database to Azure Database for PostgreSQL and update Prisma to use the `postgresql` provider instead.
-- **Production Performance:** `better-sqlite3` runs very fast on single-node instances, making it perfectly stable for Azure App Service as long as you stay on a single instance.
-- **Backups:** Azure App Service provides automatic backups, which will capture your `prod.db` file along with the rest of your app!
+## 2. Apply the schema (migrations)
+
+On first deploy (or from a machine that can reach the DB):
+
+```bash
+export DATABASE_URL="postgresql://..."
+npm ci
+npm run prisma:generate
+npm run prisma:deploy
+npm run prisma:seed   # optional: seed default models
+```
+
+In **GitHub Actions**, the workflow runs `prisma:deploy` against a temporary Postgres service before `build` so the client matches the schema.
+
+## 3. Moving data from old `dev.db` (SQLite) to PostgreSQL
+
+1. **Create an empty Postgres database** and run migrations (`prisma:deploy`) so tables exist.
+2. Keep a copy of your SQLite file (e.g. `dev.db`).
+3. From your machine, with **both** `DATABASE_URL` (Postgres) and optional `SQLITE_SOURCE` set:
+
+```bash
+export DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require"
+export SQLITE_SOURCE="dev.db"   # or file:./dev.db
+npm run migrate:sqlite-to-pg
+```
+
+This copies rows in dependency order (users → wallets → transactions → keys → logs → payments → tickets, etc.). Run it **once** after the schema is applied.
+
+## 4. Bring **production** users from the DB that is live today → Azure Postgres
+
+Yes, you can keep everyone: you copy the **existing database file or dump** into this repo’s migration path, then run the same SQLite → Postgres script against **your Azure Postgres** `DATABASE_URL`.
+
+### If production is still **SQLite** on Azure App Service (most likely)
+
+1. **Download the live SQLite file** from the Web App (pick the path your app actually used):
+   - Open the app in Azure Portal → **Development Tools** → **Advanced Tools (Kudu)** → **Go**.
+   - **Debug console** → **CMD** or **Bash**, browse under `site/wwwroot` (and `prisma/` if you stored `dev.db` there), or under `/home/data/` if you used a path like `file:/home/data/subsplit.db`.
+   - Download the `.db` file to your laptop (e.g. save as `prod-from-azure.db`).
+
+2. **Prepare Azure Postgres** (empty schema first):
+   - Create the Flexible Server DB and set firewall so **your laptop** can connect (temporarily), or run the next step from a VM that can reach Postgres.
+   - Locally:
+
+   ```bash
+   export DATABASE_URL="postgresql://USER:PASSWORD@YOUR_HOST.postgres.database.azure.com:5432/DATABASE?sslmode=require"
+   npm run prisma:generate
+   npm run prisma:deploy
+   ```
+
+3. **Copy all users and related rows** from the downloaded SQLite file:
+
+   ```bash
+   export DATABASE_URL="postgresql://USER:PASSWORD@YOUR_HOST...?sslmode=require"
+   export SQLITE_SOURCE="prod-from-azure.db"
+   npm run migrate:sqlite-to-pg
+   ```
+
+4. **Point the Web App at Postgres**: set **`DATABASE_URL`** on the App Service to the same Azure Postgres URL (and deploy the new code that uses PostgreSQL). After cutover, new traffic uses Postgres; your migrated users, wallets, keys, etc. are already there.
+
+5. **Optional**: run `npm run prisma:seed` only if you want default catalog rows; the migration script already brought real users—seeding does not recreate users if you’re careful (seed only touches `ModelOffering` in our seed).
+
+### If production is already **PostgreSQL** somewhere else
+
+Then you do **not** use `migrate:sqlite-to-pg`. Instead:
+
+- Use **pg_dump** from the old server and **pg_restore** / SQL import into Azure Postgres, or
+- Use Azure **Database migration** tools, or
+- Export/import per-table with matching schema (harder).
+
+The important part is: **same table names and columns** as this app’s Prisma schema, or adjust the dump.
+
+### Short answers to your questions
+
+- **“Pull that DB to our local code”** → Download the `.db` file via Kudu (or backup) into your project folder; that *is* pulling production data locally.
+- **“Push users to Azure Postgres”** → Run `prisma:deploy` then `migrate:sqlite-to-pg` with `DATABASE_URL` = Azure Postgres and `SQLITE_SOURCE` = that file. That **is** pushing existing users (and wallets, keys, payments, etc.) to the cloud DB.
+- **“Make sure users already using it see them”** → After the Web App’s `DATABASE_URL` points at Postgres and you’ve migrated once, they sign in against the same emails/password hashes you copied—no re-registration needed.
+
+## 5. Azure Web App (Node 20)
+
+- **Runtime:** Node 20 LTS, Linux.
+- Set **all** env vars from `.env.example` (including `AUTH_SECRET`, `APP_BASE_URL`, payment keys, Azure OpenAI, etc.).
+- Start command: `npm start` (or your configured start script).
+
+## 6. Notes
+
+- **Do not commit** real passwords or connection strings; use App Service / Key Vault / GitHub secrets.
+- If the app fails to start with a database error, verify **`DATABASE_URL`**, firewall rules, and **`sslmode=require`** for Azure Postgres.

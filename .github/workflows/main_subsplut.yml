@@ -15,6 +15,24 @@ jobs:
     permissions:
       contents: read #This is required for actions/checkout
 
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: subsplit_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test -d subsplit_ci"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://test:test@localhost:5432/subsplit_ci?schema=public
+
     steps:
       - uses: actions/checkout@v4
 
@@ -27,6 +45,7 @@ jobs:
         run: |
           npm ci
           npm run prisma:generate
+          npm run prisma:deploy
           npm run build
           npm run test
 

@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     return jsonError(401, { error: "UNAUTHORIZED", message: "Missing or invalid API key." });
   }
 
-  let body: any = null;
+  let body: z.infer<typeof BodySchema> | null = null;
   try {
     body = await parseJson(req, BodySchema);
 
@@ -56,7 +56,6 @@ export async function POST(req: Request) {
         }
         : null;
 
-    // Current implementation: route all chat to your Azure eval deployment.
     const azureResponse = await azureChatCompletions(
       {
         messages: body.messages,
@@ -64,6 +63,12 @@ export async function POST(req: Request) {
         max_tokens: body.max_tokens,
       },
       override,
+      override
+        ? null
+        : {
+            catalogDeploymentName: model.deploymentName,
+            requestModelKey: body.model,
+          },
     );
 
     const usage = z
@@ -152,9 +157,12 @@ export async function POST(req: Request) {
     }
 
     if (err instanceof Error && err.message.startsWith("AZURE_OPENAI_ERROR:")) {
+      const is404 = err.message.includes("AZURE_OPENAI_ERROR:404");
       return jsonError(502, {
         error: "UPSTREAM_ERROR",
-        message: "Azure OpenAI request failed.",
+        message: is404
+          ? "Azure returned 404 (deployment not found). In Azure Portal, copy the exact Deployment name and set it on the model in Admin (Deployment name), or name the Subsplit model key the same as that deployment. Also confirm AZURE_OPENAI_EVAL_ENDPOINT is the OpenAI resource (not the wrong resource)."
+          : "Azure OpenAI request failed.",
         context: { details: err.message },
       });
     }
