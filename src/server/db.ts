@@ -16,7 +16,29 @@ function postgresUrlFromPgEnv(): string | undefined {
   }
   const u = encodeURIComponent(user);
   const p = encodeURIComponent(password);
-  return `postgresql://${u}:${p}@${host}:${port}/${database}?sslmode=require`;
+  // Explicit verify-full matches current pg driver behavior and avoids sslmode deprecation warnings.
+  return `postgresql://${u}:${p}@${host}:${port}/${database}?sslmode=verify-full`;
+}
+
+/** Map legacy sslmode values to verify-full (pg v8 warns when require/prefer are used without explicit mode). */
+function normalizeSslModeForPgDriver(urlString: string): string {
+  try {
+    const u = new URL(urlString);
+    if (u.protocol !== "postgresql:" && u.protocol !== "postgres:") {
+      return urlString;
+    }
+    const mode = u.searchParams.get("sslmode");
+    if (
+      mode === "require" ||
+      mode === "prefer" ||
+      mode === "verify-ca"
+    ) {
+      u.searchParams.set("sslmode", "verify-full");
+    }
+    return u.toString();
+  } catch {
+    return urlString;
+  }
 }
 
 function resolveDatabaseUrl() {
@@ -43,7 +65,7 @@ function resolveDatabaseUrl() {
       "DATABASE_URL must be a PostgreSQL URL (postgresql:// or postgres://). Current value does not look like Postgres.",
     );
   }
-  return url;
+  return normalizeSslModeForPgDriver(url);
 }
 
 function createPrismaClient() {

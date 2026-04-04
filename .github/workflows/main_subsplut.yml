@@ -68,6 +68,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+
+      - name: Prisma migrate deploy (Azure production DB)
+        env:
+          DATABASE_URL: ${{ secrets.AZURE_POSTGRES_DATABASE_URL }}
+        run: |
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::notice title=Prisma::Add repo secret AZURE_POSTGRES_DATABASE_URL to apply migrations to Azure Postgres on each deploy. Until then, run locally: DATABASE_URL=... npm run prisma:deploy"
+            exit 0
+          fi
+          npm run prisma:deploy
       
       - name: Login to Azure
         uses: azure/login@v2

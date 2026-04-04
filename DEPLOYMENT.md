@@ -10,8 +10,10 @@ Subsplit uses **PostgreSQL** (recommended: **Azure Database for PostgreSQL**). T
 4. Build the connection string:
 
 ```text
-postgresql://USER:PASSWORD@YOUR_HOST.postgres.database.azure.com:5432/DATABASE?sslmode=require
+postgresql://USER:PASSWORD@YOUR_HOST.postgres.database.azure.com:5432/DATABASE?sslmode=verify-full
 ```
+
+(`sslmode=require` also works; the app normalizes it to `verify-full` for the Node `pg` driver. Encode special characters in the password, e.g. `#` → `%23`.)
 
 Set this as **`DATABASE_URL`** in your Web App **Configuration** → **Application settings**.
 
@@ -27,7 +29,9 @@ npm run prisma:deploy
 npm run prisma:seed   # optional: seed default models
 ```
 
-In **GitHub Actions**, the workflow runs `prisma:deploy` against a temporary Postgres service before `build` so the client matches the schema.
+In **GitHub Actions**, the workflow runs `prisma:deploy` against a **temporary CI Postgres** before `build` (so the build is valid). That does **not** create tables on **Azure**.
+
+To apply migrations to your **Azure** database on every deploy, add a repository secret **`AZURE_POSTGRES_DATABASE_URL`** with the same connection string you use in the Web App. The deploy job runs `prisma migrate deploy` against that URL before uploading the app. If the secret is unset, run **`npm run prisma:deploy`** once yourself (with `DATABASE_URL` pointing at Azure) so tables such as `User` exist — otherwise login fails with **P2021** (“table does not exist”).
 
 ## 3. Moving data from old `dev.db` (SQLite) to PostgreSQL
 
