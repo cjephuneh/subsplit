@@ -111,3 +111,5 @@ That means **Azure still has `DATABASE_URL=file:./dev.db`** (or an old deploymen
 2. Ensure the **Postgres firewall** allows your App Service (or “Azure services” / outbound IPs).
 3. **Redeploy** the latest app (so Prisma client + `prisma migrate deploy` match Postgres).
 4. Restart the Web App after changing variables.
+
+If Postgres is already set in Azure but you still saw errors about `file:` / SQLite, an older build may have picked up `DATABASE_URL=file:./dev.db` from a local `.env`. The server reads `DATABASE_URL` at **runtime** from the host environment; after updating Azure, redeploy **this** revision and restart the app. Prefer **CI builds** (GitHub Actions sets a Postgres URL for `npm run build`) over zipping a local `.next` built with SQLite in `.env`.

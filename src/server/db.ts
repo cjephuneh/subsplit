@@ -1,9 +1,13 @@
+import { env } from "node:process";
+
 import { PrismaPg } from "@prisma/adapter-pg";
 
 import { PrismaClient } from "@/generated/prisma";
 
 function resolveDatabaseUrl() {
-  const url = process.env.DATABASE_URL?.trim();
+  // Use `env` from node:process so Next.js does not inline build-time DATABASE_URL
+  // (e.g. file:./dev.db from a local .env); Azure App Settings must apply at runtime.
+  const url = env.DATABASE_URL?.trim();
   if (!url) {
     throw new Error(
       "DATABASE_URL is required. For Azure PostgreSQL use: postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require",
