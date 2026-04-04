@@ -113,3 +113,5 @@ That means **Azure still has `DATABASE_URL=file:./dev.db`** (or an old deploymen
 4. Restart the Web App after changing variables.
 
 If Postgres is already set in Azure but you still saw errors about `file:` / SQLite, an older build may have picked up `DATABASE_URL=file:./dev.db` from a local `.env`. The server reads `DATABASE_URL` at **runtime** from the host environment; after updating Azure, redeploy **this** revision and restart the app. Prefer **CI builds** (GitHub Actions sets a Postgres URL for `npm run build`) over zipping a local `.next` built with SQLite in `.env`.
+
+**Either** set **`DATABASE_URL`** to `postgresql://...?sslmode=require` **or** (recommended if you copied values from the Azure Postgres “Connection strings” blade) set **`PGHOST`**, **`PGUSER`**, **`PGPASSWORD`**, **`PGDATABASE`**, and optionally **`PGPORT`**, and **delete** the old **`DATABASE_URL`** if it is still `file:./dev.db`. The app will build the Postgres URL from `PG*` when `DATABASE_URL` is missing or still points at SQLite.
