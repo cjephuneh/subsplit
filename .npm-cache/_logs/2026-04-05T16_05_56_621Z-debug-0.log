@@ -5,15 +5,15 @@
 4 silly config load:file:/Users/mac/Documents/code/subsplit/.npmrc
 5 silly config load:file:/Users/mac/.npmrc
 6 silly config load:file:/usr/local/etc/npmrc
-7 verbose title npm run build
-8 verbose argv "run" "build"
-9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-04T10_30_23_388Z-
-10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-04T10_30_23_388Z-debug-0.log
+7 verbose title npm run migrate:sqlite-to-pg
+8 verbose argv "run" "migrate:sqlite-to-pg"
+9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-05T16_05_56_621Z-
+10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-05T16_05_56_621Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mac/Documents/code/subsplit
 14 verbose os Darwin 25.4.0
 15 verbose node v22.15.0
 16 verbose npm  v10.9.2
-17 verbose exit 0
-18 info ok
+17 verbose exit 1
+18 verbose code 1

@@ -4,7 +4,13 @@ import { authenticateApiKey } from "@/server/api-keys";
 import { prisma } from "@/server/db";
 import { jsonError } from "@/server/http";
 import { parseJson } from "@/server/request";
-import { azureChatCompletions, ChatCompletionsRequestSchema, type ModelEndpointOverride } from "@/server/azure-openai";
+import {
+  azureChatCompletions,
+  ChatCompletionsRequestSchema,
+  getAzureEvalConfig,
+  resolveSharedAzureDeployment,
+  type ModelEndpointOverride,
+} from "@/server/azure-openai";
 import { costCentsForTokens } from "@/server/pricing";
 import { writeApiKeyUsageLog } from "@/server/usage-logs";
 import { createTransactionAndUpdateBalance } from "@/server/credits";
@@ -26,6 +32,12 @@ export async function POST(req: Request) {
   }
 
   let body: z.infer<typeof BodySchema> | null = null;
+  let azureDebug: {
+    deployment: string;
+    source: "catalog" | "request" | "env" | "per_model_endpoint";
+    endpointHost?: string;
+  } | null = null;
+
   try {
     body = await parseJson(req, BodySchema);
 
@@ -55,6 +67,26 @@ export async function POST(req: Request) {
           deployment: model.deploymentName ?? body.model,
         }
         : null;
+
+    if (override) {
+      azureDebug = {
+        deployment: model.deploymentName?.trim() || body.model,
+        source: "per_model_endpoint",
+      };
+    } else {
+      const cfg = getAzureEvalConfig();
+      if (cfg) {
+        const r = resolveSharedAzureDeployment(cfg, {
+          catalogDeploymentName: model.deploymentName,
+          requestModelKey: body.model,
+        });
+        azureDebug = {
+          deployment: r.deployment,
+          source: r.source,
+          endpointHost: new URL(cfg.endpoint).host,
+        };
+      }
+    }
 
     const azureResponse = await azureChatCompletions(
       {
@@ -161,9 +193,20 @@ export async function POST(req: Request) {
       return jsonError(502, {
         error: "UPSTREAM_ERROR",
         message: is404
-          ? "Azure returned 404 (deployment not found). In Azure Portal, copy the exact Deployment name and set it on the model in Admin (Deployment name), or name the Subsplit model key the same as that deployment. Also confirm AZURE_OPENAI_EVAL_ENDPOINT is the OpenAI resource (not the wrong resource)."
+          ? "Azure returned 404 (deployment not found). That is unrelated to Postgres: the deployment name in the request must exist on your Azure OpenAI resource. In Azure AI Foundry / OpenAI → Deployments, copy the exact deployment name. Set it in Admin on the model (Deployment name), or clear Deployment name to use the Subsplit model key. Ensure Web App settings include AZURE_OPENAI_EVAL_ENDPOINT, API key, and AZURE_OPENAI_EVAL_DEPLOYMENT."
           : "Azure OpenAI request failed.",
-        context: { details: err.message },
+        context: {
+          details: err.message,
+          ...(is404 && azureDebug
+            ? {
+                azureDeploymentUsed: azureDebug.deployment,
+                azureDeploymentSource: azureDebug.source,
+                ...(azureDebug.endpointHost
+                  ? { azureEndpointHost: azureDebug.endpointHost }
+                  : {}),
+              }
+            : {}),
+        },
       });
     }
 

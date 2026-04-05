@@ -190,13 +190,14 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
             className="grid gap-3 md:grid-cols-2"
             onSubmit={async (e) => {
               e.preventDefault();
+              const form = e.currentTarget;
               if (isBusy) return;
               setIsBusy(true);
               setMessage(null);
               try {
-                await create(e.currentTarget);
+                await create(form);
                 await refresh();
-                (e.currentTarget as HTMLFormElement).reset();
+                form.reset();
                 setMessage("Model added.");
               } catch (err) {
                 setMessage(err instanceof Error ? err.message : "Unable to add model.");
@@ -261,9 +262,12 @@ export function AdminModelsClient({ initialModels }: { initialModels: Model[] })
             </div>
 
             <div className="md:col-span-2 space-y-1">
-              <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Provider endpoint config (optional — leave blank to use system default)</div>
+              <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400">
+                Provider endpoint (optional — blank = system Azure env). For Azure OpenAI use the resource root only, e.g.{" "}
+                <span className="font-mono">https://YOUR_RESOURCE.openai.azure.com</span> — set Deployment name to the exact Azure deployment.
+              </div>
               <div className="grid gap-3 md:grid-cols-3">
-                <Input name="endpointUrl" placeholder="Endpoint URL (e.g. https://…/openai/v1/)" aria-label="Endpoint URL" />
+                <Input name="endpointUrl" placeholder="https://…openai.azure.com or OpenAI-compatible base" aria-label="Endpoint URL" />
                 <Input name="apiKey" type="password" placeholder="API Key" aria-label="API Key" />
                 <Input name="deploymentName" placeholder="Deployment name" aria-label="Deployment name" />
               </div>

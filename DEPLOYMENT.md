@@ -36,6 +36,12 @@ Encode special characters in the password (e.g. `#` → `%23`). Then optionally:
 npm run prisma:seed
 ```
 
+### Migrations vs data (why everything looked empty)
+
+- **`prisma migrate deploy`** only creates **tables and indexes** — it does **not** insert users, credits, or model rows.
+- **`npm run prisma:seed`** fills the **default model catalog** from `prisma/default-model-offerings.ts` (by default **gpt-4** and **grok-4**). It **upserts** those keys and **does not remove** other models you add in Admin. To drop rows you no longer want, delete them under **Admin → Models** (or remove from the seed list and delete in the DB).
+- **Users and historical data** from an old SQLite app are **not** in Postgres until you run the SQLite → Postgres copy (next section) using a saved **`dev.db`** file, or users sign up again.
+
 If your project `.env` already has a correct `DATABASE_URL`, you can load it (avoid pasting `# optional:` lines into the shell — that causes `command not found: #`):
 
 ```bash
@@ -115,6 +121,15 @@ The important part is: **same table names and columns** as this app’s Prisma s
 - **Runtime:** Node 20 LTS, Linux.
 - Set **all** env vars from `.env.example` (including `AUTH_SECRET`, `APP_BASE_URL`, payment keys, Azure OpenAI, etc.).
 - Start command: `npm start` (or your configured start script).
+
+### Azure OpenAI: `DeploymentNotFound` / 404 on `/api/v1/chat/completions`
+
+This is **not caused by Postgres**. Azure returns 404 when the **deployment name** in the API URL does not exist on the **Azure OpenAI resource** you configured.
+
+1. In **Azure AI Foundry** (or your Azure OpenAI resource) → **Deployments**, copy each deployment’s **name** exactly (case-sensitive).
+2. In Subsplit **Admin → Models**, set **Deployment name** to match **or** leave it empty so Subsplit uses the **model key** as the Azure deployment name (then keys like `gpt-4` must match a deployment name in Azure).
+3. On the Web App, set **`AZURE_OPENAI_EVAL_ENDPOINT`**, **`AZURE_OPENAI_EVAL_API_KEY`**, **`AZURE_OPENAI_EVAL_DEPLOYMENT`** (fallback), and **`AZURE_OPENAI_EVAL_API_VERSION`**. They must refer to the **same** resource that actually contains your deployments.
+4. After **`migrate:sqlite-to-pg`**, old **`deploymentName`** values in `ModelOffering` can be wrong. Fix or clear them in Admin. The API error response includes **`azureDeploymentUsed`** and **`azureDeploymentSource`** (`catalog` = DB field, `request` = model key from JSON, `env` = `AZURE_OPENAI_EVAL_DEPLOYMENT`) to show what was sent to Azure.
 
 ## 6. Notes
 
