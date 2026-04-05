@@ -1,4 +1,5 @@
 import { prisma } from "@/server/db";
+import { listEnrichedApiKeysForUser } from "@/server/api-keys-list";
 
 export async function getDashboardData(userId: string) {
   const wallet = await prisma.creditWallet.findUnique({
@@ -8,7 +9,7 @@ export async function getDashboardData(userId: string) {
 
   const walletId = wallet?.id ?? null;
 
-  const [models, transactions, notifications] = await Promise.all([
+  const [models, transactions, notifications, apiKeys] = await Promise.all([
     prisma.modelOffering.findMany({
       orderBy: { outputCentsPer1kTokens: "asc" },
       select: {
@@ -49,6 +50,7 @@ export async function getDashboardData(userId: string) {
         createdAt: true,
       },
     }),
+    listEnrichedApiKeysForUser(userId),
   ]);
 
   return {
@@ -56,6 +58,8 @@ export async function getDashboardData(userId: string) {
     models,
     transactions,
     notifications,
+    apiKeys,
   };
 }
+
 

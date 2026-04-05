@@ -62,17 +62,37 @@ export async function POST(req: Request) {
     }
 
     if (status === "FAILED") {
-      await prisma.payment.update({
-        where: { id: payment.id },
+      await prisma.payment.updateMany({
+        where: { id: payment.id, status: "PENDING" },
         data: { status: "FAILED", metadataJson: JSON.stringify({ ...safeJson(payment.metadataJson), stkQuery: result }) },
       });
       return Response.json({ ok: true, status: "FAILED", result });
     }
 
-    await prisma.payment.update({
-      where: { id: payment.id },
-      data: { status: "COMPLETED", metadataJson: JSON.stringify({ ...safeJson(payment.metadataJson), stkQuery: result }) },
+    const completedMeta: Record<string, unknown> = {
+      ...safeJson(payment.metadataJson),
+      stkQuery: result,
+    };
+    const claimed = await prisma.payment.updateMany({
+      where: { id: payment.id, status: "PENDING" },
+      data: {
+        status: "COMPLETED",
+        metadataJson: JSON.stringify(completedMeta),
+      },
     });
+
+    if (claimed.count === 0) {
+      const fresh = await prisma.payment.findUnique({
+        where: { id: payment.id },
+        select: { status: true, metadataJson: true },
+      });
+      if (fresh?.status === "COMPLETED") {
+        const metaDone = safeJson(fresh.metadataJson);
+        const apiKey = getOneTimeApiKeyFromMeta(metaDone);
+        return Response.json({ ok: true, status: "COMPLETED", result, apiKey });
+      }
+      return Response.json({ ok: true, status: "COMPLETED", result });
+    }
 
     await createTransactionAndUpdateBalance({
       userId: payment.userId,
@@ -82,7 +102,7 @@ export async function POST(req: Request) {
     });
     await postBalanceSideEffects(payment.userId);
 
-    const meta = safeJson(payment.metadataJson);
+    const meta = completedMeta;
     if (meta.intent === "SPEND" && typeof meta.modelKey === "string" && typeof meta.tokens === "number") {
       await createTransactionAndUpdateBalance({
         userId: payment.userId,

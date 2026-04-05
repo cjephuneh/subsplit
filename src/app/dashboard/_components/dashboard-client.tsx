@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { formatCreditsFromCents, formatSignedCreditsFromCents } from "@/lib/credits-format";
+import type { EnrichedApiKey } from "@/types/api-keys";
 
 type User = { id: string; email: string; displayName: string };
 type Wallet = { balanceCents: number; lowBalanceCentsThreshold: number };
@@ -36,19 +37,7 @@ type Notif = {
   readAt: string | Date | null;
   createdAt: string | Date;
 };
-type ApiKeyInfo = {
-  id: string;
-  label: string;
-  prefix: string;
-  quotaCents: number;
-  usedCents: number;
-  remainingCents: number;
-  tokensLeft: number | null;
-  defaultModelKey: string | null;
-  lastUsedAt: string | Date | null;
-  revokedAt: string | Date | null;
-  createdAt: string | Date;
-};
+type ApiKeyInfo = EnrichedApiKey;
 type ApiKeyLog = {
   id: string;
   method: string;
@@ -73,6 +62,7 @@ type Props = {
   models: Model[];
   initialTransactions: Tx[];
   initialNotifications: Notif[];
+  initialKeys: ApiKeyInfo[];
 };
 
 type Page = "keys" | "wallet" | "marketplace" | "logs" | "support";
@@ -83,7 +73,11 @@ export function DashboardClient(props: Props) {
   const [wallet, setWallet] = React.useState(props.wallet);
   const [transactions, setTransactions] = React.useState(props.initialTransactions);
   const [notifications, setNotifications] = React.useState(props.initialNotifications);
-  const [keys, setKeys] = React.useState<ApiKeyInfo[]>([]);
+  const [keys, setKeys] = React.useState<ApiKeyInfo[]>(props.initialKeys);
+
+  React.useEffect(() => {
+    setKeys(props.initialKeys);
+  }, [props.initialKeys]);
   const [logs, setLogs] = React.useState<ApiKeyLog[]>([]);
   const [tickets, setTickets] = React.useState<SupportTicket[]>([]);
   const [createdKey, setCreatedKey] = React.useState<string | null>(null);

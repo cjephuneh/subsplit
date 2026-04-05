@@ -20,6 +20,7 @@ export default async function DashboardPage() {
       models={data.models}
       initialTransactions={data.transactions}
       initialNotifications={data.notifications}
+      initialKeys={data.apiKeys}
     />
   );
 }

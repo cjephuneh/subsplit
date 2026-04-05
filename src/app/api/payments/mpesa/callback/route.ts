@@ -38,8 +38,8 @@ export async function POST(req: Request) {
     }
 
     if (stk.ResultCode !== 0) {
-      await prisma.payment.update({
-        where: { id: payment.id },
+      await prisma.payment.updateMany({
+        where: { id: payment.id, status: "PENDING" },
         data: {
           status: "FAILED",
           metadataJson: JSON.stringify({
@@ -65,16 +65,19 @@ export async function POST(req: Request) {
       transactionDate,
     };
 
-    await prisma.$transaction(async (tx) => {
-      await tx.payment.update({
-        where: { id: payment.id },
-        data: {
-          status: "COMPLETED",
-          mpesaReceipt: typeof receipt === "string" ? receipt : undefined,
-          metadataJson: JSON.stringify(mergedMeta),
-        },
-      });
+    // Only one of callback vs /api/payments/mpesa/query may transition PENDING→COMPLETED and credit the wallet.
+    const claimed = await prisma.payment.updateMany({
+      where: { id: payment.id, status: "PENDING" },
+      data: {
+        status: "COMPLETED",
+        mpesaReceipt: typeof receipt === "string" ? receipt : undefined,
+        metadataJson: JSON.stringify(mergedMeta),
+      },
     });
+
+    if (claimed.count === 0) {
+      return Response.json({ ok: true });
+    }
 
     // Credit wallet top-up tied to the payment.
     await createTransactionAndUpdateBalance({
