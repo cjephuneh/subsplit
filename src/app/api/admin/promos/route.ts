@@ -11,7 +11,7 @@ const CreatePromoSchema = z.object({
   code: z.string().min(3).max(50).regex(/^[A-Z0-9_-]+$/i, "Code must be alphanumeric (hyphens and underscores allowed)"),
   credits: z.number().positive().max(1_000_000),
   maxUses: z.number().int().positive().max(100_000),
-  expiresAt: z.string().datetime().optional(),
+  expiresAt: z.string().optional(),
   note: z.string().max(500).optional(),
 });
 
@@ -74,7 +74,7 @@ export async function POST(req: Request) {
         code: body.code.toUpperCase(),
         creditsCents,
         maxUses: body.maxUses,
-        expiresAt: body.expiresAt ? new Date(body.expiresAt) : null,
+        expiresAt: body.expiresAt ? new Date(body.expiresAt + ":00") : null,
         isActive: true,
         createdByUserId: admin.id,
         note: body.note || null,

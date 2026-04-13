@@ -107,6 +107,7 @@ export function DashboardClient(props: Props) {
   const [promoMessage, setPromoMessage] = React.useState<string | null>(null);
   const [promoError, setPromoError] = React.useState<string | null>(null);
   const [redeemedPromoCredits, setRedeemedPromoCredits] = React.useState<number | null>(null);
+  const [showPromoInput, setShowPromoInput] = React.useState(false);
 
   const low = wallet.balanceCents < wallet.lowBalanceCentsThreshold;
 
@@ -972,60 +973,84 @@ export function DashboardClient(props: Props) {
             setPromoMessage(null);
             setPromoError(null);
             setRedeemedPromoCredits(null);
+            setShowPromoInput(false);
           }}
         >
           {checkoutStep === "choose" ? (
             <div className="space-y-4">
               {/* Promo Code Section */}
-              <div className="rounded-2xl border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-4 dark:border-purple-700 dark:from-purple-950/30 dark:to-pink-950/30">
-                <div className="flex items-center gap-2 mb-2">
-                  <svg className="h-5 w-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+              {!showPromoInput ? (
+                <button
+                  type="button"
+                  onClick={() => setShowPromoInput(true)}
+                  className="w-full text-left text-sm font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors flex items-center gap-2 group"
+                >
+                  <svg className="h-4 w-4 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                   </svg>
-                  <div className="text-sm font-semibold text-purple-900 dark:text-purple-100">Have a promo code?</div>
-                </div>
-                <div className="flex gap-2">
-                  <Input 
-                    value={promoCodeInput}
-                    onChange={(e) => setPromoCodeInput(e.target.value.toUpperCase())}
-                    placeholder="Enter code (e.g., HACK2026)"
-                    className="flex-1"
-                    disabled={isBusy || redeemedPromoCredits !== null}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        handleRedeemPromo();
-                      }
-                    }}
-                  />
-                  <Button 
-                    type="button" 
-                    variant="secondary"
-                    disabled={isBusy || !promoCodeInput.trim()}
-                    onClick={handleRedeemPromo}
-                    className="whitespace-nowrap"
-                  >
-                    {isBusy ? (
-                      <span className="inline-flex items-center gap-2">
-                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-purple-400/40 border-t-purple-600" />
-                        Redeeming...
-                      </span>
-                    ) : (
-                      "Redeem"
-                    )}
-                  </Button>
-                </div>
-                {promoMessage && (
-                  <div className="mt-2 rounded-lg bg-emerald-100 px-3 py-2 text-xs font-medium text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200 animate-in fade-in slide-in-from-top-2">
-                    {promoMessage}
+                  Do you have a promo code?
+                </button>
+              ) : (
+                <div className="rounded-2xl border-2 border-dashed border-purple-300 bg-gradient-to-br from-purple-50 to-pink-50 p-4 dark:border-purple-700 dark:from-purple-950/30 dark:to-pink-950/30 animate-in fade-in slide-in-from-top-2">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <svg className="h-5 w-5 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+                      </svg>
+                      <div className="text-sm font-semibold text-purple-900 dark:text-purple-100">Enter promo code</div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowPromoInput(false)}
+                      className="text-xs text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300"
+                    >
+                      Cancel
+                    </button>
                   </div>
-                )}
-                {promoError && (
-                  <div className="mt-2 rounded-lg bg-red-100 px-3 py-2 text-xs font-medium text-red-800 dark:bg-red-900/40 dark:text-red-200 animate-in fade-in slide-in-from-top-2">
-                    {promoError}
+                  <div className="flex gap-2">
+                    <Input 
+                      value={promoCodeInput}
+                      onChange={(e) => setPromoCodeInput(e.target.value.toUpperCase())}
+                      placeholder="Enter code (e.g., HACK2026)"
+                      className="flex-1"
+                      disabled={isBusy || redeemedPromoCredits !== null}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          handleRedeemPromo();
+                        }
+                      }}
+                      autoFocus
+                    />
+                    <Button 
+                      type="button" 
+                      variant="secondary"
+                      disabled={isBusy || !promoCodeInput.trim()}
+                      onClick={handleRedeemPromo}
+                      className="whitespace-nowrap"
+                    >
+                      {isBusy ? (
+                        <span className="inline-flex items-center gap-2">
+                          <span className="h-4 w-4 animate-spin rounded-full border-2 border-purple-400/40 border-t-purple-600" />
+                          Redeeming...
+                        </span>
+                      ) : (
+                        "Redeem"
+                      )}
+                    </Button>
                   </div>
-                )}
-              </div>
+                  {promoMessage && (
+                    <div className="mt-2 rounded-lg bg-emerald-100 px-3 py-2 text-xs font-medium text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200 animate-in fade-in slide-in-from-top-2">
+                      {promoMessage}
+                    </div>
+                  )}
+                  {promoError && (
+                    <div className="mt-2 rounded-lg bg-red-100 px-3 py-2 text-xs font-medium text-red-800 dark:bg-red-900/40 dark:text-red-200 animate-in fade-in slide-in-from-top-2">
+                      {promoError}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="relative flex items-center gap-3">
                 <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
@@ -1360,67 +1385,6 @@ function UsageChart({ logs }: { logs: ApiKeyLog[] }) {
           {[0, 0.5, 1].map((p) => (
             <line
               key={p}
-              x1="0"
-              y1={height * (1 - p)}
-              x2={width}
-              y2={height * (1 - p)}
-              className="stroke-zinc-100 dark:stroke-zinc-800/50"
-              strokeDasharray="4 4"
-            />
-          ))}
-
-          <path d={areaPath} fill="url(#areaGradient)" className="transition-all duration-700" />
-          <path 
-            d={linePath} 
-            fill="none" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="4" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            filter="url(#glow)" 
-            className="transition-all duration-700" 
-          />
-
-          {points.map((p, i) => (
-            <g key={i} className="group/node cursor-default">
-              <rect x={p.x - 20} y={0} width={40} height={height} fill="transparent" />
-              
-              <circle
-                cx={p.x}
-                cy={p.y}
-                r="5"
-                className="fill-white stroke-[url(#lineGradient)] stroke-[3px] opacity-0 transition-all duration-300 group-hover/node:opacity-100 group-hover/node:scale-125 dark:fill-zinc-950"
-              />
-              <text
-                x={p.x}
-                y={height + 25}
-                textAnchor="middle"
-                className="fill-zinc-400 text-[10px] font-bold uppercase tracking-wider dark:fill-zinc-600"
-              >
-                {p.label}
-              </text>
-              <g className="opacity-0 transition-all duration-300 group-hover/node:opacity-100 group-hover/node:-translate-y-2 pointer-events-none">
-                <rect x={p.x - 20} y={p.y - 36} width={40} height={20} rx={6} className="fill-zinc-900 shadow-md dark:fill-zinc-100" />
-                <text
-                  x={p.x}
-                  y={p.y - 22}
-                  textAnchor="middle"
-                  className="fill-white text-[11px] font-black dark:fill-zinc-900"
-                >
-                  {p.count}
-                </text>
-              </g>
-            </g>
-          ))}
-        </svg>
-      </div>
-    </div>
-  );
-}
-      </div>
-    </div>
-  );
-}
               x1="0"
               y1={height * (1 - p)}
               x2={width}
