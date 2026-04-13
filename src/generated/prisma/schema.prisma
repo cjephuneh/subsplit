@@ -64,12 +64,14 @@ model User {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  wallet          CreditWallet?
-  notifications   Notification[]
-  apiKeys         ApiKey[]
-  apiKeyUsageLogs ApiKeyUsageLog[]
-  payments        Payment[]
-  supportTickets  SupportTicket[]
+  wallet           CreditWallet?
+  notifications    Notification[]
+  apiKeys          ApiKey[]
+  apiKeyUsageLogs  ApiKeyUsageLog[]
+  payments         Payment[]
+  supportTickets   SupportTicket[]
+  createdPromos    PromoCode[]
+  promoRedemptions PromoRedemption[]
 }
 
 model CreditWallet {
@@ -223,4 +225,38 @@ model AppConfig {
   key       String   @id
   value     String
   updatedAt DateTime @updatedAt
+}
+
+model PromoCode {
+  id              String    @id @default(cuid())
+  code            String    @unique
+  creditsCents    Int
+  maxUses         Int
+  usedCount       Int       @default(0)
+  expiresAt       DateTime?
+  isActive        Boolean   @default(true)
+  createdByUserId String
+  note            String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  createdBy   User              @relation(fields: [createdByUserId], references: [id])
+  redemptions PromoRedemption[]
+
+  @@index([code])
+  @@index([isActive, expiresAt])
+}
+
+model PromoRedemption {
+  id           String   @id @default(cuid())
+  promoCodeId  String
+  userId       String
+  creditsCents Int
+  createdAt    DateTime @default(now())
+
+  promoCode PromoCode @relation(fields: [promoCodeId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([promoCodeId, userId])
+  @@index([userId, createdAt])
 }

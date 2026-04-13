@@ -244,6 +244,28 @@ exports.Prisma.AppConfigScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PromoCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  creditsCents: 'creditsCents',
+  maxUses: 'maxUses',
+  usedCount: 'usedCount',
+  expiresAt: 'expiresAt',
+  isActive: 'isActive',
+  createdByUserId: 'createdByUserId',
+  note: 'note',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PromoRedemptionScalarFieldEnum = {
+  id: 'id',
+  promoCodeId: 'promoCodeId',
+  userId: 'userId',
+  creditsCents: 'creditsCents',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -315,7 +337,9 @@ exports.Prisma.ModelName = {
   ApiKeyUsageLog: 'ApiKeyUsageLog',
   Payment: 'Payment',
   SupportTicket: 'SupportTicket',
-  AppConfig: 'AppConfig'
+  AppConfig: 'AppConfig',
+  PromoCode: 'PromoCode',
+  PromoRedemption: 'PromoRedemption'
 };
 
 /**

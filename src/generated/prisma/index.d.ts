@@ -63,6 +63,16 @@ export type SupportTicket = $Result.DefaultSelection<Prisma.$SupportTicketPayloa
  * 
  */
 export type AppConfig = $Result.DefaultSelection<Prisma.$AppConfigPayload>
+/**
+ * Model PromoCode
+ * 
+ */
+export type PromoCode = $Result.DefaultSelection<Prisma.$PromoCodePayload>
+/**
+ * Model PromoRedemption
+ * 
+ */
+export type PromoRedemption = $Result.DefaultSelection<Prisma.$PromoRedemptionPayload>
 
 /**
  * Enums
@@ -385,6 +395,26 @@ export class PrismaClient<
     * ```
     */
   get appConfig(): Prisma.AppConfigDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.promoCode`: Exposes CRUD operations for the **PromoCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PromoCodes
+    * const promoCodes = await prisma.promoCode.findMany()
+    * ```
+    */
+  get promoCode(): Prisma.PromoCodeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.promoRedemption`: Exposes CRUD operations for the **PromoRedemption** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PromoRedemptions
+    * const promoRedemptions = await prisma.promoRedemption.findMany()
+    * ```
+    */
+  get promoRedemption(): Prisma.PromoRedemptionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -828,7 +858,9 @@ export namespace Prisma {
     ApiKeyUsageLog: 'ApiKeyUsageLog',
     Payment: 'Payment',
     SupportTicket: 'SupportTicket',
-    AppConfig: 'AppConfig'
+    AppConfig: 'AppConfig',
+    PromoCode: 'PromoCode',
+    PromoRedemption: 'PromoRedemption'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -844,7 +876,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "appConfig"
+      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "appConfig" | "promoCode" | "promoRedemption"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1588,6 +1620,154 @@ export namespace Prisma {
           }
         }
       }
+      PromoCode: {
+        payload: Prisma.$PromoCodePayload<ExtArgs>
+        fields: Prisma.PromoCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PromoCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PromoCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          findFirst: {
+            args: Prisma.PromoCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PromoCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          findMany: {
+            args: Prisma.PromoCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>[]
+          }
+          create: {
+            args: Prisma.PromoCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          createMany: {
+            args: Prisma.PromoCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PromoCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>[]
+          }
+          delete: {
+            args: Prisma.PromoCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          update: {
+            args: Prisma.PromoCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.PromoCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PromoCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PromoCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.PromoCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoCodePayload>
+          }
+          aggregate: {
+            args: Prisma.PromoCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePromoCode>
+          }
+          groupBy: {
+            args: Prisma.PromoCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PromoCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PromoCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<PromoCodeCountAggregateOutputType> | number
+          }
+        }
+      }
+      PromoRedemption: {
+        payload: Prisma.$PromoRedemptionPayload<ExtArgs>
+        fields: Prisma.PromoRedemptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PromoRedemptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PromoRedemptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          findFirst: {
+            args: Prisma.PromoRedemptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PromoRedemptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          findMany: {
+            args: Prisma.PromoRedemptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>[]
+          }
+          create: {
+            args: Prisma.PromoRedemptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          createMany: {
+            args: Prisma.PromoRedemptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PromoRedemptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>[]
+          }
+          delete: {
+            args: Prisma.PromoRedemptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          update: {
+            args: Prisma.PromoRedemptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PromoRedemptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PromoRedemptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PromoRedemptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PromoRedemptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PromoRedemptionPayload>
+          }
+          aggregate: {
+            args: Prisma.PromoRedemptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePromoRedemption>
+          }
+          groupBy: {
+            args: Prisma.PromoRedemptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PromoRedemptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PromoRedemptionCountArgs<ExtArgs>
+            result: $Utils.Optional<PromoRedemptionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1706,6 +1886,8 @@ export namespace Prisma {
     payment?: PaymentOmit
     supportTicket?: SupportTicketOmit
     appConfig?: AppConfigOmit
+    promoCode?: PromoCodeOmit
+    promoRedemption?: PromoRedemptionOmit
   }
 
   /* Types for Logging */
@@ -1791,6 +1973,8 @@ export namespace Prisma {
     apiKeyUsageLogs: number
     payments: number
     supportTickets: number
+    createdPromos: number
+    promoRedemptions: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1799,6 +1983,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: boolean | UserCountOutputTypeCountApiKeyUsageLogsArgs
     payments?: boolean | UserCountOutputTypeCountPaymentsArgs
     supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
+    createdPromos?: boolean | UserCountOutputTypeCountCreatedPromosArgs
+    promoRedemptions?: boolean | UserCountOutputTypeCountPromoRedemptionsArgs
   }
 
   // Custom InputTypes
@@ -1845,6 +2031,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSupportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SupportTicketWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedPromosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromoCodeWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPromoRedemptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromoRedemptionWhereInput
   }
 
 
@@ -1907,6 +2107,37 @@ export namespace Prisma {
    */
   export type ApiKeyCountOutputTypeCountUsageLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ApiKeyUsageLogWhereInput
+  }
+
+
+  /**
+   * Count Type PromoCodeCountOutputType
+   */
+
+  export type PromoCodeCountOutputType = {
+    redemptions: number
+  }
+
+  export type PromoCodeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    redemptions?: boolean | PromoCodeCountOutputTypeCountRedemptionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PromoCodeCountOutputType without action
+   */
+  export type PromoCodeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCodeCountOutputType
+     */
+    select?: PromoCodeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PromoCodeCountOutputType without action
+   */
+  export type PromoCodeCountOutputTypeCountRedemptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromoRedemptionWhereInput
   }
 
 
@@ -2108,6 +2339,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: boolean | User$apiKeyUsageLogsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
+    createdPromos?: boolean | User$createdPromosArgs<ExtArgs>
+    promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2152,6 +2385,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: boolean | User$apiKeyUsageLogsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
+    createdPromos?: boolean | User$createdPromosArgs<ExtArgs>
+    promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2166,6 +2401,8 @@ export namespace Prisma {
       apiKeyUsageLogs: Prisma.$ApiKeyUsageLogPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
       supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
+      createdPromos: Prisma.$PromoCodePayload<ExtArgs>[]
+      promoRedemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2576,6 +2813,8 @@ export namespace Prisma {
     apiKeyUsageLogs<T extends User$apiKeyUsageLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$apiKeyUsageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyUsageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdPromos<T extends User$createdPromosArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPromosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    promoRedemptions<T extends User$promoRedemptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$promoRedemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3142,6 +3381,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdPromos
+   */
+  export type User$createdPromosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    where?: PromoCodeWhereInput
+    orderBy?: PromoCodeOrderByWithRelationInput | PromoCodeOrderByWithRelationInput[]
+    cursor?: PromoCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromoCodeScalarFieldEnum | PromoCodeScalarFieldEnum[]
+  }
+
+  /**
+   * User.promoRedemptions
+   */
+  export type User$promoRedemptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    where?: PromoRedemptionWhereInput
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    cursor?: PromoRedemptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
   }
 
   /**
@@ -13426,6 +13713,2324 @@ export namespace Prisma {
 
 
   /**
+   * Model PromoCode
+   */
+
+  export type AggregatePromoCode = {
+    _count: PromoCodeCountAggregateOutputType | null
+    _avg: PromoCodeAvgAggregateOutputType | null
+    _sum: PromoCodeSumAggregateOutputType | null
+    _min: PromoCodeMinAggregateOutputType | null
+    _max: PromoCodeMaxAggregateOutputType | null
+  }
+
+  export type PromoCodeAvgAggregateOutputType = {
+    creditsCents: number | null
+    maxUses: number | null
+    usedCount: number | null
+  }
+
+  export type PromoCodeSumAggregateOutputType = {
+    creditsCents: number | null
+    maxUses: number | null
+    usedCount: number | null
+  }
+
+  export type PromoCodeMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    creditsCents: number | null
+    maxUses: number | null
+    usedCount: number | null
+    expiresAt: Date | null
+    isActive: boolean | null
+    createdByUserId: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PromoCodeMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    creditsCents: number | null
+    maxUses: number | null
+    usedCount: number | null
+    expiresAt: Date | null
+    isActive: boolean | null
+    createdByUserId: string | null
+    note: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PromoCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    creditsCents: number
+    maxUses: number
+    usedCount: number
+    expiresAt: number
+    isActive: number
+    createdByUserId: number
+    note: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PromoCodeAvgAggregateInputType = {
+    creditsCents?: true
+    maxUses?: true
+    usedCount?: true
+  }
+
+  export type PromoCodeSumAggregateInputType = {
+    creditsCents?: true
+    maxUses?: true
+    usedCount?: true
+  }
+
+  export type PromoCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    creditsCents?: true
+    maxUses?: true
+    usedCount?: true
+    expiresAt?: true
+    isActive?: true
+    createdByUserId?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PromoCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    creditsCents?: true
+    maxUses?: true
+    usedCount?: true
+    expiresAt?: true
+    isActive?: true
+    createdByUserId?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PromoCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    creditsCents?: true
+    maxUses?: true
+    usedCount?: true
+    expiresAt?: true
+    isActive?: true
+    createdByUserId?: true
+    note?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PromoCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromoCode to aggregate.
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoCodes to fetch.
+     */
+    orderBy?: PromoCodeOrderByWithRelationInput | PromoCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PromoCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PromoCodes
+    **/
+    _count?: true | PromoCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PromoCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PromoCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PromoCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PromoCodeMaxAggregateInputType
+  }
+
+  export type GetPromoCodeAggregateType<T extends PromoCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregatePromoCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePromoCode[P]>
+      : GetScalarType<T[P], AggregatePromoCode[P]>
+  }
+
+
+
+
+  export type PromoCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromoCodeWhereInput
+    orderBy?: PromoCodeOrderByWithAggregationInput | PromoCodeOrderByWithAggregationInput[]
+    by: PromoCodeScalarFieldEnum[] | PromoCodeScalarFieldEnum
+    having?: PromoCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PromoCodeCountAggregateInputType | true
+    _avg?: PromoCodeAvgAggregateInputType
+    _sum?: PromoCodeSumAggregateInputType
+    _min?: PromoCodeMinAggregateInputType
+    _max?: PromoCodeMaxAggregateInputType
+  }
+
+  export type PromoCodeGroupByOutputType = {
+    id: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount: number
+    expiresAt: Date | null
+    isActive: boolean
+    createdByUserId: string
+    note: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: PromoCodeCountAggregateOutputType | null
+    _avg: PromoCodeAvgAggregateOutputType | null
+    _sum: PromoCodeSumAggregateOutputType | null
+    _min: PromoCodeMinAggregateOutputType | null
+    _max: PromoCodeMaxAggregateOutputType | null
+  }
+
+  type GetPromoCodeGroupByPayload<T extends PromoCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PromoCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PromoCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PromoCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], PromoCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PromoCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    creditsCents?: boolean
+    maxUses?: boolean
+    usedCount?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    createdByUserId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    redemptions?: boolean | PromoCode$redemptionsArgs<ExtArgs>
+    _count?: boolean | PromoCodeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoCode"]>
+
+  export type PromoCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    creditsCents?: boolean
+    maxUses?: boolean
+    usedCount?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    createdByUserId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoCode"]>
+
+  export type PromoCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    creditsCents?: boolean
+    maxUses?: boolean
+    usedCount?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    createdByUserId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoCode"]>
+
+  export type PromoCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    creditsCents?: boolean
+    maxUses?: boolean
+    usedCount?: boolean
+    expiresAt?: boolean
+    isActive?: boolean
+    createdByUserId?: boolean
+    note?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PromoCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "creditsCents" | "maxUses" | "usedCount" | "expiresAt" | "isActive" | "createdByUserId" | "note" | "createdAt" | "updatedAt", ExtArgs["result"]["promoCode"]>
+  export type PromoCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    redemptions?: boolean | PromoCode$redemptionsArgs<ExtArgs>
+    _count?: boolean | PromoCodeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PromoCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PromoCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PromoCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PromoCode"
+    objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      redemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      creditsCents: number
+      maxUses: number
+      usedCount: number
+      expiresAt: Date | null
+      isActive: boolean
+      createdByUserId: string
+      note: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["promoCode"]>
+    composites: {}
+  }
+
+  type PromoCodeGetPayload<S extends boolean | null | undefined | PromoCodeDefaultArgs> = $Result.GetResult<Prisma.$PromoCodePayload, S>
+
+  type PromoCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PromoCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PromoCodeCountAggregateInputType | true
+    }
+
+  export interface PromoCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PromoCode'], meta: { name: 'PromoCode' } }
+    /**
+     * Find zero or one PromoCode that matches the filter.
+     * @param {PromoCodeFindUniqueArgs} args - Arguments to find a PromoCode
+     * @example
+     * // Get one PromoCode
+     * const promoCode = await prisma.promoCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PromoCodeFindUniqueArgs>(args: SelectSubset<T, PromoCodeFindUniqueArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PromoCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PromoCodeFindUniqueOrThrowArgs} args - Arguments to find a PromoCode
+     * @example
+     * // Get one PromoCode
+     * const promoCode = await prisma.promoCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PromoCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, PromoCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromoCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeFindFirstArgs} args - Arguments to find a PromoCode
+     * @example
+     * // Get one PromoCode
+     * const promoCode = await prisma.promoCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PromoCodeFindFirstArgs>(args?: SelectSubset<T, PromoCodeFindFirstArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromoCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeFindFirstOrThrowArgs} args - Arguments to find a PromoCode
+     * @example
+     * // Get one PromoCode
+     * const promoCode = await prisma.promoCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PromoCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, PromoCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PromoCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PromoCodes
+     * const promoCodes = await prisma.promoCode.findMany()
+     * 
+     * // Get first 10 PromoCodes
+     * const promoCodes = await prisma.promoCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const promoCodeWithIdOnly = await prisma.promoCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PromoCodeFindManyArgs>(args?: SelectSubset<T, PromoCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PromoCode.
+     * @param {PromoCodeCreateArgs} args - Arguments to create a PromoCode.
+     * @example
+     * // Create one PromoCode
+     * const PromoCode = await prisma.promoCode.create({
+     *   data: {
+     *     // ... data to create a PromoCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends PromoCodeCreateArgs>(args: SelectSubset<T, PromoCodeCreateArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PromoCodes.
+     * @param {PromoCodeCreateManyArgs} args - Arguments to create many PromoCodes.
+     * @example
+     * // Create many PromoCodes
+     * const promoCode = await prisma.promoCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PromoCodeCreateManyArgs>(args?: SelectSubset<T, PromoCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PromoCodes and returns the data saved in the database.
+     * @param {PromoCodeCreateManyAndReturnArgs} args - Arguments to create many PromoCodes.
+     * @example
+     * // Create many PromoCodes
+     * const promoCode = await prisma.promoCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PromoCodes and only return the `id`
+     * const promoCodeWithIdOnly = await prisma.promoCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PromoCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, PromoCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PromoCode.
+     * @param {PromoCodeDeleteArgs} args - Arguments to delete one PromoCode.
+     * @example
+     * // Delete one PromoCode
+     * const PromoCode = await prisma.promoCode.delete({
+     *   where: {
+     *     // ... filter to delete one PromoCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PromoCodeDeleteArgs>(args: SelectSubset<T, PromoCodeDeleteArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PromoCode.
+     * @param {PromoCodeUpdateArgs} args - Arguments to update one PromoCode.
+     * @example
+     * // Update one PromoCode
+     * const promoCode = await prisma.promoCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PromoCodeUpdateArgs>(args: SelectSubset<T, PromoCodeUpdateArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PromoCodes.
+     * @param {PromoCodeDeleteManyArgs} args - Arguments to filter PromoCodes to delete.
+     * @example
+     * // Delete a few PromoCodes
+     * const { count } = await prisma.promoCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PromoCodeDeleteManyArgs>(args?: SelectSubset<T, PromoCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromoCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PromoCodes
+     * const promoCode = await prisma.promoCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PromoCodeUpdateManyArgs>(args: SelectSubset<T, PromoCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromoCodes and returns the data updated in the database.
+     * @param {PromoCodeUpdateManyAndReturnArgs} args - Arguments to update many PromoCodes.
+     * @example
+     * // Update many PromoCodes
+     * const promoCode = await prisma.promoCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PromoCodes and only return the `id`
+     * const promoCodeWithIdOnly = await prisma.promoCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PromoCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, PromoCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PromoCode.
+     * @param {PromoCodeUpsertArgs} args - Arguments to update or create a PromoCode.
+     * @example
+     * // Update or create a PromoCode
+     * const promoCode = await prisma.promoCode.upsert({
+     *   create: {
+     *     // ... data to create a PromoCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PromoCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PromoCodeUpsertArgs>(args: SelectSubset<T, PromoCodeUpsertArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PromoCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeCountArgs} args - Arguments to filter PromoCodes to count.
+     * @example
+     * // Count the number of PromoCodes
+     * const count = await prisma.promoCode.count({
+     *   where: {
+     *     // ... the filter for the PromoCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends PromoCodeCountArgs>(
+      args?: Subset<T, PromoCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PromoCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PromoCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PromoCodeAggregateArgs>(args: Subset<T, PromoCodeAggregateArgs>): Prisma.PrismaPromise<GetPromoCodeAggregateType<T>>
+
+    /**
+     * Group by PromoCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PromoCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PromoCodeGroupByArgs['orderBy'] }
+        : { orderBy?: PromoCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PromoCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPromoCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PromoCode model
+   */
+  readonly fields: PromoCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PromoCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PromoCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    redemptions<T extends PromoCode$redemptionsArgs<ExtArgs> = {}>(args?: Subset<T, PromoCode$redemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PromoCode model
+   */
+  interface PromoCodeFieldRefs {
+    readonly id: FieldRef<"PromoCode", 'String'>
+    readonly code: FieldRef<"PromoCode", 'String'>
+    readonly creditsCents: FieldRef<"PromoCode", 'Int'>
+    readonly maxUses: FieldRef<"PromoCode", 'Int'>
+    readonly usedCount: FieldRef<"PromoCode", 'Int'>
+    readonly expiresAt: FieldRef<"PromoCode", 'DateTime'>
+    readonly isActive: FieldRef<"PromoCode", 'Boolean'>
+    readonly createdByUserId: FieldRef<"PromoCode", 'String'>
+    readonly note: FieldRef<"PromoCode", 'String'>
+    readonly createdAt: FieldRef<"PromoCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"PromoCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PromoCode findUnique
+   */
+  export type PromoCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoCode to fetch.
+     */
+    where: PromoCodeWhereUniqueInput
+  }
+
+  /**
+   * PromoCode findUniqueOrThrow
+   */
+  export type PromoCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoCode to fetch.
+     */
+    where: PromoCodeWhereUniqueInput
+  }
+
+  /**
+   * PromoCode findFirst
+   */
+  export type PromoCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoCode to fetch.
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoCodes to fetch.
+     */
+    orderBy?: PromoCodeOrderByWithRelationInput | PromoCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromoCodes.
+     */
+    cursor?: PromoCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoCodes.
+     */
+    distinct?: PromoCodeScalarFieldEnum | PromoCodeScalarFieldEnum[]
+  }
+
+  /**
+   * PromoCode findFirstOrThrow
+   */
+  export type PromoCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoCode to fetch.
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoCodes to fetch.
+     */
+    orderBy?: PromoCodeOrderByWithRelationInput | PromoCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromoCodes.
+     */
+    cursor?: PromoCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoCodes.
+     */
+    distinct?: PromoCodeScalarFieldEnum | PromoCodeScalarFieldEnum[]
+  }
+
+  /**
+   * PromoCode findMany
+   */
+  export type PromoCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoCodes to fetch.
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoCodes to fetch.
+     */
+    orderBy?: PromoCodeOrderByWithRelationInput | PromoCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PromoCodes.
+     */
+    cursor?: PromoCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoCodes.
+     */
+    distinct?: PromoCodeScalarFieldEnum | PromoCodeScalarFieldEnum[]
+  }
+
+  /**
+   * PromoCode create
+   */
+  export type PromoCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PromoCode.
+     */
+    data: XOR<PromoCodeCreateInput, PromoCodeUncheckedCreateInput>
+  }
+
+  /**
+   * PromoCode createMany
+   */
+  export type PromoCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PromoCodes.
+     */
+    data: PromoCodeCreateManyInput | PromoCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PromoCode createManyAndReturn
+   */
+  export type PromoCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many PromoCodes.
+     */
+    data: PromoCodeCreateManyInput | PromoCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromoCode update
+   */
+  export type PromoCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PromoCode.
+     */
+    data: XOR<PromoCodeUpdateInput, PromoCodeUncheckedUpdateInput>
+    /**
+     * Choose, which PromoCode to update.
+     */
+    where: PromoCodeWhereUniqueInput
+  }
+
+  /**
+   * PromoCode updateMany
+   */
+  export type PromoCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PromoCodes.
+     */
+    data: XOR<PromoCodeUpdateManyMutationInput, PromoCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which PromoCodes to update
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * Limit how many PromoCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromoCode updateManyAndReturn
+   */
+  export type PromoCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update PromoCodes.
+     */
+    data: XOR<PromoCodeUpdateManyMutationInput, PromoCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which PromoCodes to update
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * Limit how many PromoCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromoCode upsert
+   */
+  export type PromoCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PromoCode to update in case it exists.
+     */
+    where: PromoCodeWhereUniqueInput
+    /**
+     * In case the PromoCode found by the `where` argument doesn't exist, create a new PromoCode with this data.
+     */
+    create: XOR<PromoCodeCreateInput, PromoCodeUncheckedCreateInput>
+    /**
+     * In case the PromoCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PromoCodeUpdateInput, PromoCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * PromoCode delete
+   */
+  export type PromoCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+    /**
+     * Filter which PromoCode to delete.
+     */
+    where: PromoCodeWhereUniqueInput
+  }
+
+  /**
+   * PromoCode deleteMany
+   */
+  export type PromoCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromoCodes to delete
+     */
+    where?: PromoCodeWhereInput
+    /**
+     * Limit how many PromoCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromoCode.redemptions
+   */
+  export type PromoCode$redemptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    where?: PromoRedemptionWhereInput
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    cursor?: PromoRedemptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
+  }
+
+  /**
+   * PromoCode without action
+   */
+  export type PromoCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoCode
+     */
+    select?: PromoCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoCode
+     */
+    omit?: PromoCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoCodeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PromoRedemption
+   */
+
+  export type AggregatePromoRedemption = {
+    _count: PromoRedemptionCountAggregateOutputType | null
+    _avg: PromoRedemptionAvgAggregateOutputType | null
+    _sum: PromoRedemptionSumAggregateOutputType | null
+    _min: PromoRedemptionMinAggregateOutputType | null
+    _max: PromoRedemptionMaxAggregateOutputType | null
+  }
+
+  export type PromoRedemptionAvgAggregateOutputType = {
+    creditsCents: number | null
+  }
+
+  export type PromoRedemptionSumAggregateOutputType = {
+    creditsCents: number | null
+  }
+
+  export type PromoRedemptionMinAggregateOutputType = {
+    id: string | null
+    promoCodeId: string | null
+    userId: string | null
+    creditsCents: number | null
+    createdAt: Date | null
+  }
+
+  export type PromoRedemptionMaxAggregateOutputType = {
+    id: string | null
+    promoCodeId: string | null
+    userId: string | null
+    creditsCents: number | null
+    createdAt: Date | null
+  }
+
+  export type PromoRedemptionCountAggregateOutputType = {
+    id: number
+    promoCodeId: number
+    userId: number
+    creditsCents: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PromoRedemptionAvgAggregateInputType = {
+    creditsCents?: true
+  }
+
+  export type PromoRedemptionSumAggregateInputType = {
+    creditsCents?: true
+  }
+
+  export type PromoRedemptionMinAggregateInputType = {
+    id?: true
+    promoCodeId?: true
+    userId?: true
+    creditsCents?: true
+    createdAt?: true
+  }
+
+  export type PromoRedemptionMaxAggregateInputType = {
+    id?: true
+    promoCodeId?: true
+    userId?: true
+    creditsCents?: true
+    createdAt?: true
+  }
+
+  export type PromoRedemptionCountAggregateInputType = {
+    id?: true
+    promoCodeId?: true
+    userId?: true
+    creditsCents?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PromoRedemptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromoRedemption to aggregate.
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoRedemptions to fetch.
+     */
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PromoRedemptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoRedemptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoRedemptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PromoRedemptions
+    **/
+    _count?: true | PromoRedemptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PromoRedemptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PromoRedemptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PromoRedemptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PromoRedemptionMaxAggregateInputType
+  }
+
+  export type GetPromoRedemptionAggregateType<T extends PromoRedemptionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePromoRedemption]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePromoRedemption[P]>
+      : GetScalarType<T[P], AggregatePromoRedemption[P]>
+  }
+
+
+
+
+  export type PromoRedemptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PromoRedemptionWhereInput
+    orderBy?: PromoRedemptionOrderByWithAggregationInput | PromoRedemptionOrderByWithAggregationInput[]
+    by: PromoRedemptionScalarFieldEnum[] | PromoRedemptionScalarFieldEnum
+    having?: PromoRedemptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PromoRedemptionCountAggregateInputType | true
+    _avg?: PromoRedemptionAvgAggregateInputType
+    _sum?: PromoRedemptionSumAggregateInputType
+    _min?: PromoRedemptionMinAggregateInputType
+    _max?: PromoRedemptionMaxAggregateInputType
+  }
+
+  export type PromoRedemptionGroupByOutputType = {
+    id: string
+    promoCodeId: string
+    userId: string
+    creditsCents: number
+    createdAt: Date
+    _count: PromoRedemptionCountAggregateOutputType | null
+    _avg: PromoRedemptionAvgAggregateOutputType | null
+    _sum: PromoRedemptionSumAggregateOutputType | null
+    _min: PromoRedemptionMinAggregateOutputType | null
+    _max: PromoRedemptionMaxAggregateOutputType | null
+  }
+
+  type GetPromoRedemptionGroupByPayload<T extends PromoRedemptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PromoRedemptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PromoRedemptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PromoRedemptionGroupByOutputType[P]>
+            : GetScalarType<T[P], PromoRedemptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PromoRedemptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    promoCodeId?: boolean
+    userId?: boolean
+    creditsCents?: boolean
+    createdAt?: boolean
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoRedemption"]>
+
+  export type PromoRedemptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    promoCodeId?: boolean
+    userId?: boolean
+    creditsCents?: boolean
+    createdAt?: boolean
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoRedemption"]>
+
+  export type PromoRedemptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    promoCodeId?: boolean
+    userId?: boolean
+    creditsCents?: boolean
+    createdAt?: boolean
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["promoRedemption"]>
+
+  export type PromoRedemptionSelectScalar = {
+    id?: boolean
+    promoCodeId?: boolean
+    userId?: boolean
+    creditsCents?: boolean
+    createdAt?: boolean
+  }
+
+  export type PromoRedemptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "promoCodeId" | "userId" | "creditsCents" | "createdAt", ExtArgs["result"]["promoRedemption"]>
+  export type PromoRedemptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PromoRedemptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PromoRedemptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    promoCode?: boolean | PromoCodeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PromoRedemptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PromoRedemption"
+    objects: {
+      promoCode: Prisma.$PromoCodePayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      promoCodeId: string
+      userId: string
+      creditsCents: number
+      createdAt: Date
+    }, ExtArgs["result"]["promoRedemption"]>
+    composites: {}
+  }
+
+  type PromoRedemptionGetPayload<S extends boolean | null | undefined | PromoRedemptionDefaultArgs> = $Result.GetResult<Prisma.$PromoRedemptionPayload, S>
+
+  type PromoRedemptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PromoRedemptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PromoRedemptionCountAggregateInputType | true
+    }
+
+  export interface PromoRedemptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PromoRedemption'], meta: { name: 'PromoRedemption' } }
+    /**
+     * Find zero or one PromoRedemption that matches the filter.
+     * @param {PromoRedemptionFindUniqueArgs} args - Arguments to find a PromoRedemption
+     * @example
+     * // Get one PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PromoRedemptionFindUniqueArgs>(args: SelectSubset<T, PromoRedemptionFindUniqueArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PromoRedemption that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PromoRedemptionFindUniqueOrThrowArgs} args - Arguments to find a PromoRedemption
+     * @example
+     * // Get one PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PromoRedemptionFindUniqueOrThrowArgs>(args: SelectSubset<T, PromoRedemptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromoRedemption that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionFindFirstArgs} args - Arguments to find a PromoRedemption
+     * @example
+     * // Get one PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PromoRedemptionFindFirstArgs>(args?: SelectSubset<T, PromoRedemptionFindFirstArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PromoRedemption that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionFindFirstOrThrowArgs} args - Arguments to find a PromoRedemption
+     * @example
+     * // Get one PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PromoRedemptionFindFirstOrThrowArgs>(args?: SelectSubset<T, PromoRedemptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PromoRedemptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PromoRedemptions
+     * const promoRedemptions = await prisma.promoRedemption.findMany()
+     * 
+     * // Get first 10 PromoRedemptions
+     * const promoRedemptions = await prisma.promoRedemption.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const promoRedemptionWithIdOnly = await prisma.promoRedemption.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PromoRedemptionFindManyArgs>(args?: SelectSubset<T, PromoRedemptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PromoRedemption.
+     * @param {PromoRedemptionCreateArgs} args - Arguments to create a PromoRedemption.
+     * @example
+     * // Create one PromoRedemption
+     * const PromoRedemption = await prisma.promoRedemption.create({
+     *   data: {
+     *     // ... data to create a PromoRedemption
+     *   }
+     * })
+     * 
+     */
+    create<T extends PromoRedemptionCreateArgs>(args: SelectSubset<T, PromoRedemptionCreateArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PromoRedemptions.
+     * @param {PromoRedemptionCreateManyArgs} args - Arguments to create many PromoRedemptions.
+     * @example
+     * // Create many PromoRedemptions
+     * const promoRedemption = await prisma.promoRedemption.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PromoRedemptionCreateManyArgs>(args?: SelectSubset<T, PromoRedemptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PromoRedemptions and returns the data saved in the database.
+     * @param {PromoRedemptionCreateManyAndReturnArgs} args - Arguments to create many PromoRedemptions.
+     * @example
+     * // Create many PromoRedemptions
+     * const promoRedemption = await prisma.promoRedemption.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PromoRedemptions and only return the `id`
+     * const promoRedemptionWithIdOnly = await prisma.promoRedemption.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PromoRedemptionCreateManyAndReturnArgs>(args?: SelectSubset<T, PromoRedemptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PromoRedemption.
+     * @param {PromoRedemptionDeleteArgs} args - Arguments to delete one PromoRedemption.
+     * @example
+     * // Delete one PromoRedemption
+     * const PromoRedemption = await prisma.promoRedemption.delete({
+     *   where: {
+     *     // ... filter to delete one PromoRedemption
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PromoRedemptionDeleteArgs>(args: SelectSubset<T, PromoRedemptionDeleteArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PromoRedemption.
+     * @param {PromoRedemptionUpdateArgs} args - Arguments to update one PromoRedemption.
+     * @example
+     * // Update one PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PromoRedemptionUpdateArgs>(args: SelectSubset<T, PromoRedemptionUpdateArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PromoRedemptions.
+     * @param {PromoRedemptionDeleteManyArgs} args - Arguments to filter PromoRedemptions to delete.
+     * @example
+     * // Delete a few PromoRedemptions
+     * const { count } = await prisma.promoRedemption.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PromoRedemptionDeleteManyArgs>(args?: SelectSubset<T, PromoRedemptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromoRedemptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PromoRedemptions
+     * const promoRedemption = await prisma.promoRedemption.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PromoRedemptionUpdateManyArgs>(args: SelectSubset<T, PromoRedemptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PromoRedemptions and returns the data updated in the database.
+     * @param {PromoRedemptionUpdateManyAndReturnArgs} args - Arguments to update many PromoRedemptions.
+     * @example
+     * // Update many PromoRedemptions
+     * const promoRedemption = await prisma.promoRedemption.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PromoRedemptions and only return the `id`
+     * const promoRedemptionWithIdOnly = await prisma.promoRedemption.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PromoRedemptionUpdateManyAndReturnArgs>(args: SelectSubset<T, PromoRedemptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PromoRedemption.
+     * @param {PromoRedemptionUpsertArgs} args - Arguments to update or create a PromoRedemption.
+     * @example
+     * // Update or create a PromoRedemption
+     * const promoRedemption = await prisma.promoRedemption.upsert({
+     *   create: {
+     *     // ... data to create a PromoRedemption
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PromoRedemption we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PromoRedemptionUpsertArgs>(args: SelectSubset<T, PromoRedemptionUpsertArgs<ExtArgs>>): Prisma__PromoRedemptionClient<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PromoRedemptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionCountArgs} args - Arguments to filter PromoRedemptions to count.
+     * @example
+     * // Count the number of PromoRedemptions
+     * const count = await prisma.promoRedemption.count({
+     *   where: {
+     *     // ... the filter for the PromoRedemptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PromoRedemptionCountArgs>(
+      args?: Subset<T, PromoRedemptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PromoRedemptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PromoRedemption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PromoRedemptionAggregateArgs>(args: Subset<T, PromoRedemptionAggregateArgs>): Prisma.PrismaPromise<GetPromoRedemptionAggregateType<T>>
+
+    /**
+     * Group by PromoRedemption.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PromoRedemptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PromoRedemptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PromoRedemptionGroupByArgs['orderBy'] }
+        : { orderBy?: PromoRedemptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PromoRedemptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPromoRedemptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PromoRedemption model
+   */
+  readonly fields: PromoRedemptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PromoRedemption.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PromoRedemptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    promoCode<T extends PromoCodeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PromoCodeDefaultArgs<ExtArgs>>): Prisma__PromoCodeClient<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PromoRedemption model
+   */
+  interface PromoRedemptionFieldRefs {
+    readonly id: FieldRef<"PromoRedemption", 'String'>
+    readonly promoCodeId: FieldRef<"PromoRedemption", 'String'>
+    readonly userId: FieldRef<"PromoRedemption", 'String'>
+    readonly creditsCents: FieldRef<"PromoRedemption", 'Int'>
+    readonly createdAt: FieldRef<"PromoRedemption", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PromoRedemption findUnique
+   */
+  export type PromoRedemptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoRedemption to fetch.
+     */
+    where: PromoRedemptionWhereUniqueInput
+  }
+
+  /**
+   * PromoRedemption findUniqueOrThrow
+   */
+  export type PromoRedemptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoRedemption to fetch.
+     */
+    where: PromoRedemptionWhereUniqueInput
+  }
+
+  /**
+   * PromoRedemption findFirst
+   */
+  export type PromoRedemptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoRedemption to fetch.
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoRedemptions to fetch.
+     */
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromoRedemptions.
+     */
+    cursor?: PromoRedemptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoRedemptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoRedemptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoRedemptions.
+     */
+    distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
+  }
+
+  /**
+   * PromoRedemption findFirstOrThrow
+   */
+  export type PromoRedemptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoRedemption to fetch.
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoRedemptions to fetch.
+     */
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PromoRedemptions.
+     */
+    cursor?: PromoRedemptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoRedemptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoRedemptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoRedemptions.
+     */
+    distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
+  }
+
+  /**
+   * PromoRedemption findMany
+   */
+  export type PromoRedemptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PromoRedemptions to fetch.
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PromoRedemptions to fetch.
+     */
+    orderBy?: PromoRedemptionOrderByWithRelationInput | PromoRedemptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PromoRedemptions.
+     */
+    cursor?: PromoRedemptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PromoRedemptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PromoRedemptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PromoRedemptions.
+     */
+    distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
+  }
+
+  /**
+   * PromoRedemption create
+   */
+  export type PromoRedemptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PromoRedemption.
+     */
+    data: XOR<PromoRedemptionCreateInput, PromoRedemptionUncheckedCreateInput>
+  }
+
+  /**
+   * PromoRedemption createMany
+   */
+  export type PromoRedemptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PromoRedemptions.
+     */
+    data: PromoRedemptionCreateManyInput | PromoRedemptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PromoRedemption createManyAndReturn
+   */
+  export type PromoRedemptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many PromoRedemptions.
+     */
+    data: PromoRedemptionCreateManyInput | PromoRedemptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromoRedemption update
+   */
+  export type PromoRedemptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PromoRedemption.
+     */
+    data: XOR<PromoRedemptionUpdateInput, PromoRedemptionUncheckedUpdateInput>
+    /**
+     * Choose, which PromoRedemption to update.
+     */
+    where: PromoRedemptionWhereUniqueInput
+  }
+
+  /**
+   * PromoRedemption updateMany
+   */
+  export type PromoRedemptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PromoRedemptions.
+     */
+    data: XOR<PromoRedemptionUpdateManyMutationInput, PromoRedemptionUncheckedUpdateManyInput>
+    /**
+     * Filter which PromoRedemptions to update
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * Limit how many PromoRedemptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromoRedemption updateManyAndReturn
+   */
+  export type PromoRedemptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * The data used to update PromoRedemptions.
+     */
+    data: XOR<PromoRedemptionUpdateManyMutationInput, PromoRedemptionUncheckedUpdateManyInput>
+    /**
+     * Filter which PromoRedemptions to update
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * Limit how many PromoRedemptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PromoRedemption upsert
+   */
+  export type PromoRedemptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PromoRedemption to update in case it exists.
+     */
+    where: PromoRedemptionWhereUniqueInput
+    /**
+     * In case the PromoRedemption found by the `where` argument doesn't exist, create a new PromoRedemption with this data.
+     */
+    create: XOR<PromoRedemptionCreateInput, PromoRedemptionUncheckedCreateInput>
+    /**
+     * In case the PromoRedemption was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PromoRedemptionUpdateInput, PromoRedemptionUncheckedUpdateInput>
+  }
+
+  /**
+   * PromoRedemption delete
+   */
+  export type PromoRedemptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+    /**
+     * Filter which PromoRedemption to delete.
+     */
+    where: PromoRedemptionWhereUniqueInput
+  }
+
+  /**
+   * PromoRedemption deleteMany
+   */
+  export type PromoRedemptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PromoRedemptions to delete
+     */
+    where?: PromoRedemptionWhereInput
+    /**
+     * Limit how many PromoRedemptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PromoRedemption without action
+   */
+  export type PromoRedemptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PromoRedemption
+     */
+    select?: PromoRedemptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PromoRedemption
+     */
+    omit?: PromoRedemptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PromoRedemptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13591,6 +16196,34 @@ export namespace Prisma {
   };
 
   export type AppConfigScalarFieldEnum = (typeof AppConfigScalarFieldEnum)[keyof typeof AppConfigScalarFieldEnum]
+
+
+  export const PromoCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    creditsCents: 'creditsCents',
+    maxUses: 'maxUses',
+    usedCount: 'usedCount',
+    expiresAt: 'expiresAt',
+    isActive: 'isActive',
+    createdByUserId: 'createdByUserId',
+    note: 'note',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PromoCodeScalarFieldEnum = (typeof PromoCodeScalarFieldEnum)[keyof typeof PromoCodeScalarFieldEnum]
+
+
+  export const PromoRedemptionScalarFieldEnum: {
+    id: 'id',
+    promoCodeId: 'promoCodeId',
+    userId: 'userId',
+    creditsCents: 'creditsCents',
+    createdAt: 'createdAt'
+  };
+
+  export type PromoRedemptionScalarFieldEnum = (typeof PromoRedemptionScalarFieldEnum)[keyof typeof PromoRedemptionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -13804,6 +16437,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogListRelationFilter
     payments?: PaymentListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
+    createdPromos?: PromoCodeListRelationFilter
+    promoRedemptions?: PromoRedemptionListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -13821,6 +16456,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
     supportTickets?: SupportTicketOrderByRelationAggregateInput
+    createdPromos?: PromoCodeOrderByRelationAggregateInput
+    promoRedemptions?: PromoRedemptionOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -13841,6 +16478,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogListRelationFilter
     payments?: PaymentListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
+    createdPromos?: PromoCodeListRelationFilter
+    promoRedemptions?: PromoRedemptionListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -14586,6 +17225,157 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"AppConfig"> | Date | string
   }
 
+  export type PromoCodeWhereInput = {
+    AND?: PromoCodeWhereInput | PromoCodeWhereInput[]
+    OR?: PromoCodeWhereInput[]
+    NOT?: PromoCodeWhereInput | PromoCodeWhereInput[]
+    id?: StringFilter<"PromoCode"> | string
+    code?: StringFilter<"PromoCode"> | string
+    creditsCents?: IntFilter<"PromoCode"> | number
+    maxUses?: IntFilter<"PromoCode"> | number
+    usedCount?: IntFilter<"PromoCode"> | number
+    expiresAt?: DateTimeNullableFilter<"PromoCode"> | Date | string | null
+    isActive?: BoolFilter<"PromoCode"> | boolean
+    createdByUserId?: StringFilter<"PromoCode"> | string
+    note?: StringNullableFilter<"PromoCode"> | string | null
+    createdAt?: DateTimeFilter<"PromoCode"> | Date | string
+    updatedAt?: DateTimeFilter<"PromoCode"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    redemptions?: PromoRedemptionListRelationFilter
+  }
+
+  export type PromoCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdByUserId?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    redemptions?: PromoRedemptionOrderByRelationAggregateInput
+  }
+
+  export type PromoCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    code?: string
+    AND?: PromoCodeWhereInput | PromoCodeWhereInput[]
+    OR?: PromoCodeWhereInput[]
+    NOT?: PromoCodeWhereInput | PromoCodeWhereInput[]
+    creditsCents?: IntFilter<"PromoCode"> | number
+    maxUses?: IntFilter<"PromoCode"> | number
+    usedCount?: IntFilter<"PromoCode"> | number
+    expiresAt?: DateTimeNullableFilter<"PromoCode"> | Date | string | null
+    isActive?: BoolFilter<"PromoCode"> | boolean
+    createdByUserId?: StringFilter<"PromoCode"> | string
+    note?: StringNullableFilter<"PromoCode"> | string | null
+    createdAt?: DateTimeFilter<"PromoCode"> | Date | string
+    updatedAt?: DateTimeFilter<"PromoCode"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    redemptions?: PromoRedemptionListRelationFilter
+  }, "id" | "code">
+
+  export type PromoCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdByUserId?: SortOrder
+    note?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PromoCodeCountOrderByAggregateInput
+    _avg?: PromoCodeAvgOrderByAggregateInput
+    _max?: PromoCodeMaxOrderByAggregateInput
+    _min?: PromoCodeMinOrderByAggregateInput
+    _sum?: PromoCodeSumOrderByAggregateInput
+  }
+
+  export type PromoCodeScalarWhereWithAggregatesInput = {
+    AND?: PromoCodeScalarWhereWithAggregatesInput | PromoCodeScalarWhereWithAggregatesInput[]
+    OR?: PromoCodeScalarWhereWithAggregatesInput[]
+    NOT?: PromoCodeScalarWhereWithAggregatesInput | PromoCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PromoCode"> | string
+    code?: StringWithAggregatesFilter<"PromoCode"> | string
+    creditsCents?: IntWithAggregatesFilter<"PromoCode"> | number
+    maxUses?: IntWithAggregatesFilter<"PromoCode"> | number
+    usedCount?: IntWithAggregatesFilter<"PromoCode"> | number
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"PromoCode"> | Date | string | null
+    isActive?: BoolWithAggregatesFilter<"PromoCode"> | boolean
+    createdByUserId?: StringWithAggregatesFilter<"PromoCode"> | string
+    note?: StringNullableWithAggregatesFilter<"PromoCode"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PromoCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PromoCode"> | Date | string
+  }
+
+  export type PromoRedemptionWhereInput = {
+    AND?: PromoRedemptionWhereInput | PromoRedemptionWhereInput[]
+    OR?: PromoRedemptionWhereInput[]
+    NOT?: PromoRedemptionWhereInput | PromoRedemptionWhereInput[]
+    id?: StringFilter<"PromoRedemption"> | string
+    promoCodeId?: StringFilter<"PromoRedemption"> | string
+    userId?: StringFilter<"PromoRedemption"> | string
+    creditsCents?: IntFilter<"PromoRedemption"> | number
+    createdAt?: DateTimeFilter<"PromoRedemption"> | Date | string
+    promoCode?: XOR<PromoCodeScalarRelationFilter, PromoCodeWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PromoRedemptionOrderByWithRelationInput = {
+    id?: SortOrder
+    promoCodeId?: SortOrder
+    userId?: SortOrder
+    creditsCents?: SortOrder
+    createdAt?: SortOrder
+    promoCode?: PromoCodeOrderByWithRelationInput
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PromoRedemptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    promoCodeId_userId?: PromoRedemptionPromoCodeIdUserIdCompoundUniqueInput
+    AND?: PromoRedemptionWhereInput | PromoRedemptionWhereInput[]
+    OR?: PromoRedemptionWhereInput[]
+    NOT?: PromoRedemptionWhereInput | PromoRedemptionWhereInput[]
+    promoCodeId?: StringFilter<"PromoRedemption"> | string
+    userId?: StringFilter<"PromoRedemption"> | string
+    creditsCents?: IntFilter<"PromoRedemption"> | number
+    createdAt?: DateTimeFilter<"PromoRedemption"> | Date | string
+    promoCode?: XOR<PromoCodeScalarRelationFilter, PromoCodeWhereInput>
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "promoCodeId_userId">
+
+  export type PromoRedemptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    promoCodeId?: SortOrder
+    userId?: SortOrder
+    creditsCents?: SortOrder
+    createdAt?: SortOrder
+    _count?: PromoRedemptionCountOrderByAggregateInput
+    _avg?: PromoRedemptionAvgOrderByAggregateInput
+    _max?: PromoRedemptionMaxOrderByAggregateInput
+    _min?: PromoRedemptionMinOrderByAggregateInput
+    _sum?: PromoRedemptionSumOrderByAggregateInput
+  }
+
+  export type PromoRedemptionScalarWhereWithAggregatesInput = {
+    AND?: PromoRedemptionScalarWhereWithAggregatesInput | PromoRedemptionScalarWhereWithAggregatesInput[]
+    OR?: PromoRedemptionScalarWhereWithAggregatesInput[]
+    NOT?: PromoRedemptionScalarWhereWithAggregatesInput | PromoRedemptionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PromoRedemption"> | string
+    promoCodeId?: StringWithAggregatesFilter<"PromoRedemption"> | string
+    userId?: StringWithAggregatesFilter<"PromoRedemption"> | string
+    creditsCents?: IntWithAggregatesFilter<"PromoRedemption"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"PromoRedemption"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -14601,6 +17391,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -14618,6 +17410,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -14635,6 +17429,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14652,6 +17448,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15478,6 +18276,161 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PromoCodeCreateInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedPromosInput
+    redemptions?: PromoRedemptionCreateNestedManyWithoutPromoCodeInput
+  }
+
+  export type PromoCodeUncheckedCreateInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    createdByUserId: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    redemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutPromoCodeInput
+  }
+
+  export type PromoCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPromosNestedInput
+    redemptions?: PromoRedemptionUpdateManyWithoutPromoCodeNestedInput
+  }
+
+  export type PromoCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdByUserId?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    redemptions?: PromoRedemptionUncheckedUpdateManyWithoutPromoCodeNestedInput
+  }
+
+  export type PromoCodeCreateManyInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    createdByUserId: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PromoCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdByUserId?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionCreateInput = {
+    id?: string
+    creditsCents: number
+    createdAt?: Date | string
+    promoCode: PromoCodeCreateNestedOneWithoutRedemptionsInput
+    user: UserCreateNestedOneWithoutPromoRedemptionsInput
+  }
+
+  export type PromoRedemptionUncheckedCreateInput = {
+    id?: string
+    promoCodeId: string
+    userId: string
+    creditsCents: number
+    createdAt?: Date | string
+  }
+
+  export type PromoRedemptionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promoCode?: PromoCodeUpdateOneRequiredWithoutRedemptionsNestedInput
+    user?: UserUpdateOneRequiredWithoutPromoRedemptionsNestedInput
+  }
+
+  export type PromoRedemptionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    promoCodeId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionCreateManyInput = {
+    id?: string
+    promoCodeId: string
+    userId: string
+    creditsCents: number
+    createdAt?: Date | string
+  }
+
+  export type PromoRedemptionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    promoCodeId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -15544,6 +18497,18 @@ export namespace Prisma {
     none?: SupportTicketWhereInput
   }
 
+  export type PromoCodeListRelationFilter = {
+    every?: PromoCodeWhereInput
+    some?: PromoCodeWhereInput
+    none?: PromoCodeWhereInput
+  }
+
+  export type PromoRedemptionListRelationFilter = {
+    every?: PromoRedemptionWhereInput
+    some?: PromoRedemptionWhereInput
+    none?: PromoRedemptionWhereInput
+  }
+
   export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -15561,6 +18526,14 @@ export namespace Prisma {
   }
 
   export type SupportTicketOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PromoCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PromoRedemptionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16266,6 +19239,102 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type PromoCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    createdByUserId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PromoCodeAvgOrderByAggregateInput = {
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+  }
+
+  export type PromoCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    createdByUserId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PromoCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+    expiresAt?: SortOrder
+    isActive?: SortOrder
+    createdByUserId?: SortOrder
+    note?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PromoCodeSumOrderByAggregateInput = {
+    creditsCents?: SortOrder
+    maxUses?: SortOrder
+    usedCount?: SortOrder
+  }
+
+  export type PromoCodeScalarRelationFilter = {
+    is?: PromoCodeWhereInput
+    isNot?: PromoCodeWhereInput
+  }
+
+  export type PromoRedemptionPromoCodeIdUserIdCompoundUniqueInput = {
+    promoCodeId: string
+    userId: string
+  }
+
+  export type PromoRedemptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    promoCodeId?: SortOrder
+    userId?: SortOrder
+    creditsCents?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PromoRedemptionAvgOrderByAggregateInput = {
+    creditsCents?: SortOrder
+  }
+
+  export type PromoRedemptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    promoCodeId?: SortOrder
+    userId?: SortOrder
+    creditsCents?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PromoRedemptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    promoCodeId?: SortOrder
+    userId?: SortOrder
+    creditsCents?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PromoRedemptionSumOrderByAggregateInput = {
+    creditsCents?: SortOrder
+  }
+
   export type CreditWalletCreateNestedOneWithoutUserInput = {
     create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
     connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
@@ -16307,6 +19376,20 @@ export namespace Prisma {
     connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
   }
 
+  export type PromoCodeCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput> | PromoCodeCreateWithoutCreatedByInput[] | PromoCodeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutCreatedByInput | PromoCodeCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PromoCodeCreateManyCreatedByInputEnvelope
+    connect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+  }
+
+  export type PromoRedemptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput> | PromoRedemptionCreateWithoutUserInput[] | PromoRedemptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutUserInput | PromoRedemptionCreateOrConnectWithoutUserInput[]
+    createMany?: PromoRedemptionCreateManyUserInputEnvelope
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+  }
+
   export type CreditWalletUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
     connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
@@ -16346,6 +19429,20 @@ export namespace Prisma {
     connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
     createMany?: SupportTicketCreateManyUserInputEnvelope
     connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+  }
+
+  export type PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput> | PromoCodeCreateWithoutCreatedByInput[] | PromoCodeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutCreatedByInput | PromoCodeCreateOrConnectWithoutCreatedByInput[]
+    createMany?: PromoCodeCreateManyCreatedByInputEnvelope
+    connect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+  }
+
+  export type PromoRedemptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput> | PromoRedemptionCreateWithoutUserInput[] | PromoRedemptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutUserInput | PromoRedemptionCreateOrConnectWithoutUserInput[]
+    createMany?: PromoRedemptionCreateManyUserInputEnvelope
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16440,6 +19537,34 @@ export namespace Prisma {
     deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
   }
 
+  export type PromoCodeUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput> | PromoCodeCreateWithoutCreatedByInput[] | PromoCodeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutCreatedByInput | PromoCodeCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput | PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PromoCodeCreateManyCreatedByInputEnvelope
+    set?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    disconnect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    delete?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    connect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    update?: PromoCodeUpdateWithWhereUniqueWithoutCreatedByInput | PromoCodeUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PromoCodeUpdateManyWithWhereWithoutCreatedByInput | PromoCodeUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PromoCodeScalarWhereInput | PromoCodeScalarWhereInput[]
+  }
+
+  export type PromoRedemptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput> | PromoRedemptionCreateWithoutUserInput[] | PromoRedemptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutUserInput | PromoRedemptionCreateOrConnectWithoutUserInput[]
+    upsert?: PromoRedemptionUpsertWithWhereUniqueWithoutUserInput | PromoRedemptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PromoRedemptionCreateManyUserInputEnvelope
+    set?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    disconnect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    delete?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    update?: PromoRedemptionUpdateWithWhereUniqueWithoutUserInput | PromoRedemptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PromoRedemptionUpdateManyWithWhereWithoutUserInput | PromoRedemptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
+  }
+
   export type CreditWalletUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
     connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
@@ -16518,6 +19643,34 @@ export namespace Prisma {
     update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+  }
+
+  export type PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput> | PromoCodeCreateWithoutCreatedByInput[] | PromoCodeUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutCreatedByInput | PromoCodeCreateOrConnectWithoutCreatedByInput[]
+    upsert?: PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput | PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: PromoCodeCreateManyCreatedByInputEnvelope
+    set?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    disconnect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    delete?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    connect?: PromoCodeWhereUniqueInput | PromoCodeWhereUniqueInput[]
+    update?: PromoCodeUpdateWithWhereUniqueWithoutCreatedByInput | PromoCodeUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: PromoCodeUpdateManyWithWhereWithoutCreatedByInput | PromoCodeUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: PromoCodeScalarWhereInput | PromoCodeScalarWhereInput[]
+  }
+
+  export type PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput> | PromoRedemptionCreateWithoutUserInput[] | PromoRedemptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutUserInput | PromoRedemptionCreateOrConnectWithoutUserInput[]
+    upsert?: PromoRedemptionUpsertWithWhereUniqueWithoutUserInput | PromoRedemptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PromoRedemptionCreateManyUserInputEnvelope
+    set?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    disconnect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    delete?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    update?: PromoRedemptionUpdateWithWhereUniqueWithoutUserInput | PromoRedemptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PromoRedemptionUpdateManyWithWhereWithoutUserInput | PromoRedemptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutWalletInput = {
@@ -16758,6 +19911,90 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSupportTicketsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSupportTicketsInput, UserUpdateWithoutSupportTicketsInput>, UserUncheckedUpdateWithoutSupportTicketsInput>
+  }
+
+  export type UserCreateNestedOneWithoutCreatedPromosInput = {
+    create?: XOR<UserCreateWithoutCreatedPromosInput, UserUncheckedCreateWithoutCreatedPromosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPromosInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PromoRedemptionCreateNestedManyWithoutPromoCodeInput = {
+    create?: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput> | PromoRedemptionCreateWithoutPromoCodeInput[] | PromoRedemptionUncheckedCreateWithoutPromoCodeInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutPromoCodeInput | PromoRedemptionCreateOrConnectWithoutPromoCodeInput[]
+    createMany?: PromoRedemptionCreateManyPromoCodeInputEnvelope
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+  }
+
+  export type PromoRedemptionUncheckedCreateNestedManyWithoutPromoCodeInput = {
+    create?: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput> | PromoRedemptionCreateWithoutPromoCodeInput[] | PromoRedemptionUncheckedCreateWithoutPromoCodeInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutPromoCodeInput | PromoRedemptionCreateOrConnectWithoutPromoCodeInput[]
+    createMany?: PromoRedemptionCreateManyPromoCodeInputEnvelope
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedPromosNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedPromosInput, UserUncheckedCreateWithoutCreatedPromosInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedPromosInput
+    upsert?: UserUpsertWithoutCreatedPromosInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedPromosInput, UserUpdateWithoutCreatedPromosInput>, UserUncheckedUpdateWithoutCreatedPromosInput>
+  }
+
+  export type PromoRedemptionUpdateManyWithoutPromoCodeNestedInput = {
+    create?: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput> | PromoRedemptionCreateWithoutPromoCodeInput[] | PromoRedemptionUncheckedCreateWithoutPromoCodeInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutPromoCodeInput | PromoRedemptionCreateOrConnectWithoutPromoCodeInput[]
+    upsert?: PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput | PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput[]
+    createMany?: PromoRedemptionCreateManyPromoCodeInputEnvelope
+    set?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    disconnect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    delete?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    update?: PromoRedemptionUpdateWithWhereUniqueWithoutPromoCodeInput | PromoRedemptionUpdateWithWhereUniqueWithoutPromoCodeInput[]
+    updateMany?: PromoRedemptionUpdateManyWithWhereWithoutPromoCodeInput | PromoRedemptionUpdateManyWithWhereWithoutPromoCodeInput[]
+    deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
+  }
+
+  export type PromoRedemptionUncheckedUpdateManyWithoutPromoCodeNestedInput = {
+    create?: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput> | PromoRedemptionCreateWithoutPromoCodeInput[] | PromoRedemptionUncheckedCreateWithoutPromoCodeInput[]
+    connectOrCreate?: PromoRedemptionCreateOrConnectWithoutPromoCodeInput | PromoRedemptionCreateOrConnectWithoutPromoCodeInput[]
+    upsert?: PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput | PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput[]
+    createMany?: PromoRedemptionCreateManyPromoCodeInputEnvelope
+    set?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    disconnect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    delete?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
+    update?: PromoRedemptionUpdateWithWhereUniqueWithoutPromoCodeInput | PromoRedemptionUpdateWithWhereUniqueWithoutPromoCodeInput[]
+    updateMany?: PromoRedemptionUpdateManyWithWhereWithoutPromoCodeInput | PromoRedemptionUpdateManyWithWhereWithoutPromoCodeInput[]
+    deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
+  }
+
+  export type PromoCodeCreateNestedOneWithoutRedemptionsInput = {
+    create?: XOR<PromoCodeCreateWithoutRedemptionsInput, PromoCodeUncheckedCreateWithoutRedemptionsInput>
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutRedemptionsInput
+    connect?: PromoCodeWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutPromoRedemptionsInput = {
+    create?: XOR<UserCreateWithoutPromoRedemptionsInput, UserUncheckedCreateWithoutPromoRedemptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPromoRedemptionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type PromoCodeUpdateOneRequiredWithoutRedemptionsNestedInput = {
+    create?: XOR<PromoCodeCreateWithoutRedemptionsInput, PromoCodeUncheckedCreateWithoutRedemptionsInput>
+    connectOrCreate?: PromoCodeCreateOrConnectWithoutRedemptionsInput
+    upsert?: PromoCodeUpsertWithoutRedemptionsInput
+    connect?: PromoCodeWhereUniqueInput
+    update?: XOR<XOR<PromoCodeUpdateToOneWithWhereWithoutRedemptionsInput, PromoCodeUpdateWithoutRedemptionsInput>, PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutPromoRedemptionsNestedInput = {
+    create?: XOR<UserCreateWithoutPromoRedemptionsInput, UserUncheckedCreateWithoutPromoRedemptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPromoRedemptionsInput
+    upsert?: UserUpsertWithoutPromoRedemptionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPromoRedemptionsInput, UserUpdateWithoutPromoRedemptionsInput>, UserUncheckedUpdateWithoutPromoRedemptionsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -17254,6 +20491,68 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PromoCodeCreateWithoutCreatedByInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    redemptions?: PromoRedemptionCreateNestedManyWithoutPromoCodeInput
+  }
+
+  export type PromoCodeUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    redemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutPromoCodeInput
+  }
+
+  export type PromoCodeCreateOrConnectWithoutCreatedByInput = {
+    where: PromoCodeWhereUniqueInput
+    create: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PromoCodeCreateManyCreatedByInputEnvelope = {
+    data: PromoCodeCreateManyCreatedByInput | PromoCodeCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PromoRedemptionCreateWithoutUserInput = {
+    id?: string
+    creditsCents: number
+    createdAt?: Date | string
+    promoCode: PromoCodeCreateNestedOneWithoutRedemptionsInput
+  }
+
+  export type PromoRedemptionUncheckedCreateWithoutUserInput = {
+    id?: string
+    promoCodeId: string
+    creditsCents: number
+    createdAt?: Date | string
+  }
+
+  export type PromoRedemptionCreateOrConnectWithoutUserInput = {
+    where: PromoRedemptionWhereUniqueInput
+    create: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PromoRedemptionCreateManyUserInputEnvelope = {
+    data: PromoRedemptionCreateManyUserInput | PromoRedemptionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CreditWalletUpsertWithoutUserInput = {
     update: XOR<CreditWalletUpdateWithoutUserInput, CreditWalletUncheckedUpdateWithoutUserInput>
     create: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
@@ -17446,6 +20745,66 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
   }
 
+  export type PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: PromoCodeWhereUniqueInput
+    update: XOR<PromoCodeUpdateWithoutCreatedByInput, PromoCodeUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<PromoCodeCreateWithoutCreatedByInput, PromoCodeUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type PromoCodeUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: PromoCodeWhereUniqueInput
+    data: XOR<PromoCodeUpdateWithoutCreatedByInput, PromoCodeUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type PromoCodeUpdateManyWithWhereWithoutCreatedByInput = {
+    where: PromoCodeScalarWhereInput
+    data: XOR<PromoCodeUpdateManyMutationInput, PromoCodeUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type PromoCodeScalarWhereInput = {
+    AND?: PromoCodeScalarWhereInput | PromoCodeScalarWhereInput[]
+    OR?: PromoCodeScalarWhereInput[]
+    NOT?: PromoCodeScalarWhereInput | PromoCodeScalarWhereInput[]
+    id?: StringFilter<"PromoCode"> | string
+    code?: StringFilter<"PromoCode"> | string
+    creditsCents?: IntFilter<"PromoCode"> | number
+    maxUses?: IntFilter<"PromoCode"> | number
+    usedCount?: IntFilter<"PromoCode"> | number
+    expiresAt?: DateTimeNullableFilter<"PromoCode"> | Date | string | null
+    isActive?: BoolFilter<"PromoCode"> | boolean
+    createdByUserId?: StringFilter<"PromoCode"> | string
+    note?: StringNullableFilter<"PromoCode"> | string | null
+    createdAt?: DateTimeFilter<"PromoCode"> | Date | string
+    updatedAt?: DateTimeFilter<"PromoCode"> | Date | string
+  }
+
+  export type PromoRedemptionUpsertWithWhereUniqueWithoutUserInput = {
+    where: PromoRedemptionWhereUniqueInput
+    update: XOR<PromoRedemptionUpdateWithoutUserInput, PromoRedemptionUncheckedUpdateWithoutUserInput>
+    create: XOR<PromoRedemptionCreateWithoutUserInput, PromoRedemptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PromoRedemptionUpdateWithWhereUniqueWithoutUserInput = {
+    where: PromoRedemptionWhereUniqueInput
+    data: XOR<PromoRedemptionUpdateWithoutUserInput, PromoRedemptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PromoRedemptionUpdateManyWithWhereWithoutUserInput = {
+    where: PromoRedemptionScalarWhereInput
+    data: XOR<PromoRedemptionUpdateManyMutationInput, PromoRedemptionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PromoRedemptionScalarWhereInput = {
+    AND?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
+    OR?: PromoRedemptionScalarWhereInput[]
+    NOT?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
+    id?: StringFilter<"PromoRedemption"> | string
+    promoCodeId?: StringFilter<"PromoRedemption"> | string
+    userId?: StringFilter<"PromoRedemption"> | string
+    creditsCents?: IntFilter<"PromoRedemption"> | number
+    createdAt?: DateTimeFilter<"PromoRedemption"> | Date | string
+  }
+
   export type UserCreateWithoutWalletInput = {
     id?: string
     email: string
@@ -17460,6 +20819,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -17476,6 +20837,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -17538,6 +20901,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -17554,6 +20919,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CreditTransactionUpsertWithWhereUniqueWithoutWalletInput = {
@@ -17652,6 +21019,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -17668,6 +21037,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -17700,6 +21071,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -17716,6 +21089,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutApiKeysInput = {
@@ -17732,6 +21107,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -17748,6 +21125,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -17814,6 +21193,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -17830,6 +21211,8 @@ export namespace Prisma {
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ApiKeyUsageLogUpsertWithWhereUniqueWithoutApiKeyInput = {
@@ -17897,6 +21280,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeyUsageLogsInput = {
@@ -17913,6 +21298,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeyUsageLogsInput = {
@@ -17986,6 +21373,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeyUsageLogsInput = {
@@ -18002,6 +21391,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -18018,6 +21409,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -18034,6 +21427,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -18066,6 +21461,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -18082,6 +21479,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSupportTicketsInput = {
@@ -18098,6 +21497,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -18114,6 +21515,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -18146,6 +21549,8 @@ export namespace Prisma {
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -18162,6 +21567,296 @@ export namespace Prisma {
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutCreatedPromosInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedPromosInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedPromosInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedPromosInput, UserUncheckedCreateWithoutCreatedPromosInput>
+  }
+
+  export type PromoRedemptionCreateWithoutPromoCodeInput = {
+    id?: string
+    creditsCents: number
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutPromoRedemptionsInput
+  }
+
+  export type PromoRedemptionUncheckedCreateWithoutPromoCodeInput = {
+    id?: string
+    userId: string
+    creditsCents: number
+    createdAt?: Date | string
+  }
+
+  export type PromoRedemptionCreateOrConnectWithoutPromoCodeInput = {
+    where: PromoRedemptionWhereUniqueInput
+    create: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput>
+  }
+
+  export type PromoRedemptionCreateManyPromoCodeInputEnvelope = {
+    data: PromoRedemptionCreateManyPromoCodeInput | PromoRedemptionCreateManyPromoCodeInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCreatedPromosInput = {
+    update: XOR<UserUpdateWithoutCreatedPromosInput, UserUncheckedUpdateWithoutCreatedPromosInput>
+    create: XOR<UserCreateWithoutCreatedPromosInput, UserUncheckedCreateWithoutCreatedPromosInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedPromosInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedPromosInput, UserUncheckedUpdateWithoutCreatedPromosInput>
+  }
+
+  export type UserUpdateWithoutCreatedPromosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedPromosInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput = {
+    where: PromoRedemptionWhereUniqueInput
+    update: XOR<PromoRedemptionUpdateWithoutPromoCodeInput, PromoRedemptionUncheckedUpdateWithoutPromoCodeInput>
+    create: XOR<PromoRedemptionCreateWithoutPromoCodeInput, PromoRedemptionUncheckedCreateWithoutPromoCodeInput>
+  }
+
+  export type PromoRedemptionUpdateWithWhereUniqueWithoutPromoCodeInput = {
+    where: PromoRedemptionWhereUniqueInput
+    data: XOR<PromoRedemptionUpdateWithoutPromoCodeInput, PromoRedemptionUncheckedUpdateWithoutPromoCodeInput>
+  }
+
+  export type PromoRedemptionUpdateManyWithWhereWithoutPromoCodeInput = {
+    where: PromoRedemptionScalarWhereInput
+    data: XOR<PromoRedemptionUpdateManyMutationInput, PromoRedemptionUncheckedUpdateManyWithoutPromoCodeInput>
+  }
+
+  export type PromoCodeCreateWithoutRedemptionsInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedPromosInput
+  }
+
+  export type PromoCodeUncheckedCreateWithoutRedemptionsInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    createdByUserId: string
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PromoCodeCreateOrConnectWithoutRedemptionsInput = {
+    where: PromoCodeWhereUniqueInput
+    create: XOR<PromoCodeCreateWithoutRedemptionsInput, PromoCodeUncheckedCreateWithoutRedemptionsInput>
+  }
+
+  export type UserCreateWithoutPromoRedemptionsInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutPromoRedemptionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPromoRedemptionsInput, UserUncheckedCreateWithoutPromoRedemptionsInput>
+  }
+
+  export type PromoCodeUpsertWithoutRedemptionsInput = {
+    update: XOR<PromoCodeUpdateWithoutRedemptionsInput, PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+    create: XOR<PromoCodeCreateWithoutRedemptionsInput, PromoCodeUncheckedCreateWithoutRedemptionsInput>
+    where?: PromoCodeWhereInput
+  }
+
+  export type PromoCodeUpdateToOneWithWhereWithoutRedemptionsInput = {
+    where?: PromoCodeWhereInput
+    data: XOR<PromoCodeUpdateWithoutRedemptionsInput, PromoCodeUncheckedUpdateWithoutRedemptionsInput>
+  }
+
+  export type PromoCodeUpdateWithoutRedemptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedPromosNestedInput
+  }
+
+  export type PromoCodeUncheckedUpdateWithoutRedemptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdByUserId?: StringFieldUpdateOperationsInput | string
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUpsertWithoutPromoRedemptionsInput = {
+    update: XOR<UserUpdateWithoutPromoRedemptionsInput, UserUncheckedUpdateWithoutPromoRedemptionsInput>
+    create: XOR<UserCreateWithoutPromoRedemptionsInput, UserUncheckedCreateWithoutPromoRedemptionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPromoRedemptionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPromoRedemptionsInput, UserUncheckedUpdateWithoutPromoRedemptionsInput>
+  }
+
+  export type UserUpdateWithoutPromoRedemptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type NotificationCreateManyUserInput = {
@@ -18225,6 +21920,26 @@ export namespace Prisma {
     contextJson?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type PromoCodeCreateManyCreatedByInput = {
+    id?: string
+    code: string
+    creditsCents: number
+    maxUses: number
+    usedCount?: number
+    expiresAt?: Date | string | null
+    isActive?: boolean
+    note?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PromoRedemptionCreateManyUserInput = {
+    id?: string
+    promoCodeId: string
+    creditsCents: number
+    createdAt?: Date | string
   }
 
   export type NotificationUpdateWithoutUserInput = {
@@ -18418,6 +22133,68 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PromoCodeUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    redemptions?: PromoRedemptionUpdateManyWithoutPromoCodeNestedInput
+  }
+
+  export type PromoCodeUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    redemptions?: PromoRedemptionUncheckedUpdateManyWithoutPromoCodeNestedInput
+  }
+
+  export type PromoCodeUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    maxUses?: IntFieldUpdateOperationsInput | number
+    usedCount?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    note?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    promoCode?: PromoCodeUpdateOneRequiredWithoutRedemptionsNestedInput
+  }
+
+  export type PromoRedemptionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    promoCodeId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    promoCodeId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CreditTransactionCreateManyWalletInput = {
     id?: string
     type: $Enums.CreditTransactionType
@@ -18503,6 +22280,34 @@ export namespace Prisma {
     status?: IntFieldUpdateOperationsInput | number
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionCreateManyPromoCodeInput = {
+    id?: string
+    userId: string
+    creditsCents: number
+    createdAt?: Date | string
+  }
+
+  export type PromoRedemptionUpdateWithoutPromoCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPromoRedemptionsNestedInput
+  }
+
+  export type PromoRedemptionUncheckedUpdateWithoutPromoCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PromoRedemptionUncheckedUpdateManyWithoutPromoCodeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    creditsCents?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
