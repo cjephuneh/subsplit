@@ -148,6 +148,8 @@ exports.Prisma.CreditTransactionScalarFieldEnum = {
   modelKey: 'modelKey',
   note: 'note',
   counterpartyUserId: 'counterpartyUserId',
+  expiresAt: 'expiresAt',
+  isStartupCredit: 'isStartupCredit',
   createdAt: 'createdAt'
 };
 
@@ -236,6 +238,25 @@ exports.Prisma.SupportTicketScalarFieldEnum = {
   contextJson: 'contextJson',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StartupApplicationScalarFieldEnum = {
+  id: 'id',
+  startupName: 'startupName',
+  problem: 'problem',
+  country: 'country',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  startupStage: 'startupStage',
+  startupLink: 'startupLink',
+  founderVideoUrl: 'founderVideoUrl',
+  status: 'status',
+  adminNotes: 'adminNotes',
+  creditsAllocated: 'creditsAllocated',
+  expiresAt: 'expiresAt',
+  appliedAt: 'appliedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedByUserId: 'reviewedByUserId'
 };
 
 exports.Prisma.AppConfigScalarFieldEnum = {
@@ -327,6 +348,12 @@ exports.SupportTicketStatus = exports.$Enums.SupportTicketStatus = {
   CLOSED: 'CLOSED'
 };
 
+exports.StartupApplicationStatus = exports.$Enums.StartupApplicationStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   CreditWallet: 'CreditWallet',
@@ -337,6 +364,7 @@ exports.Prisma.ModelName = {
   ApiKeyUsageLog: 'ApiKeyUsageLog',
   Payment: 'Payment',
   SupportTicket: 'SupportTicket',
+  StartupApplication: 'StartupApplication',
   AppConfig: 'AppConfig',
   PromoCode: 'PromoCode',
   PromoRedemption: 'PromoRedemption'

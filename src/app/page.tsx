@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Wallet, ShieldCheck, Terminal, Sparkles } from "lucide-react";
+import { ArrowRight, Wallet, ShieldCheck, Terminal, Sparkles, Rocket } from "lucide-react";
 
 export default function Home() {
   return (
@@ -8,6 +8,7 @@ export default function Home() {
       <Hero />
       <ValueProps />
       <Pricing />
+      <Startups />
       <Footer />
     </main>
   );
@@ -174,6 +175,36 @@ function Pricing() {
               Go to dashboard
             </Link>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Startups() {
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div className="rounded-[2rem] border-2 border-indigo-200 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 p-8 shadow-sm dark:border-indigo-900 dark:from-indigo-950/30 dark:via-purple-950/30 dark:to-pink-950/30 sm:p-10">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-100 px-4 py-2 text-sm text-indigo-800 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-300">
+              <Rocket size={16} />
+              Subsplit for Startups
+            </div>
+            <h2 className="text-2xl font-semibold tracking-tight">
+              Get 5,000 Free API Credits
+            </h2>
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">
+              Building the next big thing? Apply for free credits to power your AI integration. Valid for 1 year.
+            </p>
+          </div>
+          <Link
+            href="/startups"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 px-6 text-base font-medium text-white transition-all hover:from-indigo-700 hover:to-purple-700 shadow-lg hover:shadow-xl"
+          >
+            Apply Now
+            <ArrowRight size={18} className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

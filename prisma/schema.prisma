@@ -24,6 +24,7 @@ model User {
   createdPromos     PromoCode[]
   promoRedemptions  PromoRedemption[]
   supportTickets    SupportTicket[]
+  reviewedStartups  StartupApplication[]
 }
 
 model CreditWallet {
@@ -47,6 +48,8 @@ model CreditTransaction {
   modelKey           String?
   note               String?
   counterpartyUserId String?
+  expiresAt          DateTime?
+  isStartupCredit    Boolean               @default(false)
   createdAt          DateTime              @default(now())
   wallet             CreditWallet          @relation(fields: [walletId], references: [id], onDelete: Cascade)
 
@@ -166,6 +169,30 @@ model SupportTicket {
   @@index([requestId])
 }
 
+model StartupApplication {
+  id              String                   @id @default(cuid())
+  startupName     String
+  problem         String
+  country         String
+  phoneNumber     String
+  email           String
+  startupStage    String
+  startupLink     String
+  founderVideoUrl String?
+  status          StartupApplicationStatus @default(PENDING)
+  adminNotes      String?
+  creditsAllocated Int                     @default(500000)
+  expiresAt       DateTime?
+  appliedAt       DateTime                 @default(now())
+  reviewedAt      DateTime?
+  reviewedByUserId String?
+  
+  reviewedBy      User?                    @relation(fields: [reviewedByUserId], references: [id])
+
+  @@index([status, appliedAt])
+  @@index([email])
+}
+
 model AppConfig {
   key       String   @id
   value     String
@@ -249,4 +276,10 @@ enum SupportTicketStatus {
   INVESTIGATING
   RESOLVED
   CLOSED
+}
+
+enum StartupApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

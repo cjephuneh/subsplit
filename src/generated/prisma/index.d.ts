@@ -59,6 +59,11 @@ export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
  */
 export type SupportTicket = $Result.DefaultSelection<Prisma.$SupportTicketPayload>
 /**
+ * Model StartupApplication
+ * 
+ */
+export type StartupApplication = $Result.DefaultSelection<Prisma.$StartupApplicationPayload>
+/**
  * Model AppConfig
  * 
  */
@@ -145,6 +150,15 @@ export const SupportTicketStatus: {
 
 export type SupportTicketStatus = (typeof SupportTicketStatus)[keyof typeof SupportTicketStatus]
 
+
+export const StartupApplicationStatus: {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+};
+
+export type StartupApplicationStatus = (typeof StartupApplicationStatus)[keyof typeof StartupApplicationStatus]
+
 }
 
 export type CreditTransactionType = $Enums.CreditTransactionType
@@ -174,6 +188,10 @@ export const ModelType: typeof $Enums.ModelType
 export type SupportTicketStatus = $Enums.SupportTicketStatus
 
 export const SupportTicketStatus: typeof $Enums.SupportTicketStatus
+
+export type StartupApplicationStatus = $Enums.StartupApplicationStatus
+
+export const StartupApplicationStatus: typeof $Enums.StartupApplicationStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -385,6 +403,16 @@ export class PrismaClient<
     * ```
     */
   get supportTicket(): Prisma.SupportTicketDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.startupApplication`: Exposes CRUD operations for the **StartupApplication** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more StartupApplications
+    * const startupApplications = await prisma.startupApplication.findMany()
+    * ```
+    */
+  get startupApplication(): Prisma.StartupApplicationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.appConfig`: Exposes CRUD operations for the **AppConfig** model.
@@ -858,6 +886,7 @@ export namespace Prisma {
     ApiKeyUsageLog: 'ApiKeyUsageLog',
     Payment: 'Payment',
     SupportTicket: 'SupportTicket',
+    StartupApplication: 'StartupApplication',
     AppConfig: 'AppConfig',
     PromoCode: 'PromoCode',
     PromoRedemption: 'PromoRedemption'
@@ -876,7 +905,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "appConfig" | "promoCode" | "promoRedemption"
+      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "startupApplication" | "appConfig" | "promoCode" | "promoRedemption"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1546,6 +1575,80 @@ export namespace Prisma {
           }
         }
       }
+      StartupApplication: {
+        payload: Prisma.$StartupApplicationPayload<ExtArgs>
+        fields: Prisma.StartupApplicationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.StartupApplicationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.StartupApplicationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          findFirst: {
+            args: Prisma.StartupApplicationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.StartupApplicationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          findMany: {
+            args: Prisma.StartupApplicationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>[]
+          }
+          create: {
+            args: Prisma.StartupApplicationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          createMany: {
+            args: Prisma.StartupApplicationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.StartupApplicationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>[]
+          }
+          delete: {
+            args: Prisma.StartupApplicationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          update: {
+            args: Prisma.StartupApplicationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          deleteMany: {
+            args: Prisma.StartupApplicationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.StartupApplicationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.StartupApplicationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>[]
+          }
+          upsert: {
+            args: Prisma.StartupApplicationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$StartupApplicationPayload>
+          }
+          aggregate: {
+            args: Prisma.StartupApplicationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateStartupApplication>
+          }
+          groupBy: {
+            args: Prisma.StartupApplicationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<StartupApplicationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.StartupApplicationCountArgs<ExtArgs>
+            result: $Utils.Optional<StartupApplicationCountAggregateOutputType> | number
+          }
+        }
+      }
       AppConfig: {
         payload: Prisma.$AppConfigPayload<ExtArgs>
         fields: Prisma.AppConfigFieldRefs
@@ -1885,6 +1988,7 @@ export namespace Prisma {
     apiKeyUsageLog?: ApiKeyUsageLogOmit
     payment?: PaymentOmit
     supportTicket?: SupportTicketOmit
+    startupApplication?: StartupApplicationOmit
     appConfig?: AppConfigOmit
     promoCode?: PromoCodeOmit
     promoRedemption?: PromoRedemptionOmit
@@ -1968,23 +2072,25 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    notifications: number
     apiKeys: number
     apiKeyUsageLogs: number
+    notifications: number
     payments: number
-    supportTickets: number
     createdPromos: number
     promoRedemptions: number
+    supportTickets: number
+    reviewedStartups: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     apiKeys?: boolean | UserCountOutputTypeCountApiKeysArgs
     apiKeyUsageLogs?: boolean | UserCountOutputTypeCountApiKeyUsageLogsArgs
+    notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
     payments?: boolean | UserCountOutputTypeCountPaymentsArgs
-    supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
     createdPromos?: boolean | UserCountOutputTypeCountCreatedPromosArgs
     promoRedemptions?: boolean | UserCountOutputTypeCountPromoRedemptionsArgs
+    supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
+    reviewedStartups?: boolean | UserCountOutputTypeCountReviewedStartupsArgs
   }
 
   // Custom InputTypes
@@ -1996,13 +2102,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: NotificationWhereInput
   }
 
   /**
@@ -2022,15 +2121,15 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PaymentWhereInput
+  export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NotificationWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountSupportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SupportTicketWhereInput
+  export type UserCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
   /**
@@ -2045,6 +2144,20 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPromoRedemptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PromoRedemptionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSupportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SupportTicketWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountReviewedStartupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StartupApplicationWhereInput
   }
 
 
@@ -2333,14 +2446,15 @@ export namespace Prisma {
     preferredCurrency?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    wallet?: boolean | User$walletArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
     apiKeys?: boolean | User$apiKeysArgs<ExtArgs>
     apiKeyUsageLogs?: boolean | User$apiKeyUsageLogsArgs<ExtArgs>
+    wallet?: boolean | User$walletArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
-    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     createdPromos?: boolean | User$createdPromosArgs<ExtArgs>
     promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
+    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
+    reviewedStartups?: boolean | User$reviewedStartupsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2379,14 +2493,15 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "displayName" | "passwordHash" | "isAdmin" | "preferredCurrency" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    wallet?: boolean | User$walletArgs<ExtArgs>
-    notifications?: boolean | User$notificationsArgs<ExtArgs>
     apiKeys?: boolean | User$apiKeysArgs<ExtArgs>
     apiKeyUsageLogs?: boolean | User$apiKeyUsageLogsArgs<ExtArgs>
+    wallet?: boolean | User$walletArgs<ExtArgs>
+    notifications?: boolean | User$notificationsArgs<ExtArgs>
     payments?: boolean | User$paymentsArgs<ExtArgs>
-    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     createdPromos?: boolean | User$createdPromosArgs<ExtArgs>
     promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
+    supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
+    reviewedStartups?: boolean | User$reviewedStartupsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2395,14 +2510,15 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      wallet: Prisma.$CreditWalletPayload<ExtArgs> | null
-      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
       apiKeyUsageLogs: Prisma.$ApiKeyUsageLogPayload<ExtArgs>[]
+      wallet: Prisma.$CreditWalletPayload<ExtArgs> | null
+      notifications: Prisma.$NotificationPayload<ExtArgs>[]
       payments: Prisma.$PaymentPayload<ExtArgs>[]
-      supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
       createdPromos: Prisma.$PromoCodePayload<ExtArgs>[]
       promoRedemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
+      supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
+      reviewedStartups: Prisma.$StartupApplicationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2807,14 +2923,15 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__CreditWalletClient<$Result.GetResult<Prisma.$CreditWalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apiKeys<T extends User$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, User$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apiKeyUsageLogs<T extends User$apiKeyUsageLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$apiKeyUsageLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyUsageLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    wallet<T extends User$walletArgs<ExtArgs> = {}>(args?: Subset<T, User$walletArgs<ExtArgs>>): Prisma__CreditWalletClient<$Result.GetResult<Prisma.$CreditWalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     payments<T extends User$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, User$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdPromos<T extends User$createdPromosArgs<ExtArgs> = {}>(args?: Subset<T, User$createdPromosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     promoRedemptions<T extends User$promoRedemptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$promoRedemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviewedStartups<T extends User$reviewedStartupsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedStartupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3245,49 +3362,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.wallet
-   */
-  export type User$walletArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CreditWallet
-     */
-    select?: CreditWalletSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CreditWallet
-     */
-    omit?: CreditWalletOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CreditWalletInclude<ExtArgs> | null
-    where?: CreditWalletWhereInput
-  }
-
-  /**
-   * User.notifications
-   */
-  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Notification
-     */
-    select?: NotificationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Notification
-     */
-    omit?: NotificationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: NotificationInclude<ExtArgs> | null
-    where?: NotificationWhereInput
-    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
-    cursor?: NotificationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
-  }
-
-  /**
    * User.apiKeys
    */
   export type User$apiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3336,6 +3410,49 @@ export namespace Prisma {
   }
 
   /**
+   * User.wallet
+   */
+  export type User$walletArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CreditWallet
+     */
+    select?: CreditWalletSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CreditWallet
+     */
+    omit?: CreditWalletOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CreditWalletInclude<ExtArgs> | null
+    where?: CreditWalletWhereInput
+  }
+
+  /**
+   * User.notifications
+   */
+  export type User$notificationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Notification
+     */
+    select?: NotificationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Notification
+     */
+    omit?: NotificationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: NotificationInclude<ExtArgs> | null
+    where?: NotificationWhereInput
+    orderBy?: NotificationOrderByWithRelationInput | NotificationOrderByWithRelationInput[]
+    cursor?: NotificationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: NotificationScalarFieldEnum | NotificationScalarFieldEnum[]
+  }
+
+  /**
    * User.payments
    */
   export type User$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3357,30 +3474,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
-  }
-
-  /**
-   * User.supportTickets
-   */
-  export type User$supportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SupportTicket
-     */
-    select?: SupportTicketSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SupportTicket
-     */
-    omit?: SupportTicketOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SupportTicketInclude<ExtArgs> | null
-    where?: SupportTicketWhereInput
-    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
-    cursor?: SupportTicketWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
   }
 
   /**
@@ -3429,6 +3522,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PromoRedemptionScalarFieldEnum | PromoRedemptionScalarFieldEnum[]
+  }
+
+  /**
+   * User.supportTickets
+   */
+  export type User$supportTicketsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SupportTicket
+     */
+    select?: SupportTicketSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SupportTicket
+     */
+    omit?: SupportTicketOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SupportTicketInclude<ExtArgs> | null
+    where?: SupportTicketWhereInput
+    orderBy?: SupportTicketOrderByWithRelationInput | SupportTicketOrderByWithRelationInput[]
+    cursor?: SupportTicketWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SupportTicketScalarFieldEnum | SupportTicketScalarFieldEnum[]
+  }
+
+  /**
+   * User.reviewedStartups
+   */
+  export type User$reviewedStartupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    where?: StartupApplicationWhereInput
+    orderBy?: StartupApplicationOrderByWithRelationInput | StartupApplicationOrderByWithRelationInput[]
+    cursor?: StartupApplicationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: StartupApplicationScalarFieldEnum | StartupApplicationScalarFieldEnum[]
   }
 
   /**
@@ -3660,8 +3801,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | CreditWallet$transactionsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | CreditWalletCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creditWallet"]>
 
@@ -3696,8 +3837,8 @@ export namespace Prisma {
 
   export type CreditWalletOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "balanceCents" | "lowBalanceCentsThreshold" | "createdAt" | "updatedAt", ExtArgs["result"]["creditWallet"]>
   export type CreditWalletInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
     transactions?: boolean | CreditWallet$transactionsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | CreditWalletCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CreditWalletIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3710,8 +3851,8 @@ export namespace Prisma {
   export type $CreditWalletPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CreditWallet"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
       transactions: Prisma.$CreditTransactionPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4114,8 +4255,8 @@ export namespace Prisma {
    */
   export interface Prisma__CreditWalletClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     transactions<T extends CreditWallet$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, CreditWallet$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreditTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4622,6 +4763,8 @@ export namespace Prisma {
     modelKey: string | null
     note: string | null
     counterpartyUserId: string | null
+    expiresAt: Date | null
+    isStartupCredit: boolean | null
     createdAt: Date | null
   }
 
@@ -4633,6 +4776,8 @@ export namespace Prisma {
     modelKey: string | null
     note: string | null
     counterpartyUserId: string | null
+    expiresAt: Date | null
+    isStartupCredit: boolean | null
     createdAt: Date | null
   }
 
@@ -4644,6 +4789,8 @@ export namespace Prisma {
     modelKey: number
     note: number
     counterpartyUserId: number
+    expiresAt: number
+    isStartupCredit: number
     createdAt: number
     _all: number
   }
@@ -4665,6 +4812,8 @@ export namespace Prisma {
     modelKey?: true
     note?: true
     counterpartyUserId?: true
+    expiresAt?: true
+    isStartupCredit?: true
     createdAt?: true
   }
 
@@ -4676,6 +4825,8 @@ export namespace Prisma {
     modelKey?: true
     note?: true
     counterpartyUserId?: true
+    expiresAt?: true
+    isStartupCredit?: true
     createdAt?: true
   }
 
@@ -4687,6 +4838,8 @@ export namespace Prisma {
     modelKey?: true
     note?: true
     counterpartyUserId?: true
+    expiresAt?: true
+    isStartupCredit?: true
     createdAt?: true
     _all?: true
   }
@@ -4785,6 +4938,8 @@ export namespace Prisma {
     modelKey: string | null
     note: string | null
     counterpartyUserId: string | null
+    expiresAt: Date | null
+    isStartupCredit: boolean
     createdAt: Date
     _count: CreditTransactionCountAggregateOutputType | null
     _avg: CreditTransactionAvgAggregateOutputType | null
@@ -4815,6 +4970,8 @@ export namespace Prisma {
     modelKey?: boolean
     note?: boolean
     counterpartyUserId?: boolean
+    expiresAt?: boolean
+    isStartupCredit?: boolean
     createdAt?: boolean
     wallet?: boolean | CreditWalletDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creditTransaction"]>
@@ -4827,6 +4984,8 @@ export namespace Prisma {
     modelKey?: boolean
     note?: boolean
     counterpartyUserId?: boolean
+    expiresAt?: boolean
+    isStartupCredit?: boolean
     createdAt?: boolean
     wallet?: boolean | CreditWalletDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creditTransaction"]>
@@ -4839,6 +4998,8 @@ export namespace Prisma {
     modelKey?: boolean
     note?: boolean
     counterpartyUserId?: boolean
+    expiresAt?: boolean
+    isStartupCredit?: boolean
     createdAt?: boolean
     wallet?: boolean | CreditWalletDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creditTransaction"]>
@@ -4851,10 +5012,12 @@ export namespace Prisma {
     modelKey?: boolean
     note?: boolean
     counterpartyUserId?: boolean
+    expiresAt?: boolean
+    isStartupCredit?: boolean
     createdAt?: boolean
   }
 
-  export type CreditTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "walletId" | "type" | "amountCents" | "modelKey" | "note" | "counterpartyUserId" | "createdAt", ExtArgs["result"]["creditTransaction"]>
+  export type CreditTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "walletId" | "type" | "amountCents" | "modelKey" | "note" | "counterpartyUserId" | "expiresAt" | "isStartupCredit" | "createdAt", ExtArgs["result"]["creditTransaction"]>
   export type CreditTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     wallet?: boolean | CreditWalletDefaultArgs<ExtArgs>
   }
@@ -4878,6 +5041,8 @@ export namespace Prisma {
       modelKey: string | null
       note: string | null
       counterpartyUserId: string | null
+      expiresAt: Date | null
+      isStartupCredit: boolean
       createdAt: Date
     }, ExtArgs["result"]["creditTransaction"]>
     composites: {}
@@ -5310,6 +5475,8 @@ export namespace Prisma {
     readonly modelKey: FieldRef<"CreditTransaction", 'String'>
     readonly note: FieldRef<"CreditTransaction", 'String'>
     readonly counterpartyUserId: FieldRef<"CreditTransaction", 'String'>
+    readonly expiresAt: FieldRef<"CreditTransaction", 'DateTime'>
+    readonly isStartupCredit: FieldRef<"CreditTransaction", 'Boolean'>
     readonly createdAt: FieldRef<"CreditTransaction", 'DateTime'>
   }
     
@@ -12739,6 +12906,1265 @@ export namespace Prisma {
 
 
   /**
+   * Model StartupApplication
+   */
+
+  export type AggregateStartupApplication = {
+    _count: StartupApplicationCountAggregateOutputType | null
+    _avg: StartupApplicationAvgAggregateOutputType | null
+    _sum: StartupApplicationSumAggregateOutputType | null
+    _min: StartupApplicationMinAggregateOutputType | null
+    _max: StartupApplicationMaxAggregateOutputType | null
+  }
+
+  export type StartupApplicationAvgAggregateOutputType = {
+    creditsAllocated: number | null
+  }
+
+  export type StartupApplicationSumAggregateOutputType = {
+    creditsAllocated: number | null
+  }
+
+  export type StartupApplicationMinAggregateOutputType = {
+    id: string | null
+    startupName: string | null
+    problem: string | null
+    country: string | null
+    phoneNumber: string | null
+    email: string | null
+    startupStage: string | null
+    startupLink: string | null
+    founderVideoUrl: string | null
+    status: $Enums.StartupApplicationStatus | null
+    adminNotes: string | null
+    creditsAllocated: number | null
+    expiresAt: Date | null
+    appliedAt: Date | null
+    reviewedAt: Date | null
+    reviewedByUserId: string | null
+  }
+
+  export type StartupApplicationMaxAggregateOutputType = {
+    id: string | null
+    startupName: string | null
+    problem: string | null
+    country: string | null
+    phoneNumber: string | null
+    email: string | null
+    startupStage: string | null
+    startupLink: string | null
+    founderVideoUrl: string | null
+    status: $Enums.StartupApplicationStatus | null
+    adminNotes: string | null
+    creditsAllocated: number | null
+    expiresAt: Date | null
+    appliedAt: Date | null
+    reviewedAt: Date | null
+    reviewedByUserId: string | null
+  }
+
+  export type StartupApplicationCountAggregateOutputType = {
+    id: number
+    startupName: number
+    problem: number
+    country: number
+    phoneNumber: number
+    email: number
+    startupStage: number
+    startupLink: number
+    founderVideoUrl: number
+    status: number
+    adminNotes: number
+    creditsAllocated: number
+    expiresAt: number
+    appliedAt: number
+    reviewedAt: number
+    reviewedByUserId: number
+    _all: number
+  }
+
+
+  export type StartupApplicationAvgAggregateInputType = {
+    creditsAllocated?: true
+  }
+
+  export type StartupApplicationSumAggregateInputType = {
+    creditsAllocated?: true
+  }
+
+  export type StartupApplicationMinAggregateInputType = {
+    id?: true
+    startupName?: true
+    problem?: true
+    country?: true
+    phoneNumber?: true
+    email?: true
+    startupStage?: true
+    startupLink?: true
+    founderVideoUrl?: true
+    status?: true
+    adminNotes?: true
+    creditsAllocated?: true
+    expiresAt?: true
+    appliedAt?: true
+    reviewedAt?: true
+    reviewedByUserId?: true
+  }
+
+  export type StartupApplicationMaxAggregateInputType = {
+    id?: true
+    startupName?: true
+    problem?: true
+    country?: true
+    phoneNumber?: true
+    email?: true
+    startupStage?: true
+    startupLink?: true
+    founderVideoUrl?: true
+    status?: true
+    adminNotes?: true
+    creditsAllocated?: true
+    expiresAt?: true
+    appliedAt?: true
+    reviewedAt?: true
+    reviewedByUserId?: true
+  }
+
+  export type StartupApplicationCountAggregateInputType = {
+    id?: true
+    startupName?: true
+    problem?: true
+    country?: true
+    phoneNumber?: true
+    email?: true
+    startupStage?: true
+    startupLink?: true
+    founderVideoUrl?: true
+    status?: true
+    adminNotes?: true
+    creditsAllocated?: true
+    expiresAt?: true
+    appliedAt?: true
+    reviewedAt?: true
+    reviewedByUserId?: true
+    _all?: true
+  }
+
+  export type StartupApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StartupApplication to aggregate.
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StartupApplications to fetch.
+     */
+    orderBy?: StartupApplicationOrderByWithRelationInput | StartupApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: StartupApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StartupApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StartupApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned StartupApplications
+    **/
+    _count?: true | StartupApplicationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: StartupApplicationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: StartupApplicationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: StartupApplicationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: StartupApplicationMaxAggregateInputType
+  }
+
+  export type GetStartupApplicationAggregateType<T extends StartupApplicationAggregateArgs> = {
+        [P in keyof T & keyof AggregateStartupApplication]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateStartupApplication[P]>
+      : GetScalarType<T[P], AggregateStartupApplication[P]>
+  }
+
+
+
+
+  export type StartupApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: StartupApplicationWhereInput
+    orderBy?: StartupApplicationOrderByWithAggregationInput | StartupApplicationOrderByWithAggregationInput[]
+    by: StartupApplicationScalarFieldEnum[] | StartupApplicationScalarFieldEnum
+    having?: StartupApplicationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: StartupApplicationCountAggregateInputType | true
+    _avg?: StartupApplicationAvgAggregateInputType
+    _sum?: StartupApplicationSumAggregateInputType
+    _min?: StartupApplicationMinAggregateInputType
+    _max?: StartupApplicationMaxAggregateInputType
+  }
+
+  export type StartupApplicationGroupByOutputType = {
+    id: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl: string | null
+    status: $Enums.StartupApplicationStatus
+    adminNotes: string | null
+    creditsAllocated: number
+    expiresAt: Date | null
+    appliedAt: Date
+    reviewedAt: Date | null
+    reviewedByUserId: string | null
+    _count: StartupApplicationCountAggregateOutputType | null
+    _avg: StartupApplicationAvgAggregateOutputType | null
+    _sum: StartupApplicationSumAggregateOutputType | null
+    _min: StartupApplicationMinAggregateOutputType | null
+    _max: StartupApplicationMaxAggregateOutputType | null
+  }
+
+  type GetStartupApplicationGroupByPayload<T extends StartupApplicationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<StartupApplicationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof StartupApplicationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], StartupApplicationGroupByOutputType[P]>
+            : GetScalarType<T[P], StartupApplicationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type StartupApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startupName?: boolean
+    problem?: boolean
+    country?: boolean
+    phoneNumber?: boolean
+    email?: boolean
+    startupStage?: boolean
+    startupLink?: boolean
+    founderVideoUrl?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    creditsAllocated?: boolean
+    expiresAt?: boolean
+    appliedAt?: boolean
+    reviewedAt?: boolean
+    reviewedByUserId?: boolean
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }, ExtArgs["result"]["startupApplication"]>
+
+  export type StartupApplicationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startupName?: boolean
+    problem?: boolean
+    country?: boolean
+    phoneNumber?: boolean
+    email?: boolean
+    startupStage?: boolean
+    startupLink?: boolean
+    founderVideoUrl?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    creditsAllocated?: boolean
+    expiresAt?: boolean
+    appliedAt?: boolean
+    reviewedAt?: boolean
+    reviewedByUserId?: boolean
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }, ExtArgs["result"]["startupApplication"]>
+
+  export type StartupApplicationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    startupName?: boolean
+    problem?: boolean
+    country?: boolean
+    phoneNumber?: boolean
+    email?: boolean
+    startupStage?: boolean
+    startupLink?: boolean
+    founderVideoUrl?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    creditsAllocated?: boolean
+    expiresAt?: boolean
+    appliedAt?: boolean
+    reviewedAt?: boolean
+    reviewedByUserId?: boolean
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }, ExtArgs["result"]["startupApplication"]>
+
+  export type StartupApplicationSelectScalar = {
+    id?: boolean
+    startupName?: boolean
+    problem?: boolean
+    country?: boolean
+    phoneNumber?: boolean
+    email?: boolean
+    startupStage?: boolean
+    startupLink?: boolean
+    founderVideoUrl?: boolean
+    status?: boolean
+    adminNotes?: boolean
+    creditsAllocated?: boolean
+    expiresAt?: boolean
+    appliedAt?: boolean
+    reviewedAt?: boolean
+    reviewedByUserId?: boolean
+  }
+
+  export type StartupApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "startupName" | "problem" | "country" | "phoneNumber" | "email" | "startupStage" | "startupLink" | "founderVideoUrl" | "status" | "adminNotes" | "creditsAllocated" | "expiresAt" | "appliedAt" | "reviewedAt" | "reviewedByUserId", ExtArgs["result"]["startupApplication"]>
+  export type StartupApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }
+  export type StartupApplicationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }
+  export type StartupApplicationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    reviewedBy?: boolean | StartupApplication$reviewedByArgs<ExtArgs>
+  }
+
+  export type $StartupApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "StartupApplication"
+    objects: {
+      reviewedBy: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      startupName: string
+      problem: string
+      country: string
+      phoneNumber: string
+      email: string
+      startupStage: string
+      startupLink: string
+      founderVideoUrl: string | null
+      status: $Enums.StartupApplicationStatus
+      adminNotes: string | null
+      creditsAllocated: number
+      expiresAt: Date | null
+      appliedAt: Date
+      reviewedAt: Date | null
+      reviewedByUserId: string | null
+    }, ExtArgs["result"]["startupApplication"]>
+    composites: {}
+  }
+
+  type StartupApplicationGetPayload<S extends boolean | null | undefined | StartupApplicationDefaultArgs> = $Result.GetResult<Prisma.$StartupApplicationPayload, S>
+
+  type StartupApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<StartupApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: StartupApplicationCountAggregateInputType | true
+    }
+
+  export interface StartupApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['StartupApplication'], meta: { name: 'StartupApplication' } }
+    /**
+     * Find zero or one StartupApplication that matches the filter.
+     * @param {StartupApplicationFindUniqueArgs} args - Arguments to find a StartupApplication
+     * @example
+     * // Get one StartupApplication
+     * const startupApplication = await prisma.startupApplication.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends StartupApplicationFindUniqueArgs>(args: SelectSubset<T, StartupApplicationFindUniqueArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one StartupApplication that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {StartupApplicationFindUniqueOrThrowArgs} args - Arguments to find a StartupApplication
+     * @example
+     * // Get one StartupApplication
+     * const startupApplication = await prisma.startupApplication.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends StartupApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, StartupApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StartupApplication that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationFindFirstArgs} args - Arguments to find a StartupApplication
+     * @example
+     * // Get one StartupApplication
+     * const startupApplication = await prisma.startupApplication.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends StartupApplicationFindFirstArgs>(args?: SelectSubset<T, StartupApplicationFindFirstArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first StartupApplication that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationFindFirstOrThrowArgs} args - Arguments to find a StartupApplication
+     * @example
+     * // Get one StartupApplication
+     * const startupApplication = await prisma.startupApplication.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends StartupApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, StartupApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more StartupApplications that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all StartupApplications
+     * const startupApplications = await prisma.startupApplication.findMany()
+     * 
+     * // Get first 10 StartupApplications
+     * const startupApplications = await prisma.startupApplication.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const startupApplicationWithIdOnly = await prisma.startupApplication.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends StartupApplicationFindManyArgs>(args?: SelectSubset<T, StartupApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a StartupApplication.
+     * @param {StartupApplicationCreateArgs} args - Arguments to create a StartupApplication.
+     * @example
+     * // Create one StartupApplication
+     * const StartupApplication = await prisma.startupApplication.create({
+     *   data: {
+     *     // ... data to create a StartupApplication
+     *   }
+     * })
+     * 
+     */
+    create<T extends StartupApplicationCreateArgs>(args: SelectSubset<T, StartupApplicationCreateArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many StartupApplications.
+     * @param {StartupApplicationCreateManyArgs} args - Arguments to create many StartupApplications.
+     * @example
+     * // Create many StartupApplications
+     * const startupApplication = await prisma.startupApplication.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends StartupApplicationCreateManyArgs>(args?: SelectSubset<T, StartupApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many StartupApplications and returns the data saved in the database.
+     * @param {StartupApplicationCreateManyAndReturnArgs} args - Arguments to create many StartupApplications.
+     * @example
+     * // Create many StartupApplications
+     * const startupApplication = await prisma.startupApplication.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many StartupApplications and only return the `id`
+     * const startupApplicationWithIdOnly = await prisma.startupApplication.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends StartupApplicationCreateManyAndReturnArgs>(args?: SelectSubset<T, StartupApplicationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a StartupApplication.
+     * @param {StartupApplicationDeleteArgs} args - Arguments to delete one StartupApplication.
+     * @example
+     * // Delete one StartupApplication
+     * const StartupApplication = await prisma.startupApplication.delete({
+     *   where: {
+     *     // ... filter to delete one StartupApplication
+     *   }
+     * })
+     * 
+     */
+    delete<T extends StartupApplicationDeleteArgs>(args: SelectSubset<T, StartupApplicationDeleteArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one StartupApplication.
+     * @param {StartupApplicationUpdateArgs} args - Arguments to update one StartupApplication.
+     * @example
+     * // Update one StartupApplication
+     * const startupApplication = await prisma.startupApplication.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends StartupApplicationUpdateArgs>(args: SelectSubset<T, StartupApplicationUpdateArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more StartupApplications.
+     * @param {StartupApplicationDeleteManyArgs} args - Arguments to filter StartupApplications to delete.
+     * @example
+     * // Delete a few StartupApplications
+     * const { count } = await prisma.startupApplication.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends StartupApplicationDeleteManyArgs>(args?: SelectSubset<T, StartupApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StartupApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many StartupApplications
+     * const startupApplication = await prisma.startupApplication.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends StartupApplicationUpdateManyArgs>(args: SelectSubset<T, StartupApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more StartupApplications and returns the data updated in the database.
+     * @param {StartupApplicationUpdateManyAndReturnArgs} args - Arguments to update many StartupApplications.
+     * @example
+     * // Update many StartupApplications
+     * const startupApplication = await prisma.startupApplication.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more StartupApplications and only return the `id`
+     * const startupApplicationWithIdOnly = await prisma.startupApplication.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends StartupApplicationUpdateManyAndReturnArgs>(args: SelectSubset<T, StartupApplicationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one StartupApplication.
+     * @param {StartupApplicationUpsertArgs} args - Arguments to update or create a StartupApplication.
+     * @example
+     * // Update or create a StartupApplication
+     * const startupApplication = await prisma.startupApplication.upsert({
+     *   create: {
+     *     // ... data to create a StartupApplication
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the StartupApplication we want to update
+     *   }
+     * })
+     */
+    upsert<T extends StartupApplicationUpsertArgs>(args: SelectSubset<T, StartupApplicationUpsertArgs<ExtArgs>>): Prisma__StartupApplicationClient<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of StartupApplications.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationCountArgs} args - Arguments to filter StartupApplications to count.
+     * @example
+     * // Count the number of StartupApplications
+     * const count = await prisma.startupApplication.count({
+     *   where: {
+     *     // ... the filter for the StartupApplications we want to count
+     *   }
+     * })
+    **/
+    count<T extends StartupApplicationCountArgs>(
+      args?: Subset<T, StartupApplicationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], StartupApplicationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a StartupApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends StartupApplicationAggregateArgs>(args: Subset<T, StartupApplicationAggregateArgs>): Prisma.PrismaPromise<GetStartupApplicationAggregateType<T>>
+
+    /**
+     * Group by StartupApplication.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {StartupApplicationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends StartupApplicationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: StartupApplicationGroupByArgs['orderBy'] }
+        : { orderBy?: StartupApplicationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, StartupApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetStartupApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the StartupApplication model
+   */
+  readonly fields: StartupApplicationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for StartupApplication.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__StartupApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    reviewedBy<T extends StartupApplication$reviewedByArgs<ExtArgs> = {}>(args?: Subset<T, StartupApplication$reviewedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the StartupApplication model
+   */
+  interface StartupApplicationFieldRefs {
+    readonly id: FieldRef<"StartupApplication", 'String'>
+    readonly startupName: FieldRef<"StartupApplication", 'String'>
+    readonly problem: FieldRef<"StartupApplication", 'String'>
+    readonly country: FieldRef<"StartupApplication", 'String'>
+    readonly phoneNumber: FieldRef<"StartupApplication", 'String'>
+    readonly email: FieldRef<"StartupApplication", 'String'>
+    readonly startupStage: FieldRef<"StartupApplication", 'String'>
+    readonly startupLink: FieldRef<"StartupApplication", 'String'>
+    readonly founderVideoUrl: FieldRef<"StartupApplication", 'String'>
+    readonly status: FieldRef<"StartupApplication", 'StartupApplicationStatus'>
+    readonly adminNotes: FieldRef<"StartupApplication", 'String'>
+    readonly creditsAllocated: FieldRef<"StartupApplication", 'Int'>
+    readonly expiresAt: FieldRef<"StartupApplication", 'DateTime'>
+    readonly appliedAt: FieldRef<"StartupApplication", 'DateTime'>
+    readonly reviewedAt: FieldRef<"StartupApplication", 'DateTime'>
+    readonly reviewedByUserId: FieldRef<"StartupApplication", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * StartupApplication findUnique
+   */
+  export type StartupApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which StartupApplication to fetch.
+     */
+    where: StartupApplicationWhereUniqueInput
+  }
+
+  /**
+   * StartupApplication findUniqueOrThrow
+   */
+  export type StartupApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which StartupApplication to fetch.
+     */
+    where: StartupApplicationWhereUniqueInput
+  }
+
+  /**
+   * StartupApplication findFirst
+   */
+  export type StartupApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which StartupApplication to fetch.
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StartupApplications to fetch.
+     */
+    orderBy?: StartupApplicationOrderByWithRelationInput | StartupApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StartupApplications.
+     */
+    cursor?: StartupApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StartupApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StartupApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StartupApplications.
+     */
+    distinct?: StartupApplicationScalarFieldEnum | StartupApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * StartupApplication findFirstOrThrow
+   */
+  export type StartupApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which StartupApplication to fetch.
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StartupApplications to fetch.
+     */
+    orderBy?: StartupApplicationOrderByWithRelationInput | StartupApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for StartupApplications.
+     */
+    cursor?: StartupApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StartupApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StartupApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StartupApplications.
+     */
+    distinct?: StartupApplicationScalarFieldEnum | StartupApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * StartupApplication findMany
+   */
+  export type StartupApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter, which StartupApplications to fetch.
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of StartupApplications to fetch.
+     */
+    orderBy?: StartupApplicationOrderByWithRelationInput | StartupApplicationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing StartupApplications.
+     */
+    cursor?: StartupApplicationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` StartupApplications from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` StartupApplications.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of StartupApplications.
+     */
+    distinct?: StartupApplicationScalarFieldEnum | StartupApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * StartupApplication create
+   */
+  export type StartupApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a StartupApplication.
+     */
+    data: XOR<StartupApplicationCreateInput, StartupApplicationUncheckedCreateInput>
+  }
+
+  /**
+   * StartupApplication createMany
+   */
+  export type StartupApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many StartupApplications.
+     */
+    data: StartupApplicationCreateManyInput | StartupApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * StartupApplication createManyAndReturn
+   */
+  export type StartupApplicationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to create many StartupApplications.
+     */
+    data: StartupApplicationCreateManyInput | StartupApplicationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StartupApplication update
+   */
+  export type StartupApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a StartupApplication.
+     */
+    data: XOR<StartupApplicationUpdateInput, StartupApplicationUncheckedUpdateInput>
+    /**
+     * Choose, which StartupApplication to update.
+     */
+    where: StartupApplicationWhereUniqueInput
+  }
+
+  /**
+   * StartupApplication updateMany
+   */
+  export type StartupApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update StartupApplications.
+     */
+    data: XOR<StartupApplicationUpdateManyMutationInput, StartupApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which StartupApplications to update
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * Limit how many StartupApplications to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * StartupApplication updateManyAndReturn
+   */
+  export type StartupApplicationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * The data used to update StartupApplications.
+     */
+    data: XOR<StartupApplicationUpdateManyMutationInput, StartupApplicationUncheckedUpdateManyInput>
+    /**
+     * Filter which StartupApplications to update
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * Limit how many StartupApplications to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * StartupApplication upsert
+   */
+  export type StartupApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the StartupApplication to update in case it exists.
+     */
+    where: StartupApplicationWhereUniqueInput
+    /**
+     * In case the StartupApplication found by the `where` argument doesn't exist, create a new StartupApplication with this data.
+     */
+    create: XOR<StartupApplicationCreateInput, StartupApplicationUncheckedCreateInput>
+    /**
+     * In case the StartupApplication was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<StartupApplicationUpdateInput, StartupApplicationUncheckedUpdateInput>
+  }
+
+  /**
+   * StartupApplication delete
+   */
+  export type StartupApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+    /**
+     * Filter which StartupApplication to delete.
+     */
+    where: StartupApplicationWhereUniqueInput
+  }
+
+  /**
+   * StartupApplication deleteMany
+   */
+  export type StartupApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which StartupApplications to delete
+     */
+    where?: StartupApplicationWhereInput
+    /**
+     * Limit how many StartupApplications to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * StartupApplication.reviewedBy
+   */
+  export type StartupApplication$reviewedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * StartupApplication without action
+   */
+  export type StartupApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the StartupApplication
+     */
+    select?: StartupApplicationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the StartupApplication
+     */
+    omit?: StartupApplicationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: StartupApplicationInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model AppConfig
    */
 
@@ -16078,6 +17504,8 @@ export namespace Prisma {
     modelKey: 'modelKey',
     note: 'note',
     counterpartyUserId: 'counterpartyUserId',
+    expiresAt: 'expiresAt',
+    isStartupCredit: 'isStartupCredit',
     createdAt: 'createdAt'
   };
 
@@ -16187,6 +17615,28 @@ export namespace Prisma {
   };
 
   export type SupportTicketScalarFieldEnum = (typeof SupportTicketScalarFieldEnum)[keyof typeof SupportTicketScalarFieldEnum]
+
+
+  export const StartupApplicationScalarFieldEnum: {
+    id: 'id',
+    startupName: 'startupName',
+    problem: 'problem',
+    country: 'country',
+    phoneNumber: 'phoneNumber',
+    email: 'email',
+    startupStage: 'startupStage',
+    startupLink: 'startupLink',
+    founderVideoUrl: 'founderVideoUrl',
+    status: 'status',
+    adminNotes: 'adminNotes',
+    creditsAllocated: 'creditsAllocated',
+    expiresAt: 'expiresAt',
+    appliedAt: 'appliedAt',
+    reviewedAt: 'reviewedAt',
+    reviewedByUserId: 'reviewedByUserId'
+  };
+
+  export type StartupApplicationScalarFieldEnum = (typeof StartupApplicationScalarFieldEnum)[keyof typeof StartupApplicationScalarFieldEnum]
 
 
   export const AppConfigScalarFieldEnum: {
@@ -16403,6 +17853,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'StartupApplicationStatus'
+   */
+  export type EnumStartupApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StartupApplicationStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'StartupApplicationStatus[]'
+   */
+  export type ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StartupApplicationStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -16431,14 +17895,15 @@ export namespace Prisma {
     preferredCurrency?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
-    notifications?: NotificationListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
     apiKeyUsageLogs?: ApiKeyUsageLogListRelationFilter
+    wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
+    notifications?: NotificationListRelationFilter
     payments?: PaymentListRelationFilter
-    supportTickets?: SupportTicketListRelationFilter
     createdPromos?: PromoCodeListRelationFilter
     promoRedemptions?: PromoRedemptionListRelationFilter
+    supportTickets?: SupportTicketListRelationFilter
+    reviewedStartups?: StartupApplicationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16450,14 +17915,15 @@ export namespace Prisma {
     preferredCurrency?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    wallet?: CreditWalletOrderByWithRelationInput
-    notifications?: NotificationOrderByRelationAggregateInput
     apiKeys?: ApiKeyOrderByRelationAggregateInput
     apiKeyUsageLogs?: ApiKeyUsageLogOrderByRelationAggregateInput
+    wallet?: CreditWalletOrderByWithRelationInput
+    notifications?: NotificationOrderByRelationAggregateInput
     payments?: PaymentOrderByRelationAggregateInput
-    supportTickets?: SupportTicketOrderByRelationAggregateInput
     createdPromos?: PromoCodeOrderByRelationAggregateInput
     promoRedemptions?: PromoRedemptionOrderByRelationAggregateInput
+    supportTickets?: SupportTicketOrderByRelationAggregateInput
+    reviewedStartups?: StartupApplicationOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16472,14 +17938,15 @@ export namespace Prisma {
     preferredCurrency?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
-    notifications?: NotificationListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
     apiKeyUsageLogs?: ApiKeyUsageLogListRelationFilter
+    wallet?: XOR<CreditWalletNullableScalarRelationFilter, CreditWalletWhereInput> | null
+    notifications?: NotificationListRelationFilter
     payments?: PaymentListRelationFilter
-    supportTickets?: SupportTicketListRelationFilter
     createdPromos?: PromoCodeListRelationFilter
     promoRedemptions?: PromoRedemptionListRelationFilter
+    supportTickets?: SupportTicketListRelationFilter
+    reviewedStartups?: StartupApplicationListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -16520,8 +17987,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: IntFilter<"CreditWallet"> | number
     createdAt?: DateTimeFilter<"CreditWallet"> | Date | string
     updatedAt?: DateTimeFilter<"CreditWallet"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: CreditTransactionListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type CreditWalletOrderByWithRelationInput = {
@@ -16531,8 +17998,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
     transactions?: CreditTransactionOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
   }
 
   export type CreditWalletWhereUniqueInput = Prisma.AtLeast<{
@@ -16545,8 +18012,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: IntFilter<"CreditWallet"> | number
     createdAt?: DateTimeFilter<"CreditWallet"> | Date | string
     updatedAt?: DateTimeFilter<"CreditWallet"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
     transactions?: CreditTransactionListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
   export type CreditWalletOrderByWithAggregationInput = {
@@ -16586,6 +18053,8 @@ export namespace Prisma {
     modelKey?: StringNullableFilter<"CreditTransaction"> | string | null
     note?: StringNullableFilter<"CreditTransaction"> | string | null
     counterpartyUserId?: StringNullableFilter<"CreditTransaction"> | string | null
+    expiresAt?: DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
+    isStartupCredit?: BoolFilter<"CreditTransaction"> | boolean
     createdAt?: DateTimeFilter<"CreditTransaction"> | Date | string
     wallet?: XOR<CreditWalletScalarRelationFilter, CreditWalletWhereInput>
   }
@@ -16598,6 +18067,8 @@ export namespace Prisma {
     modelKey?: SortOrderInput | SortOrder
     note?: SortOrderInput | SortOrder
     counterpartyUserId?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    isStartupCredit?: SortOrder
     createdAt?: SortOrder
     wallet?: CreditWalletOrderByWithRelationInput
   }
@@ -16613,6 +18084,8 @@ export namespace Prisma {
     modelKey?: StringNullableFilter<"CreditTransaction"> | string | null
     note?: StringNullableFilter<"CreditTransaction"> | string | null
     counterpartyUserId?: StringNullableFilter<"CreditTransaction"> | string | null
+    expiresAt?: DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
+    isStartupCredit?: BoolFilter<"CreditTransaction"> | boolean
     createdAt?: DateTimeFilter<"CreditTransaction"> | Date | string
     wallet?: XOR<CreditWalletScalarRelationFilter, CreditWalletWhereInput>
   }, "id">
@@ -16625,6 +18098,8 @@ export namespace Prisma {
     modelKey?: SortOrderInput | SortOrder
     note?: SortOrderInput | SortOrder
     counterpartyUserId?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    isStartupCredit?: SortOrder
     createdAt?: SortOrder
     _count?: CreditTransactionCountOrderByAggregateInput
     _avg?: CreditTransactionAvgOrderByAggregateInput
@@ -16644,6 +18119,8 @@ export namespace Prisma {
     modelKey?: StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
     note?: StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
     counterpartyUserId?: StringNullableWithAggregatesFilter<"CreditTransaction"> | string | null
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"CreditTransaction"> | Date | string | null
+    isStartupCredit?: BoolWithAggregatesFilter<"CreditTransaction"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"CreditTransaction"> | Date | string
   }
 
@@ -17183,6 +18660,118 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"SupportTicket"> | Date | string
   }
 
+  export type StartupApplicationWhereInput = {
+    AND?: StartupApplicationWhereInput | StartupApplicationWhereInput[]
+    OR?: StartupApplicationWhereInput[]
+    NOT?: StartupApplicationWhereInput | StartupApplicationWhereInput[]
+    id?: StringFilter<"StartupApplication"> | string
+    startupName?: StringFilter<"StartupApplication"> | string
+    problem?: StringFilter<"StartupApplication"> | string
+    country?: StringFilter<"StartupApplication"> | string
+    phoneNumber?: StringFilter<"StartupApplication"> | string
+    email?: StringFilter<"StartupApplication"> | string
+    startupStage?: StringFilter<"StartupApplication"> | string
+    startupLink?: StringFilter<"StartupApplication"> | string
+    founderVideoUrl?: StringNullableFilter<"StartupApplication"> | string | null
+    status?: EnumStartupApplicationStatusFilter<"StartupApplication"> | $Enums.StartupApplicationStatus
+    adminNotes?: StringNullableFilter<"StartupApplication"> | string | null
+    creditsAllocated?: IntFilter<"StartupApplication"> | number
+    expiresAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    appliedAt?: DateTimeFilter<"StartupApplication"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    reviewedByUserId?: StringNullableFilter<"StartupApplication"> | string | null
+    reviewedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type StartupApplicationOrderByWithRelationInput = {
+    id?: SortOrder
+    startupName?: SortOrder
+    problem?: SortOrder
+    country?: SortOrder
+    phoneNumber?: SortOrder
+    email?: SortOrder
+    startupStage?: SortOrder
+    startupLink?: SortOrder
+    founderVideoUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrderInput | SortOrder
+    creditsAllocated?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    appliedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewedByUserId?: SortOrderInput | SortOrder
+    reviewedBy?: UserOrderByWithRelationInput
+  }
+
+  export type StartupApplicationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: StartupApplicationWhereInput | StartupApplicationWhereInput[]
+    OR?: StartupApplicationWhereInput[]
+    NOT?: StartupApplicationWhereInput | StartupApplicationWhereInput[]
+    startupName?: StringFilter<"StartupApplication"> | string
+    problem?: StringFilter<"StartupApplication"> | string
+    country?: StringFilter<"StartupApplication"> | string
+    phoneNumber?: StringFilter<"StartupApplication"> | string
+    email?: StringFilter<"StartupApplication"> | string
+    startupStage?: StringFilter<"StartupApplication"> | string
+    startupLink?: StringFilter<"StartupApplication"> | string
+    founderVideoUrl?: StringNullableFilter<"StartupApplication"> | string | null
+    status?: EnumStartupApplicationStatusFilter<"StartupApplication"> | $Enums.StartupApplicationStatus
+    adminNotes?: StringNullableFilter<"StartupApplication"> | string | null
+    creditsAllocated?: IntFilter<"StartupApplication"> | number
+    expiresAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    appliedAt?: DateTimeFilter<"StartupApplication"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    reviewedByUserId?: StringNullableFilter<"StartupApplication"> | string | null
+    reviewedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type StartupApplicationOrderByWithAggregationInput = {
+    id?: SortOrder
+    startupName?: SortOrder
+    problem?: SortOrder
+    country?: SortOrder
+    phoneNumber?: SortOrder
+    email?: SortOrder
+    startupStage?: SortOrder
+    startupLink?: SortOrder
+    founderVideoUrl?: SortOrderInput | SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrderInput | SortOrder
+    creditsAllocated?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    appliedAt?: SortOrder
+    reviewedAt?: SortOrderInput | SortOrder
+    reviewedByUserId?: SortOrderInput | SortOrder
+    _count?: StartupApplicationCountOrderByAggregateInput
+    _avg?: StartupApplicationAvgOrderByAggregateInput
+    _max?: StartupApplicationMaxOrderByAggregateInput
+    _min?: StartupApplicationMinOrderByAggregateInput
+    _sum?: StartupApplicationSumOrderByAggregateInput
+  }
+
+  export type StartupApplicationScalarWhereWithAggregatesInput = {
+    AND?: StartupApplicationScalarWhereWithAggregatesInput | StartupApplicationScalarWhereWithAggregatesInput[]
+    OR?: StartupApplicationScalarWhereWithAggregatesInput[]
+    NOT?: StartupApplicationScalarWhereWithAggregatesInput | StartupApplicationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"StartupApplication"> | string
+    startupName?: StringWithAggregatesFilter<"StartupApplication"> | string
+    problem?: StringWithAggregatesFilter<"StartupApplication"> | string
+    country?: StringWithAggregatesFilter<"StartupApplication"> | string
+    phoneNumber?: StringWithAggregatesFilter<"StartupApplication"> | string
+    email?: StringWithAggregatesFilter<"StartupApplication"> | string
+    startupStage?: StringWithAggregatesFilter<"StartupApplication"> | string
+    startupLink?: StringWithAggregatesFilter<"StartupApplication"> | string
+    founderVideoUrl?: StringNullableWithAggregatesFilter<"StartupApplication"> | string | null
+    status?: EnumStartupApplicationStatusWithAggregatesFilter<"StartupApplication"> | $Enums.StartupApplicationStatus
+    adminNotes?: StringNullableWithAggregatesFilter<"StartupApplication"> | string | null
+    creditsAllocated?: IntWithAggregatesFilter<"StartupApplication"> | number
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"StartupApplication"> | Date | string | null
+    appliedAt?: DateTimeWithAggregatesFilter<"StartupApplication"> | Date | string
+    reviewedAt?: DateTimeNullableWithAggregatesFilter<"StartupApplication"> | Date | string | null
+    reviewedByUserId?: StringNullableWithAggregatesFilter<"StartupApplication"> | string | null
+  }
+
   export type AppConfigWhereInput = {
     AND?: AppConfigWhereInput | AppConfigWhereInput[]
     OR?: AppConfigWhereInput[]
@@ -17385,14 +18974,15 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17404,14 +18994,15 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUpdateInput = {
@@ -17423,14 +19014,15 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17442,14 +19034,15 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -17491,8 +19084,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutWalletInput
     transactions?: CreditTransactionCreateNestedManyWithoutWalletInput
+    user: UserCreateNestedOneWithoutWalletInput
   }
 
   export type CreditWalletUncheckedCreateInput = {
@@ -17511,8 +19104,8 @@ export namespace Prisma {
     lowBalanceCentsThreshold?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutWalletNestedInput
     transactions?: CreditTransactionUpdateManyWithoutWalletNestedInput
+    user?: UserUpdateOneRequiredWithoutWalletNestedInput
   }
 
   export type CreditWalletUncheckedUpdateInput = {
@@ -17558,6 +19151,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
     wallet: CreditWalletCreateNestedOneWithoutTransactionsInput
   }
@@ -17570,6 +19165,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
   }
 
@@ -17580,6 +19177,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     wallet?: CreditWalletUpdateOneRequiredWithoutTransactionsNestedInput
   }
@@ -17592,6 +19191,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17603,6 +19204,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
   }
 
@@ -17613,6 +19216,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -17624,6 +19229,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -18234,6 +19841,138 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type StartupApplicationCreateInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedBy?: UserCreateNestedOneWithoutReviewedStartupsInput
+  }
+
+  export type StartupApplicationUncheckedCreateInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedByUserId?: string | null
+  }
+
+  export type StartupApplicationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedBy?: UserUpdateOneWithoutReviewedStartupsNestedInput
+  }
+
+  export type StartupApplicationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type StartupApplicationCreateManyInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
+    reviewedByUserId?: string | null
+  }
+
+  export type StartupApplicationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StartupApplicationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    reviewedByUserId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AppConfigCreateInput = {
     key: string
     value: string
@@ -18462,17 +20201,6 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type CreditWalletNullableScalarRelationFilter = {
-    is?: CreditWalletWhereInput | null
-    isNot?: CreditWalletWhereInput | null
-  }
-
-  export type NotificationListRelationFilter = {
-    every?: NotificationWhereInput
-    some?: NotificationWhereInput
-    none?: NotificationWhereInput
-  }
-
   export type ApiKeyListRelationFilter = {
     every?: ApiKeyWhereInput
     some?: ApiKeyWhereInput
@@ -18485,16 +20213,21 @@ export namespace Prisma {
     none?: ApiKeyUsageLogWhereInput
   }
 
+  export type CreditWalletNullableScalarRelationFilter = {
+    is?: CreditWalletWhereInput | null
+    isNot?: CreditWalletWhereInput | null
+  }
+
+  export type NotificationListRelationFilter = {
+    every?: NotificationWhereInput
+    some?: NotificationWhereInput
+    none?: NotificationWhereInput
+  }
+
   export type PaymentListRelationFilter = {
     every?: PaymentWhereInput
     some?: PaymentWhereInput
     none?: PaymentWhereInput
-  }
-
-  export type SupportTicketListRelationFilter = {
-    every?: SupportTicketWhereInput
-    some?: SupportTicketWhereInput
-    none?: SupportTicketWhereInput
   }
 
   export type PromoCodeListRelationFilter = {
@@ -18509,8 +20242,16 @@ export namespace Prisma {
     none?: PromoRedemptionWhereInput
   }
 
-  export type NotificationOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type SupportTicketListRelationFilter = {
+    every?: SupportTicketWhereInput
+    some?: SupportTicketWhereInput
+    none?: SupportTicketWhereInput
+  }
+
+  export type StartupApplicationListRelationFilter = {
+    every?: StartupApplicationWhereInput
+    some?: StartupApplicationWhereInput
+    none?: StartupApplicationWhereInput
   }
 
   export type ApiKeyOrderByRelationAggregateInput = {
@@ -18521,11 +20262,11 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type PaymentOrderByRelationAggregateInput = {
+  export type NotificationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type SupportTicketOrderByRelationAggregateInput = {
+  export type PaymentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18534,6 +20275,14 @@ export namespace Prisma {
   }
 
   export type PromoRedemptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SupportTicketOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type StartupApplicationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18621,15 +20370,15 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type CreditTransactionListRelationFilter = {
     every?: CreditTransactionWhereInput
     some?: CreditTransactionWhereInput
     none?: CreditTransactionWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type CreditTransactionOrderByRelationAggregateInput = {
@@ -18711,6 +20460,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type CreditWalletScalarRelationFilter = {
     is?: CreditWalletWhereInput
     isNot?: CreditWalletWhereInput
@@ -18729,6 +20489,8 @@ export namespace Prisma {
     modelKey?: SortOrder
     note?: SortOrder
     counterpartyUserId?: SortOrder
+    expiresAt?: SortOrder
+    isStartupCredit?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -18744,6 +20506,8 @@ export namespace Prisma {
     modelKey?: SortOrder
     note?: SortOrder
     counterpartyUserId?: SortOrder
+    expiresAt?: SortOrder
+    isStartupCredit?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -18755,6 +20519,8 @@ export namespace Prisma {
     modelKey?: SortOrder
     note?: SortOrder
     counterpartyUserId?: SortOrder
+    expiresAt?: SortOrder
+    isStartupCredit?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -18788,6 +20554,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumModelTypeFilter<$PrismaModel = never> = {
@@ -18881,17 +20661,6 @@ export namespace Prisma {
     not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NotificationCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
@@ -18930,20 +20699,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
     _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumApiKeyEnvironmentFilter<$PrismaModel = never> = {
@@ -19221,6 +20976,93 @@ export namespace Prisma {
     _max?: NestedEnumSupportTicketStatusFilter<$PrismaModel>
   }
 
+  export type EnumStartupApplicationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StartupApplicationStatus | EnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStartupApplicationStatusFilter<$PrismaModel> | $Enums.StartupApplicationStatus
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type StartupApplicationCountOrderByAggregateInput = {
+    id?: SortOrder
+    startupName?: SortOrder
+    problem?: SortOrder
+    country?: SortOrder
+    phoneNumber?: SortOrder
+    email?: SortOrder
+    startupStage?: SortOrder
+    startupLink?: SortOrder
+    founderVideoUrl?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    creditsAllocated?: SortOrder
+    expiresAt?: SortOrder
+    appliedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedByUserId?: SortOrder
+  }
+
+  export type StartupApplicationAvgOrderByAggregateInput = {
+    creditsAllocated?: SortOrder
+  }
+
+  export type StartupApplicationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    startupName?: SortOrder
+    problem?: SortOrder
+    country?: SortOrder
+    phoneNumber?: SortOrder
+    email?: SortOrder
+    startupStage?: SortOrder
+    startupLink?: SortOrder
+    founderVideoUrl?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    creditsAllocated?: SortOrder
+    expiresAt?: SortOrder
+    appliedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedByUserId?: SortOrder
+  }
+
+  export type StartupApplicationMinOrderByAggregateInput = {
+    id?: SortOrder
+    startupName?: SortOrder
+    problem?: SortOrder
+    country?: SortOrder
+    phoneNumber?: SortOrder
+    email?: SortOrder
+    startupStage?: SortOrder
+    startupLink?: SortOrder
+    founderVideoUrl?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
+    creditsAllocated?: SortOrder
+    expiresAt?: SortOrder
+    appliedAt?: SortOrder
+    reviewedAt?: SortOrder
+    reviewedByUserId?: SortOrder
+  }
+
+  export type StartupApplicationSumOrderByAggregateInput = {
+    creditsAllocated?: SortOrder
+  }
+
+  export type EnumStartupApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StartupApplicationStatus | EnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStartupApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.StartupApplicationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStartupApplicationStatusFilter<$PrismaModel>
+    _max?: NestedEnumStartupApplicationStatusFilter<$PrismaModel>
+  }
+
   export type AppConfigCountOrderByAggregateInput = {
     key?: SortOrder
     value?: SortOrder
@@ -19335,19 +21177,6 @@ export namespace Prisma {
     creditsCents?: SortOrder
   }
 
-  export type CreditWalletCreateNestedOneWithoutUserInput = {
-    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
-    connect?: CreditWalletWhereUniqueInput
-  }
-
-  export type NotificationCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-  }
-
   export type ApiKeyCreateNestedManyWithoutUserInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -19362,18 +21191,24 @@ export namespace Prisma {
     connect?: ApiKeyUsageLogWhereUniqueInput | ApiKeyUsageLogWhereUniqueInput[]
   }
 
+  export type CreditWalletCreateNestedOneWithoutUserInput = {
+    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
+    connect?: CreditWalletWhereUniqueInput
+  }
+
+  export type NotificationCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type PaymentCreateNestedManyWithoutUserInput = {
     create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
     createMany?: PaymentCreateManyUserInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-  }
-
-  export type SupportTicketCreateNestedManyWithoutUserInput = {
-    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
-    createMany?: SupportTicketCreateManyUserInputEnvelope
-    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
   }
 
   export type PromoCodeCreateNestedManyWithoutCreatedByInput = {
@@ -19390,17 +21225,18 @@ export namespace Prisma {
     connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
   }
 
-  export type CreditWalletUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
-    connect?: CreditWalletWhereUniqueInput
+  export type SupportTicketCreateNestedManyWithoutUserInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
   }
 
-  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  export type StartupApplicationCreateNestedManyWithoutReviewedByInput = {
+    create?: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput> | StartupApplicationCreateWithoutReviewedByInput[] | StartupApplicationUncheckedCreateWithoutReviewedByInput[]
+    connectOrCreate?: StartupApplicationCreateOrConnectWithoutReviewedByInput | StartupApplicationCreateOrConnectWithoutReviewedByInput[]
+    createMany?: StartupApplicationCreateManyReviewedByInputEnvelope
+    connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
   }
 
   export type ApiKeyUncheckedCreateNestedManyWithoutUserInput = {
@@ -19417,18 +21253,24 @@ export namespace Prisma {
     connect?: ApiKeyUsageLogWhereUniqueInput | ApiKeyUsageLogWhereUniqueInput[]
   }
 
+  export type CreditWalletUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
+    connect?: CreditWalletWhereUniqueInput
+  }
+
+  export type NotificationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+  }
+
   export type PaymentUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
     createMany?: PaymentCreateManyUserInputEnvelope
     connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
-  }
-
-  export type SupportTicketUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
-    createMany?: SupportTicketCreateManyUserInputEnvelope
-    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
   }
 
   export type PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput = {
@@ -19445,6 +21287,20 @@ export namespace Prisma {
     connect?: PromoRedemptionWhereUniqueInput | PromoRedemptionWhereUniqueInput[]
   }
 
+  export type SupportTicketUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+  }
+
+  export type StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput = {
+    create?: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput> | StartupApplicationCreateWithoutReviewedByInput[] | StartupApplicationUncheckedCreateWithoutReviewedByInput[]
+    connectOrCreate?: StartupApplicationCreateOrConnectWithoutReviewedByInput | StartupApplicationCreateOrConnectWithoutReviewedByInput[]
+    createMany?: StartupApplicationCreateManyReviewedByInputEnvelope
+    connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -19455,30 +21311,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type CreditWalletUpdateOneWithoutUserNestedInput = {
-    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
-    upsert?: CreditWalletUpsertWithoutUserInput
-    disconnect?: CreditWalletWhereInput | boolean
-    delete?: CreditWalletWhereInput | boolean
-    connect?: CreditWalletWhereUniqueInput
-    update?: XOR<XOR<CreditWalletUpdateToOneWithWhereWithoutUserInput, CreditWalletUpdateWithoutUserInput>, CreditWalletUncheckedUpdateWithoutUserInput>
-  }
-
-  export type NotificationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
   export type ApiKeyUpdateManyWithoutUserNestedInput = {
@@ -19509,6 +21341,30 @@ export namespace Prisma {
     deleteMany?: ApiKeyUsageLogScalarWhereInput | ApiKeyUsageLogScalarWhereInput[]
   }
 
+  export type CreditWalletUpdateOneWithoutUserNestedInput = {
+    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
+    upsert?: CreditWalletUpsertWithoutUserInput
+    disconnect?: CreditWalletWhereInput | boolean
+    delete?: CreditWalletWhereInput | boolean
+    connect?: CreditWalletWhereUniqueInput
+    update?: XOR<XOR<CreditWalletUpdateToOneWithWhereWithoutUserInput, CreditWalletUpdateWithoutUserInput>, CreditWalletUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type PaymentUpdateManyWithoutUserNestedInput = {
     create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
@@ -19521,20 +21377,6 @@ export namespace Prisma {
     update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
-  }
-
-  export type SupportTicketUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
-    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SupportTicketCreateManyUserInputEnvelope
-    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
   }
 
   export type PromoCodeUpdateManyWithoutCreatedByNestedInput = {
@@ -19565,28 +21407,32 @@ export namespace Prisma {
     deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
   }
 
-  export type CreditWalletUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
-    upsert?: CreditWalletUpsertWithoutUserInput
-    disconnect?: CreditWalletWhereInput | boolean
-    delete?: CreditWalletWhereInput | boolean
-    connect?: CreditWalletWhereUniqueInput
-    update?: XOR<XOR<CreditWalletUpdateToOneWithWhereWithoutUserInput, CreditWalletUpdateWithoutUserInput>, CreditWalletUncheckedUpdateWithoutUserInput>
+  export type SupportTicketUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
   }
 
-  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
-    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: NotificationCreateManyUserInputEnvelope
-    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
-    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  export type StartupApplicationUpdateManyWithoutReviewedByNestedInput = {
+    create?: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput> | StartupApplicationCreateWithoutReviewedByInput[] | StartupApplicationUncheckedCreateWithoutReviewedByInput[]
+    connectOrCreate?: StartupApplicationCreateOrConnectWithoutReviewedByInput | StartupApplicationCreateOrConnectWithoutReviewedByInput[]
+    upsert?: StartupApplicationUpsertWithWhereUniqueWithoutReviewedByInput | StartupApplicationUpsertWithWhereUniqueWithoutReviewedByInput[]
+    createMany?: StartupApplicationCreateManyReviewedByInputEnvelope
+    set?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    disconnect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    delete?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    update?: StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput | StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput[]
+    updateMany?: StartupApplicationUpdateManyWithWhereWithoutReviewedByInput | StartupApplicationUpdateManyWithWhereWithoutReviewedByInput[]
+    deleteMany?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
   }
 
   export type ApiKeyUncheckedUpdateManyWithoutUserNestedInput = {
@@ -19617,6 +21463,30 @@ export namespace Prisma {
     deleteMany?: ApiKeyUsageLogScalarWhereInput | ApiKeyUsageLogScalarWhereInput[]
   }
 
+  export type CreditWalletUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+    connectOrCreate?: CreditWalletCreateOrConnectWithoutUserInput
+    upsert?: CreditWalletUpsertWithoutUserInput
+    disconnect?: CreditWalletWhereInput | boolean
+    delete?: CreditWalletWhereInput | boolean
+    connect?: CreditWalletWhereUniqueInput
+    update?: XOR<XOR<CreditWalletUpdateToOneWithWhereWithoutUserInput, CreditWalletUpdateWithoutUserInput>, CreditWalletUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput> | NotificationCreateWithoutUserInput[] | NotificationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: NotificationCreateOrConnectWithoutUserInput | NotificationCreateOrConnectWithoutUserInput[]
+    upsert?: NotificationUpsertWithWhereUniqueWithoutUserInput | NotificationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: NotificationCreateManyUserInputEnvelope
+    set?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    disconnect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    delete?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
+    update?: NotificationUpdateWithWhereUniqueWithoutUserInput | NotificationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: NotificationUpdateManyWithWhereWithoutUserInput | NotificationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+  }
+
   export type PaymentUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<PaymentCreateWithoutUserInput, PaymentUncheckedCreateWithoutUserInput> | PaymentCreateWithoutUserInput[] | PaymentUncheckedCreateWithoutUserInput[]
     connectOrCreate?: PaymentCreateOrConnectWithoutUserInput | PaymentCreateOrConnectWithoutUserInput[]
@@ -19629,20 +21499,6 @@ export namespace Prisma {
     update?: PaymentUpdateWithWhereUniqueWithoutUserInput | PaymentUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: PaymentUpdateManyWithWhereWithoutUserInput | PaymentUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
-  }
-
-  export type SupportTicketUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
-    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: SupportTicketCreateManyUserInputEnvelope
-    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
-    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
   }
 
   export type PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput = {
@@ -19673,10 +21529,32 @@ export namespace Prisma {
     deleteMany?: PromoRedemptionScalarWhereInput | PromoRedemptionScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutWalletInput = {
-    create?: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWalletInput
-    connect?: UserWhereUniqueInput
+  export type SupportTicketUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput> | SupportTicketCreateWithoutUserInput[] | SupportTicketUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SupportTicketCreateOrConnectWithoutUserInput | SupportTicketCreateOrConnectWithoutUserInput[]
+    upsert?: SupportTicketUpsertWithWhereUniqueWithoutUserInput | SupportTicketUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SupportTicketCreateManyUserInputEnvelope
+    set?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    disconnect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    delete?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    connect?: SupportTicketWhereUniqueInput | SupportTicketWhereUniqueInput[]
+    update?: SupportTicketUpdateWithWhereUniqueWithoutUserInput | SupportTicketUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SupportTicketUpdateManyWithWhereWithoutUserInput | SupportTicketUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+  }
+
+  export type StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput = {
+    create?: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput> | StartupApplicationCreateWithoutReviewedByInput[] | StartupApplicationUncheckedCreateWithoutReviewedByInput[]
+    connectOrCreate?: StartupApplicationCreateOrConnectWithoutReviewedByInput | StartupApplicationCreateOrConnectWithoutReviewedByInput[]
+    upsert?: StartupApplicationUpsertWithWhereUniqueWithoutReviewedByInput | StartupApplicationUpsertWithWhereUniqueWithoutReviewedByInput[]
+    createMany?: StartupApplicationCreateManyReviewedByInputEnvelope
+    set?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    disconnect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    delete?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+    update?: StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput | StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput[]
+    updateMany?: StartupApplicationUpdateManyWithWhereWithoutReviewedByInput | StartupApplicationUpdateManyWithWhereWithoutReviewedByInput[]
+    deleteMany?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
   }
 
   export type CreditTransactionCreateNestedManyWithoutWalletInput = {
@@ -19684,6 +21562,12 @@ export namespace Prisma {
     connectOrCreate?: CreditTransactionCreateOrConnectWithoutWalletInput | CreditTransactionCreateOrConnectWithoutWalletInput[]
     createMany?: CreditTransactionCreateManyWalletInputEnvelope
     connect?: CreditTransactionWhereUniqueInput | CreditTransactionWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutWalletInput = {
+    create?: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWalletInput
+    connect?: UserWhereUniqueInput
   }
 
   export type CreditTransactionUncheckedCreateNestedManyWithoutWalletInput = {
@@ -19701,14 +21585,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneRequiredWithoutWalletNestedInput = {
-    create?: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWalletInput
-    upsert?: UserUpsertWithoutWalletInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWalletInput, UserUpdateWithoutWalletInput>, UserUncheckedUpdateWithoutWalletInput>
-  }
-
   export type CreditTransactionUpdateManyWithoutWalletNestedInput = {
     create?: XOR<CreditTransactionCreateWithoutWalletInput, CreditTransactionUncheckedCreateWithoutWalletInput> | CreditTransactionCreateWithoutWalletInput[] | CreditTransactionUncheckedCreateWithoutWalletInput[]
     connectOrCreate?: CreditTransactionCreateOrConnectWithoutWalletInput | CreditTransactionCreateOrConnectWithoutWalletInput[]
@@ -19721,6 +21597,14 @@ export namespace Prisma {
     update?: CreditTransactionUpdateWithWhereUniqueWithoutWalletInput | CreditTransactionUpdateWithWhereUniqueWithoutWalletInput[]
     updateMany?: CreditTransactionUpdateManyWithWhereWithoutWalletInput | CreditTransactionUpdateManyWithWhereWithoutWalletInput[]
     deleteMany?: CreditTransactionScalarWhereInput | CreditTransactionScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutWalletNestedInput = {
+    create?: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWalletInput
+    upsert?: UserUpsertWithoutWalletInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWalletInput, UserUpdateWithoutWalletInput>, UserUncheckedUpdateWithoutWalletInput>
   }
 
   export type CreditTransactionUncheckedUpdateManyWithoutWalletNestedInput = {
@@ -19751,6 +21635,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type CreditWalletUpdateOneRequiredWithoutTransactionsNestedInput = {
     create?: XOR<CreditWalletCreateWithoutTransactionsInput, CreditWalletUncheckedCreateWithoutTransactionsInput>
     connectOrCreate?: CreditWalletCreateOrConnectWithoutTransactionsInput
@@ -19771,10 +21659,6 @@ export namespace Prisma {
 
   export type EnumNotificationTypeFieldUpdateOperationsInput = {
     set?: $Enums.NotificationType
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
@@ -19911,6 +21795,26 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutSupportTicketsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSupportTicketsInput, UserUpdateWithoutSupportTicketsInput>, UserUncheckedUpdateWithoutSupportTicketsInput>
+  }
+
+  export type UserCreateNestedOneWithoutReviewedStartupsInput = {
+    create?: XOR<UserCreateWithoutReviewedStartupsInput, UserUncheckedCreateWithoutReviewedStartupsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedStartupsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumStartupApplicationStatusFieldUpdateOperationsInput = {
+    set?: $Enums.StartupApplicationStatus
+  }
+
+  export type UserUpdateOneWithoutReviewedStartupsNestedInput = {
+    create?: XOR<UserCreateWithoutReviewedStartupsInput, UserUncheckedCreateWithoutReviewedStartupsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReviewedStartupsInput
+    upsert?: UserUpsertWithoutReviewedStartupsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutReviewedStartupsInput, UserUpdateWithoutReviewedStartupsInput>, UserUncheckedUpdateWithoutReviewedStartupsInput>
   }
 
   export type UserCreateNestedOneWithoutCreatedPromosInput = {
@@ -20125,6 +22029,17 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedEnumCreditTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.CreditTransactionType | EnumCreditTransactionTypeFieldRefInput<$PrismaModel>
     in?: $Enums.CreditTransactionType[] | ListEnumCreditTransactionTypeFieldRefInput<$PrismaModel>
@@ -20163,6 +22078,20 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumModelTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ModelType | EnumModelTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ModelType[] | ListEnumModelTypeFieldRefInput<$PrismaModel>
@@ -20187,17 +22116,6 @@ export namespace Prisma {
     not?: NestedEnumNotificationTypeFilter<$PrismaModel> | $Enums.NotificationType
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumNotificationTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.NotificationType | EnumNotificationTypeFieldRefInput<$PrismaModel>
     in?: $Enums.NotificationType[] | ListEnumNotificationTypeFieldRefInput<$PrismaModel>
@@ -20206,20 +22124,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumNotificationTypeFilter<$PrismaModel>
     _max?: NestedEnumNotificationTypeFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumApiKeyEnvironmentFilter<$PrismaModel = never> = {
@@ -20290,55 +22194,21 @@ export namespace Prisma {
     _max?: NestedEnumSupportTicketStatusFilter<$PrismaModel>
   }
 
-  export type CreditWalletCreateWithoutUserInput = {
-    id?: string
-    balanceCents?: number
-    lowBalanceCentsThreshold?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    transactions?: CreditTransactionCreateNestedManyWithoutWalletInput
+  export type NestedEnumStartupApplicationStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.StartupApplicationStatus | EnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStartupApplicationStatusFilter<$PrismaModel> | $Enums.StartupApplicationStatus
   }
 
-  export type CreditWalletUncheckedCreateWithoutUserInput = {
-    id?: string
-    balanceCents?: number
-    lowBalanceCentsThreshold?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    transactions?: CreditTransactionUncheckedCreateNestedManyWithoutWalletInput
-  }
-
-  export type CreditWalletCreateOrConnectWithoutUserInput = {
-    where: CreditWalletWhereUniqueInput
-    create: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    readAt?: Date | string | null
-    createdAt?: Date | string
-  }
-
-  export type NotificationUncheckedCreateWithoutUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    readAt?: Date | string | null
-    createdAt?: Date | string
-  }
-
-  export type NotificationCreateOrConnectWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
-  }
-
-  export type NotificationCreateManyUserInputEnvelope = {
-    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
-    skipDuplicates?: boolean
+  export type NestedEnumStartupApplicationStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StartupApplicationStatus | EnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.StartupApplicationStatus[] | ListEnumStartupApplicationStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumStartupApplicationStatusWithAggregatesFilter<$PrismaModel> | $Enums.StartupApplicationStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStartupApplicationStatusFilter<$PrismaModel>
+    _max?: NestedEnumStartupApplicationStatusFilter<$PrismaModel>
   }
 
   export type ApiKeyCreateWithoutUserInput = {
@@ -20415,6 +22285,57 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CreditWalletCreateWithoutUserInput = {
+    id?: string
+    balanceCents?: number
+    lowBalanceCentsThreshold?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transactions?: CreditTransactionCreateNestedManyWithoutWalletInput
+  }
+
+  export type CreditWalletUncheckedCreateWithoutUserInput = {
+    id?: string
+    balanceCents?: number
+    lowBalanceCentsThreshold?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transactions?: CreditTransactionUncheckedCreateNestedManyWithoutWalletInput
+  }
+
+  export type CreditWalletCreateOrConnectWithoutUserInput = {
+    where: CreditWalletWhereUniqueInput
+    create: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type NotificationUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type NotificationCreateOrConnectWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationCreateManyUserInputEnvelope = {
+    data: NotificationCreateManyUserInput | NotificationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PaymentCreateWithoutUserInput = {
     id?: string
     provider: $Enums.PaymentProvider
@@ -20456,38 +22377,6 @@ export namespace Prisma {
 
   export type PaymentCreateManyUserInputEnvelope = {
     data: PaymentCreateManyUserInput | PaymentCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SupportTicketCreateWithoutUserInput = {
-    id?: string
-    status?: $Enums.SupportTicketStatus
-    subject: string
-    message: string
-    requestId?: string | null
-    contextJson?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SupportTicketUncheckedCreateWithoutUserInput = {
-    id?: string
-    status?: $Enums.SupportTicketStatus
-    subject: string
-    message: string
-    requestId?: string | null
-    contextJson?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SupportTicketCreateOrConnectWithoutUserInput = {
-    where: SupportTicketWhereUniqueInput
-    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
-  }
-
-  export type SupportTicketCreateManyUserInputEnvelope = {
-    data: SupportTicketCreateManyUserInput | SupportTicketCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -20553,62 +22442,82 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type CreditWalletUpsertWithoutUserInput = {
-    update: XOR<CreditWalletUpdateWithoutUserInput, CreditWalletUncheckedUpdateWithoutUserInput>
-    create: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
-    where?: CreditWalletWhereInput
+  export type SupportTicketCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.SupportTicketStatus
+    subject: string
+    message: string
+    requestId?: string | null
+    contextJson?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CreditWalletUpdateToOneWithWhereWithoutUserInput = {
-    where?: CreditWalletWhereInput
-    data: XOR<CreditWalletUpdateWithoutUserInput, CreditWalletUncheckedUpdateWithoutUserInput>
+  export type SupportTicketUncheckedCreateWithoutUserInput = {
+    id?: string
+    status?: $Enums.SupportTicketStatus
+    subject: string
+    message: string
+    requestId?: string | null
+    contextJson?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CreditWalletUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    balanceCents?: IntFieldUpdateOperationsInput | number
-    lowBalanceCentsThreshold?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transactions?: CreditTransactionUpdateManyWithoutWalletNestedInput
+  export type SupportTicketCreateOrConnectWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
   }
 
-  export type CreditWalletUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    balanceCents?: IntFieldUpdateOperationsInput | number
-    lowBalanceCentsThreshold?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transactions?: CreditTransactionUncheckedUpdateManyWithoutWalletNestedInput
+  export type SupportTicketCreateManyUserInputEnvelope = {
+    data: SupportTicketCreateManyUserInput | SupportTicketCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
-  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
-    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  export type StartupApplicationCreateWithoutReviewedByInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
   }
 
-  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
-    where: NotificationWhereUniqueInput
-    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+  export type StartupApplicationUncheckedCreateWithoutReviewedByInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
   }
 
-  export type NotificationUpdateManyWithWhereWithoutUserInput = {
-    where: NotificationScalarWhereInput
-    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
+  export type StartupApplicationCreateOrConnectWithoutReviewedByInput = {
+    where: StartupApplicationWhereUniqueInput
+    create: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput>
   }
 
-  export type NotificationScalarWhereInput = {
-    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    OR?: NotificationScalarWhereInput[]
-    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
-    id?: StringFilter<"Notification"> | string
-    userId?: StringFilter<"Notification"> | string
-    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
-    title?: StringFilter<"Notification"> | string
-    message?: StringFilter<"Notification"> | string
-    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
-    createdAt?: DateTimeFilter<"Notification"> | Date | string
+  export type StartupApplicationCreateManyReviewedByInputEnvelope = {
+    data: StartupApplicationCreateManyReviewedByInput | StartupApplicationCreateManyReviewedByInput[]
+    skipDuplicates?: boolean
   }
 
   export type ApiKeyUpsertWithWhereUniqueWithoutUserInput = {
@@ -20677,6 +22586,64 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"ApiKeyUsageLog"> | Date | string
   }
 
+  export type CreditWalletUpsertWithoutUserInput = {
+    update: XOR<CreditWalletUpdateWithoutUserInput, CreditWalletUncheckedUpdateWithoutUserInput>
+    create: XOR<CreditWalletCreateWithoutUserInput, CreditWalletUncheckedCreateWithoutUserInput>
+    where?: CreditWalletWhereInput
+  }
+
+  export type CreditWalletUpdateToOneWithWhereWithoutUserInput = {
+    where?: CreditWalletWhereInput
+    data: XOR<CreditWalletUpdateWithoutUserInput, CreditWalletUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CreditWalletUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    lowBalanceCentsThreshold?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transactions?: CreditTransactionUpdateManyWithoutWalletNestedInput
+  }
+
+  export type CreditWalletUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    lowBalanceCentsThreshold?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transactions?: CreditTransactionUncheckedUpdateManyWithoutWalletNestedInput
+  }
+
+  export type NotificationUpsertWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    update: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+    create: XOR<NotificationCreateWithoutUserInput, NotificationUncheckedCreateWithoutUserInput>
+  }
+
+  export type NotificationUpdateWithWhereUniqueWithoutUserInput = {
+    where: NotificationWhereUniqueInput
+    data: XOR<NotificationUpdateWithoutUserInput, NotificationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type NotificationUpdateManyWithWhereWithoutUserInput = {
+    where: NotificationScalarWhereInput
+    data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type NotificationScalarWhereInput = {
+    AND?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    OR?: NotificationScalarWhereInput[]
+    NOT?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
+    id?: StringFilter<"Notification"> | string
+    userId?: StringFilter<"Notification"> | string
+    type?: EnumNotificationTypeFilter<"Notification"> | $Enums.NotificationType
+    title?: StringFilter<"Notification"> | string
+    message?: StringFilter<"Notification"> | string
+    readAt?: DateTimeNullableFilter<"Notification"> | Date | string | null
+    createdAt?: DateTimeFilter<"Notification"> | Date | string
+  }
+
   export type PaymentUpsertWithWhereUniqueWithoutUserInput = {
     where: PaymentWhereUniqueInput
     update: XOR<PaymentUpdateWithoutUserInput, PaymentUncheckedUpdateWithoutUserInput>
@@ -20712,37 +22679,6 @@ export namespace Prisma {
     mpesaReceipt?: StringNullableFilter<"Payment"> | string | null
     createdAt?: DateTimeFilter<"Payment"> | Date | string
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
-  }
-
-  export type SupportTicketUpsertWithWhereUniqueWithoutUserInput = {
-    where: SupportTicketWhereUniqueInput
-    update: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
-    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
-  }
-
-  export type SupportTicketUpdateWithWhereUniqueWithoutUserInput = {
-    where: SupportTicketWhereUniqueInput
-    data: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
-  }
-
-  export type SupportTicketUpdateManyWithWhereWithoutUserInput = {
-    where: SupportTicketScalarWhereInput
-    data: XOR<SupportTicketUpdateManyMutationInput, SupportTicketUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type SupportTicketScalarWhereInput = {
-    AND?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
-    OR?: SupportTicketScalarWhereInput[]
-    NOT?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
-    id?: StringFilter<"SupportTicket"> | string
-    userId?: StringFilter<"SupportTicket"> | string
-    status?: EnumSupportTicketStatusFilter<"SupportTicket"> | $Enums.SupportTicketStatus
-    subject?: StringFilter<"SupportTicket"> | string
-    message?: StringFilter<"SupportTicket"> | string
-    requestId?: StringNullableFilter<"SupportTicket"> | string | null
-    contextJson?: StringNullableFilter<"SupportTicket"> | string | null
-    createdAt?: DateTimeFilter<"SupportTicket"> | Date | string
-    updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
   }
 
   export type PromoCodeUpsertWithWhereUniqueWithoutCreatedByInput = {
@@ -20805,45 +22741,73 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"PromoRedemption"> | Date | string
   }
 
-  export type UserCreateWithoutWalletInput = {
-    id?: string
-    email: string
-    displayName: string
-    passwordHash: string
-    isAdmin?: boolean
-    preferredCurrency?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    notifications?: NotificationCreateNestedManyWithoutUserInput
-    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
-    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
-    payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
-    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
-    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+  export type SupportTicketUpsertWithWhereUniqueWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    update: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
+    create: XOR<SupportTicketCreateWithoutUserInput, SupportTicketUncheckedCreateWithoutUserInput>
   }
 
-  export type UserUncheckedCreateWithoutWalletInput = {
-    id?: string
-    email: string
-    displayName: string
-    passwordHash: string
-    isAdmin?: boolean
-    preferredCurrency?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
-    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
-    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
-    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+  export type SupportTicketUpdateWithWhereUniqueWithoutUserInput = {
+    where: SupportTicketWhereUniqueInput
+    data: XOR<SupportTicketUpdateWithoutUserInput, SupportTicketUncheckedUpdateWithoutUserInput>
   }
 
-  export type UserCreateOrConnectWithoutWalletInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
+  export type SupportTicketUpdateManyWithWhereWithoutUserInput = {
+    where: SupportTicketScalarWhereInput
+    data: XOR<SupportTicketUpdateManyMutationInput, SupportTicketUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SupportTicketScalarWhereInput = {
+    AND?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+    OR?: SupportTicketScalarWhereInput[]
+    NOT?: SupportTicketScalarWhereInput | SupportTicketScalarWhereInput[]
+    id?: StringFilter<"SupportTicket"> | string
+    userId?: StringFilter<"SupportTicket"> | string
+    status?: EnumSupportTicketStatusFilter<"SupportTicket"> | $Enums.SupportTicketStatus
+    subject?: StringFilter<"SupportTicket"> | string
+    message?: StringFilter<"SupportTicket"> | string
+    requestId?: StringNullableFilter<"SupportTicket"> | string | null
+    contextJson?: StringNullableFilter<"SupportTicket"> | string | null
+    createdAt?: DateTimeFilter<"SupportTicket"> | Date | string
+    updatedAt?: DateTimeFilter<"SupportTicket"> | Date | string
+  }
+
+  export type StartupApplicationUpsertWithWhereUniqueWithoutReviewedByInput = {
+    where: StartupApplicationWhereUniqueInput
+    update: XOR<StartupApplicationUpdateWithoutReviewedByInput, StartupApplicationUncheckedUpdateWithoutReviewedByInput>
+    create: XOR<StartupApplicationCreateWithoutReviewedByInput, StartupApplicationUncheckedCreateWithoutReviewedByInput>
+  }
+
+  export type StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput = {
+    where: StartupApplicationWhereUniqueInput
+    data: XOR<StartupApplicationUpdateWithoutReviewedByInput, StartupApplicationUncheckedUpdateWithoutReviewedByInput>
+  }
+
+  export type StartupApplicationUpdateManyWithWhereWithoutReviewedByInput = {
+    where: StartupApplicationScalarWhereInput
+    data: XOR<StartupApplicationUpdateManyMutationInput, StartupApplicationUncheckedUpdateManyWithoutReviewedByInput>
+  }
+
+  export type StartupApplicationScalarWhereInput = {
+    AND?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
+    OR?: StartupApplicationScalarWhereInput[]
+    NOT?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
+    id?: StringFilter<"StartupApplication"> | string
+    startupName?: StringFilter<"StartupApplication"> | string
+    problem?: StringFilter<"StartupApplication"> | string
+    country?: StringFilter<"StartupApplication"> | string
+    phoneNumber?: StringFilter<"StartupApplication"> | string
+    email?: StringFilter<"StartupApplication"> | string
+    startupStage?: StringFilter<"StartupApplication"> | string
+    startupLink?: StringFilter<"StartupApplication"> | string
+    founderVideoUrl?: StringNullableFilter<"StartupApplication"> | string | null
+    status?: EnumStartupApplicationStatusFilter<"StartupApplication"> | $Enums.StartupApplicationStatus
+    adminNotes?: StringNullableFilter<"StartupApplication"> | string | null
+    creditsAllocated?: IntFilter<"StartupApplication"> | number
+    expiresAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    appliedAt?: DateTimeFilter<"StartupApplication"> | Date | string
+    reviewedAt?: DateTimeNullableFilter<"StartupApplication"> | Date | string | null
+    reviewedByUserId?: StringNullableFilter<"StartupApplication"> | string | null
   }
 
   export type CreditTransactionCreateWithoutWalletInput = {
@@ -20853,6 +22817,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
   }
 
@@ -20863,6 +22829,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
   }
 
@@ -20876,51 +22844,47 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutWalletInput = {
-    update: XOR<UserUpdateWithoutWalletInput, UserUncheckedUpdateWithoutWalletInput>
+  export type UserCreateWithoutWalletInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+  }
+
+  export type UserUncheckedCreateWithoutWalletInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  }
+
+  export type UserCreateOrConnectWithoutWalletInput = {
+    where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutWalletInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutWalletInput, UserUncheckedUpdateWithoutWalletInput>
-  }
-
-  export type UserUpdateWithoutWalletInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    preferredCurrency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
-    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
-    payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
-    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
-    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutWalletInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    displayName?: StringFieldUpdateOperationsInput | string
-    passwordHash?: StringFieldUpdateOperationsInput | string
-    isAdmin?: BoolFieldUpdateOperationsInput | boolean
-    preferredCurrency?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
-    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
-    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
-    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CreditTransactionUpsertWithWhereUniqueWithoutWalletInput = {
@@ -20950,7 +22914,58 @@ export namespace Prisma {
     modelKey?: StringNullableFilter<"CreditTransaction"> | string | null
     note?: StringNullableFilter<"CreditTransaction"> | string | null
     counterpartyUserId?: StringNullableFilter<"CreditTransaction"> | string | null
+    expiresAt?: DateTimeNullableFilter<"CreditTransaction"> | Date | string | null
+    isStartupCredit?: BoolFilter<"CreditTransaction"> | boolean
     createdAt?: DateTimeFilter<"CreditTransaction"> | Date | string
+  }
+
+  export type UserUpsertWithoutWalletInput = {
+    update: XOR<UserUpdateWithoutWalletInput, UserUncheckedUpdateWithoutWalletInput>
+    create: XOR<UserCreateWithoutWalletInput, UserUncheckedCreateWithoutWalletInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutWalletInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutWalletInput, UserUncheckedUpdateWithoutWalletInput>
+  }
+
+  export type UserUpdateWithoutWalletInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutWalletInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type CreditWalletCreateWithoutTransactionsInput = {
@@ -21014,13 +23029,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -21032,13 +23048,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -21066,13 +23083,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -21084,13 +23102,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserCreateWithoutApiKeysInput = {
@@ -21102,13 +23121,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -21120,13 +23140,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -21188,13 +23209,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -21206,13 +23228,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type ApiKeyUsageLogUpsertWithWhereUniqueWithoutApiKeyInput = {
@@ -21275,13 +23298,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     wallet?: CreditWalletCreateNestedOneWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
-    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutApiKeyUsageLogsInput = {
@@ -21293,13 +23317,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
-    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutApiKeyUsageLogsInput = {
@@ -21368,13 +23393,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     wallet?: CreditWalletUpdateOneWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
-    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeyUsageLogsInput = {
@@ -21386,13 +23412,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
-    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -21404,13 +23431,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -21422,13 +23450,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -21456,13 +23485,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -21474,13 +23504,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserCreateWithoutSupportTicketsInput = {
@@ -21492,13 +23523,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -21510,13 +23542,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -21544,13 +23577,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -21562,13 +23596,106 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+  }
+
+  export type UserCreateWithoutReviewedStartupsInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutReviewedStartupsInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutReviewedStartupsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutReviewedStartupsInput, UserUncheckedCreateWithoutReviewedStartupsInput>
+  }
+
+  export type UserUpsertWithoutReviewedStartupsInput = {
+    update: XOR<UserUpdateWithoutReviewedStartupsInput, UserUncheckedUpdateWithoutReviewedStartupsInput>
+    create: XOR<UserCreateWithoutReviewedStartupsInput, UserUncheckedCreateWithoutReviewedStartupsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutReviewedStartupsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutReviewedStartupsInput, UserUncheckedUpdateWithoutReviewedStartupsInput>
+  }
+
+  export type UserUpdateWithoutReviewedStartupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutReviewedStartupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCreatedPromosInput = {
@@ -21580,13 +23707,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPromosInput = {
@@ -21598,13 +23726,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPromosInput = {
@@ -21656,13 +23785,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPromosInput = {
@@ -21674,13 +23804,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput = {
@@ -21741,13 +23872,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletCreateNestedOneWithoutUserInput
-    notifications?: NotificationCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
     payments?: PaymentCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
@@ -21759,13 +23891,14 @@ export namespace Prisma {
     preferredCurrency?: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
-    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
     payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
-    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
   }
 
   export type UserCreateOrConnectWithoutPromoRedemptionsInput = {
@@ -21832,13 +23965,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
     payments?: PaymentUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
@@ -21850,22 +23984,14 @@ export namespace Prisma {
     preferredCurrency?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
-    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
     apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
-    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
-  }
-
-  export type NotificationCreateManyUserInput = {
-    id?: string
-    type: $Enums.NotificationType
-    title: string
-    message: string
-    readAt?: Date | string | null
-    createdAt?: Date | string
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
 
   export type ApiKeyCreateManyUserInput = {
@@ -21894,6 +24020,15 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type NotificationCreateManyUserInput = {
+    id?: string
+    type: $Enums.NotificationType
+    title: string
+    message: string
+    readAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
   export type PaymentCreateManyUserInput = {
     id?: string
     provider: $Enums.PaymentProvider
@@ -21907,17 +24042,6 @@ export namespace Prisma {
     providerRef?: string | null
     merchantRequestId?: string | null
     mpesaReceipt?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SupportTicketCreateManyUserInput = {
-    id?: string
-    status?: $Enums.SupportTicketStatus
-    subject: string
-    message: string
-    requestId?: string | null
-    contextJson?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21942,31 +24066,33 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
-  export type NotificationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SupportTicketCreateManyUserInput = {
+    id?: string
+    status?: $Enums.SupportTicketStatus
+    subject: string
+    message: string
+    requestId?: string | null
+    contextJson?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type NotificationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type NotificationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
-    title?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type StartupApplicationCreateManyReviewedByInput = {
+    id?: string
+    startupName: string
+    problem: string
+    country: string
+    phoneNumber: string
+    email: string
+    startupStage: string
+    startupLink: string
+    founderVideoUrl?: string | null
+    status?: $Enums.StartupApplicationStatus
+    adminNotes?: string | null
+    creditsAllocated?: number
+    expiresAt?: Date | string | null
+    appliedAt?: Date | string
+    reviewedAt?: Date | string | null
   }
 
   export type ApiKeyUpdateWithoutUserInput = {
@@ -22049,6 +24175,33 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type NotificationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NotificationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumNotificationTypeFieldUpdateOperationsInput | $Enums.NotificationType
+    title?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    readAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PaymentUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     provider?: EnumPaymentProviderFieldUpdateOperationsInput | $Enums.PaymentProvider
@@ -22096,39 +24249,6 @@ export namespace Prisma {
     providerRef?: NullableStringFieldUpdateOperationsInput | string | null
     merchantRequestId?: NullableStringFieldUpdateOperationsInput | string | null
     mpesaReceipt?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SupportTicketUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
-    subject?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    requestId?: NullableStringFieldUpdateOperationsInput | string | null
-    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SupportTicketUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
-    subject?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    requestId?: NullableStringFieldUpdateOperationsInput | string | null
-    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SupportTicketUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
-    subject?: StringFieldUpdateOperationsInput | string
-    message?: StringFieldUpdateOperationsInput | string
-    requestId?: NullableStringFieldUpdateOperationsInput | string | null
-    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22195,6 +24315,93 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SupportTicketUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    requestId?: NullableStringFieldUpdateOperationsInput | string | null
+    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportTicketUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    requestId?: NullableStringFieldUpdateOperationsInput | string | null
+    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SupportTicketUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumSupportTicketStatusFieldUpdateOperationsInput | $Enums.SupportTicketStatus
+    subject?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    requestId?: NullableStringFieldUpdateOperationsInput | string | null
+    contextJson?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StartupApplicationUpdateWithoutReviewedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StartupApplicationUncheckedUpdateWithoutReviewedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type StartupApplicationUncheckedUpdateManyWithoutReviewedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    startupName?: StringFieldUpdateOperationsInput | string
+    problem?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    startupStage?: StringFieldUpdateOperationsInput | string
+    startupLink?: StringFieldUpdateOperationsInput | string
+    founderVideoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumStartupApplicationStatusFieldUpdateOperationsInput | $Enums.StartupApplicationStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
+    creditsAllocated?: IntFieldUpdateOperationsInput | number
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type CreditTransactionCreateManyWalletInput = {
     id?: string
     type: $Enums.CreditTransactionType
@@ -22202,6 +24409,8 @@ export namespace Prisma {
     modelKey?: string | null
     note?: string | null
     counterpartyUserId?: string | null
+    expiresAt?: Date | string | null
+    isStartupCredit?: boolean
     createdAt?: Date | string
   }
 
@@ -22212,6 +24421,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -22222,6 +24433,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -22232,6 +24445,8 @@ export namespace Prisma {
     modelKey?: NullableStringFieldUpdateOperationsInput | string | null
     note?: NullableStringFieldUpdateOperationsInput | string | null
     counterpartyUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isStartupCredit?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

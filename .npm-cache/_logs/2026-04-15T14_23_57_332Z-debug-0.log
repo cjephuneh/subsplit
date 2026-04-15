@@ -5,10 +5,10 @@
 4 silly config load:file:/Users/mac/Documents/code/subsplit/.npmrc
 5 silly config load:file:/Users/mac/.npmrc
 6 silly config load:file:/usr/local/etc/npmrc
-7 verbose title npm exec prisma db pull
-8 verbose argv "exec" "--" "prisma" "db" "pull"
-9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-13T13_22_42_271Z-
-10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-13T13_22_42_271Z-debug-0.log
+7 verbose title npm exec prisma generate
+8 verbose argv "exec" "--" "prisma" "generate"
+9 verbose logfile logs-max:10 dir:/Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-15T14_23_57_332Z-
+10 verbose logfile /Users/mac/Documents/code/subsplit/.npm-cache/_logs/2026-04-15T14_23_57_332Z-debug-0.log
 11 silly logfile start cleaning logs, removing 1 files
 12 silly logfile done cleaning log files
 13 verbose cwd /Users/mac/Documents/code/subsplit

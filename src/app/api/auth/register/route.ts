@@ -48,6 +48,29 @@ export async function POST(req: Request) {
       note: "Welcome bonus",
     });
 
+    // Check if user has an approved startup application
+    const approvedStartupApp = await prisma.startupApplication.findFirst({
+      where: {
+        email: body.email.toLowerCase(),
+        status: "APPROVED",
+      },
+    });
+
+    if (approvedStartupApp) {
+      // Calculate expiry date (1 year from approval)
+      const expiresAt = approvedStartupApp.expiresAt || new Date(Date.now() + 365 * 24 * 60 * 60 * 1000);
+
+      // Add startup credits to wallet
+      await createTransactionAndUpdateBalance({
+        userId: user.id,
+        type: "TOP_UP",
+        amountCents: approvedStartupApp.creditsAllocated,
+        note: `Subsplit for Startups - ${approvedStartupApp.creditsAllocated / 100} credits (expires ${expiresAt.toLocaleDateString()})`,
+        expiresAt,
+        isStartupCredit: true,
+      });
+    }
+
     const token = await createSessionToken(user.id);
     const res = NextResponse.json({ ok: true });
     res.cookies.set("subsplit_session", token, {

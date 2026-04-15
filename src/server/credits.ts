@@ -78,10 +78,12 @@ type CreateTxInput = {
   modelKey?: string;
   note?: string;
   counterpartyUserId?: string;
+  expiresAt?: Date;
+  isStartupCredit?: boolean;
 };
 
 export async function createTransactionAndUpdateBalance(input: CreateTxInput) {
-  const { userId, type, amountCents, modelKey, note, counterpartyUserId } =
+  const { userId, type, amountCents, modelKey, note, counterpartyUserId, expiresAt, isStartupCredit } =
     input;
 
   if (!Number.isInteger(amountCents) || amountCents === 0) {
@@ -128,6 +130,8 @@ export async function createTransactionAndUpdateBalance(input: CreateTxInput) {
         modelKey,
         note,
         counterpartyUserId,
+        expiresAt: expiresAt || null,
+        isStartupCredit: isStartupCredit || false,
       },
     });
 

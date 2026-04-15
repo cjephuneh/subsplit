@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Layers3, LifeBuoy, ArrowLeft, Gift } from "lucide-react";
+import { LayoutDashboard, Users, Layers3, LifeBuoy, ArrowLeft, Gift, Rocket } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const items = [
     { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/users", label: "Users", icon: Users },
     { href: "/admin/models", label: "Models", icon: Layers3 },
     { href: "/admin/promos", label: "Promo Codes", icon: Gift },
+    { href: "/admin/startups", label: "Startups", icon: Rocket },
     { href: "/admin/support", label: "Support", icon: LifeBuoy },
 ];
 
