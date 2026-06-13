@@ -8,6 +8,7 @@ export default function Home() {
       <Hero />
       <ValueProps />
       <Pricing />
+      <SellApiKeysCta />
       <Startups />
       <Footer />
     </main>
@@ -175,6 +176,36 @@ function Pricing() {
               Go to dashboard
             </Link>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SellApiKeysCta() {
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div className="rounded-[2rem] border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 p-8 shadow-sm dark:border-emerald-900 dark:from-emerald-950/30 dark:via-teal-950/30 dark:to-emerald-950/30 sm:p-10">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+          <div className="space-y-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-100 px-4 py-2 text-sm text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300">
+              <Sparkles size={16} />
+              Earn credits
+            </div>
+            <h2 className="text-2xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50">
+              Have unused OpenAI, Claude, or Groq API keys? Turn them into cash.
+            </h2>
+            <p className="text-sm text-zinc-700 dark:text-zinc-300 max-w-xl">
+              List your developer API keys on the Subsplit marketplace. Other users route their completions requests through Subsplit using your keys, and we credit you with 85% of their transaction value automatically.
+            </p>
+          </div>
+          <Link
+            href="/dashboard"
+            className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-6 text-base font-medium text-white transition-all hover:from-emerald-700 hover:to-teal-700 shadow-lg hover:shadow-xl"
+          >
+            Sell API Keys
+            <ArrowRight size={18} className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

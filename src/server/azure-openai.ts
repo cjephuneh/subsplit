@@ -142,6 +142,69 @@ export async function azureChatCompletions(
     }
 
     // Non-Azure: OpenAI-compatible base URL + /chat/completions (e.g. Anthropic gateway, OpenAI).
+    if (base.includes("anthropic.com")) {
+      const systemMessage = input.messages
+        .filter((m) => m.role === "system")
+        .map((m) => m.content)
+        .join("\n");
+      const anthropicMessages = input.messages
+        .filter((m) => m.role !== "system")
+        .map((m) => ({
+          role: m.role === "assistant" ? "assistant" : "user",
+          content: m.content,
+        }));
+
+      const url = `${base}/v1/messages`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": override.apiKey,
+          "anthropic-version": "2023-06-01",
+        },
+        body: JSON.stringify({
+          model: override.deployment || "claude-3-5-sonnet-20241022",
+          system: systemMessage || undefined,
+          messages: anthropicMessages,
+          max_tokens: input.max_tokens ?? 1024,
+          temperature: input.temperature,
+        }),
+      });
+
+      const json: any = await res.json().catch(() => null);
+      if (!res.ok) {
+        throw new Error(
+          `AZURE_OPENAI_ERROR:${res.status}:${safeJsonString(json)}`,
+        );
+      }
+
+      const textContent = json.content?.map((c: any) => c.text || "").join("") || "";
+      const promptTokens = json.usage?.input_tokens ?? 0;
+      const completionTokens = json.usage?.output_tokens ?? 0;
+
+      return {
+        id: json.id,
+        object: "chat.completion",
+        created: Math.floor(Date.now() / 1000),
+        model: json.model,
+        choices: [
+          {
+            index: 0,
+            message: {
+              role: "assistant",
+              content: textContent,
+            },
+            finish_reason: json.stop_reason === "end_turn" ? "stop" : json.stop_reason || "stop",
+          },
+        ],
+        usage: {
+          prompt_tokens: promptTokens,
+          completion_tokens: completionTokens,
+          total_tokens: promptTokens + completionTokens,
+        },
+      };
+    }
+
     const url = `${base}/chat/completions`;
     const res = await fetch(url, {
       method: "POST",

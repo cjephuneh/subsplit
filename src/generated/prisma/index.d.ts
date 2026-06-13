@@ -78,6 +78,11 @@ export type PromoCode = $Result.DefaultSelection<Prisma.$PromoCodePayload>
  * 
  */
 export type PromoRedemption = $Result.DefaultSelection<Prisma.$PromoRedemptionPayload>
+/**
+ * Model ListedApiKey
+ * 
+ */
+export type ListedApiKey = $Result.DefaultSelection<Prisma.$ListedApiKeyPayload>
 
 /**
  * Enums
@@ -443,6 +448,16 @@ export class PrismaClient<
     * ```
     */
   get promoRedemption(): Prisma.PromoRedemptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.listedApiKey`: Exposes CRUD operations for the **ListedApiKey** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ListedApiKeys
+    * const listedApiKeys = await prisma.listedApiKey.findMany()
+    * ```
+    */
+  get listedApiKey(): Prisma.ListedApiKeyDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -889,7 +904,8 @@ export namespace Prisma {
     StartupApplication: 'StartupApplication',
     AppConfig: 'AppConfig',
     PromoCode: 'PromoCode',
-    PromoRedemption: 'PromoRedemption'
+    PromoRedemption: 'PromoRedemption',
+    ListedApiKey: 'ListedApiKey'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -905,7 +921,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "startupApplication" | "appConfig" | "promoCode" | "promoRedemption"
+      modelProps: "user" | "creditWallet" | "creditTransaction" | "modelOffering" | "notification" | "apiKey" | "apiKeyUsageLog" | "payment" | "supportTicket" | "startupApplication" | "appConfig" | "promoCode" | "promoRedemption" | "listedApiKey"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1871,6 +1887,80 @@ export namespace Prisma {
           }
         }
       }
+      ListedApiKey: {
+        payload: Prisma.$ListedApiKeyPayload<ExtArgs>
+        fields: Prisma.ListedApiKeyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ListedApiKeyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ListedApiKeyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          findFirst: {
+            args: Prisma.ListedApiKeyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ListedApiKeyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          findMany: {
+            args: Prisma.ListedApiKeyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>[]
+          }
+          create: {
+            args: Prisma.ListedApiKeyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          createMany: {
+            args: Prisma.ListedApiKeyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ListedApiKeyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>[]
+          }
+          delete: {
+            args: Prisma.ListedApiKeyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          update: {
+            args: Prisma.ListedApiKeyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          deleteMany: {
+            args: Prisma.ListedApiKeyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ListedApiKeyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ListedApiKeyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>[]
+          }
+          upsert: {
+            args: Prisma.ListedApiKeyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ListedApiKeyPayload>
+          }
+          aggregate: {
+            args: Prisma.ListedApiKeyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateListedApiKey>
+          }
+          groupBy: {
+            args: Prisma.ListedApiKeyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ListedApiKeyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ListedApiKeyCountArgs<ExtArgs>
+            result: $Utils.Optional<ListedApiKeyCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1992,6 +2082,7 @@ export namespace Prisma {
     appConfig?: AppConfigOmit
     promoCode?: PromoCodeOmit
     promoRedemption?: PromoRedemptionOmit
+    listedApiKey?: ListedApiKeyOmit
   }
 
   /* Types for Logging */
@@ -2080,6 +2171,7 @@ export namespace Prisma {
     promoRedemptions: number
     supportTickets: number
     reviewedStartups: number
+    listedApiKeys: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2091,6 +2183,7 @@ export namespace Prisma {
     promoRedemptions?: boolean | UserCountOutputTypeCountPromoRedemptionsArgs
     supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
     reviewedStartups?: boolean | UserCountOutputTypeCountReviewedStartupsArgs
+    listedApiKeys?: boolean | UserCountOutputTypeCountListedApiKeysArgs
   }
 
   // Custom InputTypes
@@ -2158,6 +2251,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReviewedStartupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: StartupApplicationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountListedApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ListedApiKeyWhereInput
   }
 
 
@@ -2455,6 +2555,7 @@ export namespace Prisma {
     promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     reviewedStartups?: boolean | User$reviewedStartupsArgs<ExtArgs>
+    listedApiKeys?: boolean | User$listedApiKeysArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2502,6 +2603,7 @@ export namespace Prisma {
     promoRedemptions?: boolean | User$promoRedemptionsArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
     reviewedStartups?: boolean | User$reviewedStartupsArgs<ExtArgs>
+    listedApiKeys?: boolean | User$listedApiKeysArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2519,6 +2621,7 @@ export namespace Prisma {
       promoRedemptions: Prisma.$PromoRedemptionPayload<ExtArgs>[]
       supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
       reviewedStartups: Prisma.$StartupApplicationPayload<ExtArgs>[]
+      listedApiKeys: Prisma.$ListedApiKeyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2932,6 +3035,7 @@ export namespace Prisma {
     promoRedemptions<T extends User$promoRedemptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$promoRedemptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PromoRedemptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewedStartups<T extends User$reviewedStartupsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewedStartupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StartupApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    listedApiKeys<T extends User$listedApiKeysArgs<ExtArgs> = {}>(args?: Subset<T, User$listedApiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3570,6 +3674,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: StartupApplicationScalarFieldEnum | StartupApplicationScalarFieldEnum[]
+  }
+
+  /**
+   * User.listedApiKeys
+   */
+  export type User$listedApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    where?: ListedApiKeyWhereInput
+    orderBy?: ListedApiKeyOrderByWithRelationInput | ListedApiKeyOrderByWithRelationInput[]
+    cursor?: ListedApiKeyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ListedApiKeyScalarFieldEnum | ListedApiKeyScalarFieldEnum[]
   }
 
   /**
@@ -17457,6 +17585,1155 @@ export namespace Prisma {
 
 
   /**
+   * Model ListedApiKey
+   */
+
+  export type AggregateListedApiKey = {
+    _count: ListedApiKeyCountAggregateOutputType | null
+    _avg: ListedApiKeyAvgAggregateOutputType | null
+    _sum: ListedApiKeySumAggregateOutputType | null
+    _min: ListedApiKeyMinAggregateOutputType | null
+    _max: ListedApiKeyMaxAggregateOutputType | null
+  }
+
+  export type ListedApiKeyAvgAggregateOutputType = {
+    balanceCents: number | null
+  }
+
+  export type ListedApiKeySumAggregateOutputType = {
+    balanceCents: number | null
+  }
+
+  export type ListedApiKeyMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    provider: string | null
+    label: string | null
+    apiKey: string | null
+    isActive: boolean | null
+    balanceCents: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ListedApiKeyMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    provider: string | null
+    label: string | null
+    apiKey: string | null
+    isActive: boolean | null
+    balanceCents: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ListedApiKeyCountAggregateOutputType = {
+    id: number
+    userId: number
+    provider: number
+    label: number
+    apiKey: number
+    isActive: number
+    balanceCents: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ListedApiKeyAvgAggregateInputType = {
+    balanceCents?: true
+  }
+
+  export type ListedApiKeySumAggregateInputType = {
+    balanceCents?: true
+  }
+
+  export type ListedApiKeyMinAggregateInputType = {
+    id?: true
+    userId?: true
+    provider?: true
+    label?: true
+    apiKey?: true
+    isActive?: true
+    balanceCents?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ListedApiKeyMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    provider?: true
+    label?: true
+    apiKey?: true
+    isActive?: true
+    balanceCents?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ListedApiKeyCountAggregateInputType = {
+    id?: true
+    userId?: true
+    provider?: true
+    label?: true
+    apiKey?: true
+    isActive?: true
+    balanceCents?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ListedApiKeyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ListedApiKey to aggregate.
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListedApiKeys to fetch.
+     */
+    orderBy?: ListedApiKeyOrderByWithRelationInput | ListedApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ListedApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListedApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListedApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ListedApiKeys
+    **/
+    _count?: true | ListedApiKeyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ListedApiKeyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ListedApiKeySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ListedApiKeyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ListedApiKeyMaxAggregateInputType
+  }
+
+  export type GetListedApiKeyAggregateType<T extends ListedApiKeyAggregateArgs> = {
+        [P in keyof T & keyof AggregateListedApiKey]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateListedApiKey[P]>
+      : GetScalarType<T[P], AggregateListedApiKey[P]>
+  }
+
+
+
+
+  export type ListedApiKeyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ListedApiKeyWhereInput
+    orderBy?: ListedApiKeyOrderByWithAggregationInput | ListedApiKeyOrderByWithAggregationInput[]
+    by: ListedApiKeyScalarFieldEnum[] | ListedApiKeyScalarFieldEnum
+    having?: ListedApiKeyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ListedApiKeyCountAggregateInputType | true
+    _avg?: ListedApiKeyAvgAggregateInputType
+    _sum?: ListedApiKeySumAggregateInputType
+    _min?: ListedApiKeyMinAggregateInputType
+    _max?: ListedApiKeyMaxAggregateInputType
+  }
+
+  export type ListedApiKeyGroupByOutputType = {
+    id: string
+    userId: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive: boolean
+    balanceCents: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ListedApiKeyCountAggregateOutputType | null
+    _avg: ListedApiKeyAvgAggregateOutputType | null
+    _sum: ListedApiKeySumAggregateOutputType | null
+    _min: ListedApiKeyMinAggregateOutputType | null
+    _max: ListedApiKeyMaxAggregateOutputType | null
+  }
+
+  type GetListedApiKeyGroupByPayload<T extends ListedApiKeyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ListedApiKeyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ListedApiKeyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ListedApiKeyGroupByOutputType[P]>
+            : GetScalarType<T[P], ListedApiKeyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ListedApiKeySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    provider?: boolean
+    label?: boolean
+    apiKey?: boolean
+    isActive?: boolean
+    balanceCents?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["listedApiKey"]>
+
+  export type ListedApiKeySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    provider?: boolean
+    label?: boolean
+    apiKey?: boolean
+    isActive?: boolean
+    balanceCents?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["listedApiKey"]>
+
+  export type ListedApiKeySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    provider?: boolean
+    label?: boolean
+    apiKey?: boolean
+    isActive?: boolean
+    balanceCents?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["listedApiKey"]>
+
+  export type ListedApiKeySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    provider?: boolean
+    label?: boolean
+    apiKey?: boolean
+    isActive?: boolean
+    balanceCents?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ListedApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "provider" | "label" | "apiKey" | "isActive" | "balanceCents" | "createdAt" | "updatedAt", ExtArgs["result"]["listedApiKey"]>
+  export type ListedApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ListedApiKeyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ListedApiKeyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ListedApiKeyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ListedApiKey"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      provider: string
+      label: string
+      apiKey: string
+      isActive: boolean
+      balanceCents: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["listedApiKey"]>
+    composites: {}
+  }
+
+  type ListedApiKeyGetPayload<S extends boolean | null | undefined | ListedApiKeyDefaultArgs> = $Result.GetResult<Prisma.$ListedApiKeyPayload, S>
+
+  type ListedApiKeyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ListedApiKeyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ListedApiKeyCountAggregateInputType | true
+    }
+
+  export interface ListedApiKeyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ListedApiKey'], meta: { name: 'ListedApiKey' } }
+    /**
+     * Find zero or one ListedApiKey that matches the filter.
+     * @param {ListedApiKeyFindUniqueArgs} args - Arguments to find a ListedApiKey
+     * @example
+     * // Get one ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ListedApiKeyFindUniqueArgs>(args: SelectSubset<T, ListedApiKeyFindUniqueArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ListedApiKey that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ListedApiKeyFindUniqueOrThrowArgs} args - Arguments to find a ListedApiKey
+     * @example
+     * // Get one ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ListedApiKeyFindUniqueOrThrowArgs>(args: SelectSubset<T, ListedApiKeyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ListedApiKey that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyFindFirstArgs} args - Arguments to find a ListedApiKey
+     * @example
+     * // Get one ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ListedApiKeyFindFirstArgs>(args?: SelectSubset<T, ListedApiKeyFindFirstArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ListedApiKey that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyFindFirstOrThrowArgs} args - Arguments to find a ListedApiKey
+     * @example
+     * // Get one ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ListedApiKeyFindFirstOrThrowArgs>(args?: SelectSubset<T, ListedApiKeyFindFirstOrThrowArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ListedApiKeys that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ListedApiKeys
+     * const listedApiKeys = await prisma.listedApiKey.findMany()
+     * 
+     * // Get first 10 ListedApiKeys
+     * const listedApiKeys = await prisma.listedApiKey.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const listedApiKeyWithIdOnly = await prisma.listedApiKey.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ListedApiKeyFindManyArgs>(args?: SelectSubset<T, ListedApiKeyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ListedApiKey.
+     * @param {ListedApiKeyCreateArgs} args - Arguments to create a ListedApiKey.
+     * @example
+     * // Create one ListedApiKey
+     * const ListedApiKey = await prisma.listedApiKey.create({
+     *   data: {
+     *     // ... data to create a ListedApiKey
+     *   }
+     * })
+     * 
+     */
+    create<T extends ListedApiKeyCreateArgs>(args: SelectSubset<T, ListedApiKeyCreateArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ListedApiKeys.
+     * @param {ListedApiKeyCreateManyArgs} args - Arguments to create many ListedApiKeys.
+     * @example
+     * // Create many ListedApiKeys
+     * const listedApiKey = await prisma.listedApiKey.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ListedApiKeyCreateManyArgs>(args?: SelectSubset<T, ListedApiKeyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ListedApiKeys and returns the data saved in the database.
+     * @param {ListedApiKeyCreateManyAndReturnArgs} args - Arguments to create many ListedApiKeys.
+     * @example
+     * // Create many ListedApiKeys
+     * const listedApiKey = await prisma.listedApiKey.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ListedApiKeys and only return the `id`
+     * const listedApiKeyWithIdOnly = await prisma.listedApiKey.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ListedApiKeyCreateManyAndReturnArgs>(args?: SelectSubset<T, ListedApiKeyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ListedApiKey.
+     * @param {ListedApiKeyDeleteArgs} args - Arguments to delete one ListedApiKey.
+     * @example
+     * // Delete one ListedApiKey
+     * const ListedApiKey = await prisma.listedApiKey.delete({
+     *   where: {
+     *     // ... filter to delete one ListedApiKey
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ListedApiKeyDeleteArgs>(args: SelectSubset<T, ListedApiKeyDeleteArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ListedApiKey.
+     * @param {ListedApiKeyUpdateArgs} args - Arguments to update one ListedApiKey.
+     * @example
+     * // Update one ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ListedApiKeyUpdateArgs>(args: SelectSubset<T, ListedApiKeyUpdateArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ListedApiKeys.
+     * @param {ListedApiKeyDeleteManyArgs} args - Arguments to filter ListedApiKeys to delete.
+     * @example
+     * // Delete a few ListedApiKeys
+     * const { count } = await prisma.listedApiKey.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ListedApiKeyDeleteManyArgs>(args?: SelectSubset<T, ListedApiKeyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ListedApiKeys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ListedApiKeys
+     * const listedApiKey = await prisma.listedApiKey.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ListedApiKeyUpdateManyArgs>(args: SelectSubset<T, ListedApiKeyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ListedApiKeys and returns the data updated in the database.
+     * @param {ListedApiKeyUpdateManyAndReturnArgs} args - Arguments to update many ListedApiKeys.
+     * @example
+     * // Update many ListedApiKeys
+     * const listedApiKey = await prisma.listedApiKey.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ListedApiKeys and only return the `id`
+     * const listedApiKeyWithIdOnly = await prisma.listedApiKey.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ListedApiKeyUpdateManyAndReturnArgs>(args: SelectSubset<T, ListedApiKeyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ListedApiKey.
+     * @param {ListedApiKeyUpsertArgs} args - Arguments to update or create a ListedApiKey.
+     * @example
+     * // Update or create a ListedApiKey
+     * const listedApiKey = await prisma.listedApiKey.upsert({
+     *   create: {
+     *     // ... data to create a ListedApiKey
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ListedApiKey we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ListedApiKeyUpsertArgs>(args: SelectSubset<T, ListedApiKeyUpsertArgs<ExtArgs>>): Prisma__ListedApiKeyClient<$Result.GetResult<Prisma.$ListedApiKeyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ListedApiKeys.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyCountArgs} args - Arguments to filter ListedApiKeys to count.
+     * @example
+     * // Count the number of ListedApiKeys
+     * const count = await prisma.listedApiKey.count({
+     *   where: {
+     *     // ... the filter for the ListedApiKeys we want to count
+     *   }
+     * })
+    **/
+    count<T extends ListedApiKeyCountArgs>(
+      args?: Subset<T, ListedApiKeyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ListedApiKeyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ListedApiKey.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ListedApiKeyAggregateArgs>(args: Subset<T, ListedApiKeyAggregateArgs>): Prisma.PrismaPromise<GetListedApiKeyAggregateType<T>>
+
+    /**
+     * Group by ListedApiKey.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ListedApiKeyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ListedApiKeyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ListedApiKeyGroupByArgs['orderBy'] }
+        : { orderBy?: ListedApiKeyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ListedApiKeyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetListedApiKeyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ListedApiKey model
+   */
+  readonly fields: ListedApiKeyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ListedApiKey.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ListedApiKeyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ListedApiKey model
+   */
+  interface ListedApiKeyFieldRefs {
+    readonly id: FieldRef<"ListedApiKey", 'String'>
+    readonly userId: FieldRef<"ListedApiKey", 'String'>
+    readonly provider: FieldRef<"ListedApiKey", 'String'>
+    readonly label: FieldRef<"ListedApiKey", 'String'>
+    readonly apiKey: FieldRef<"ListedApiKey", 'String'>
+    readonly isActive: FieldRef<"ListedApiKey", 'Boolean'>
+    readonly balanceCents: FieldRef<"ListedApiKey", 'Int'>
+    readonly createdAt: FieldRef<"ListedApiKey", 'DateTime'>
+    readonly updatedAt: FieldRef<"ListedApiKey", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ListedApiKey findUnique
+   */
+  export type ListedApiKeyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which ListedApiKey to fetch.
+     */
+    where: ListedApiKeyWhereUniqueInput
+  }
+
+  /**
+   * ListedApiKey findUniqueOrThrow
+   */
+  export type ListedApiKeyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which ListedApiKey to fetch.
+     */
+    where: ListedApiKeyWhereUniqueInput
+  }
+
+  /**
+   * ListedApiKey findFirst
+   */
+  export type ListedApiKeyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which ListedApiKey to fetch.
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListedApiKeys to fetch.
+     */
+    orderBy?: ListedApiKeyOrderByWithRelationInput | ListedApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ListedApiKeys.
+     */
+    cursor?: ListedApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListedApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListedApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ListedApiKeys.
+     */
+    distinct?: ListedApiKeyScalarFieldEnum | ListedApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * ListedApiKey findFirstOrThrow
+   */
+  export type ListedApiKeyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which ListedApiKey to fetch.
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListedApiKeys to fetch.
+     */
+    orderBy?: ListedApiKeyOrderByWithRelationInput | ListedApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ListedApiKeys.
+     */
+    cursor?: ListedApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListedApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListedApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ListedApiKeys.
+     */
+    distinct?: ListedApiKeyScalarFieldEnum | ListedApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * ListedApiKey findMany
+   */
+  export type ListedApiKeyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter, which ListedApiKeys to fetch.
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ListedApiKeys to fetch.
+     */
+    orderBy?: ListedApiKeyOrderByWithRelationInput | ListedApiKeyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ListedApiKeys.
+     */
+    cursor?: ListedApiKeyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ListedApiKeys from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ListedApiKeys.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ListedApiKeys.
+     */
+    distinct?: ListedApiKeyScalarFieldEnum | ListedApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * ListedApiKey create
+   */
+  export type ListedApiKeyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ListedApiKey.
+     */
+    data: XOR<ListedApiKeyCreateInput, ListedApiKeyUncheckedCreateInput>
+  }
+
+  /**
+   * ListedApiKey createMany
+   */
+  export type ListedApiKeyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ListedApiKeys.
+     */
+    data: ListedApiKeyCreateManyInput | ListedApiKeyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ListedApiKey createManyAndReturn
+   */
+  export type ListedApiKeyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * The data used to create many ListedApiKeys.
+     */
+    data: ListedApiKeyCreateManyInput | ListedApiKeyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ListedApiKey update
+   */
+  export type ListedApiKeyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ListedApiKey.
+     */
+    data: XOR<ListedApiKeyUpdateInput, ListedApiKeyUncheckedUpdateInput>
+    /**
+     * Choose, which ListedApiKey to update.
+     */
+    where: ListedApiKeyWhereUniqueInput
+  }
+
+  /**
+   * ListedApiKey updateMany
+   */
+  export type ListedApiKeyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ListedApiKeys.
+     */
+    data: XOR<ListedApiKeyUpdateManyMutationInput, ListedApiKeyUncheckedUpdateManyInput>
+    /**
+     * Filter which ListedApiKeys to update
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * Limit how many ListedApiKeys to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ListedApiKey updateManyAndReturn
+   */
+  export type ListedApiKeyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * The data used to update ListedApiKeys.
+     */
+    data: XOR<ListedApiKeyUpdateManyMutationInput, ListedApiKeyUncheckedUpdateManyInput>
+    /**
+     * Filter which ListedApiKeys to update
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * Limit how many ListedApiKeys to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ListedApiKey upsert
+   */
+  export type ListedApiKeyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ListedApiKey to update in case it exists.
+     */
+    where: ListedApiKeyWhereUniqueInput
+    /**
+     * In case the ListedApiKey found by the `where` argument doesn't exist, create a new ListedApiKey with this data.
+     */
+    create: XOR<ListedApiKeyCreateInput, ListedApiKeyUncheckedCreateInput>
+    /**
+     * In case the ListedApiKey was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ListedApiKeyUpdateInput, ListedApiKeyUncheckedUpdateInput>
+  }
+
+  /**
+   * ListedApiKey delete
+   */
+  export type ListedApiKeyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+    /**
+     * Filter which ListedApiKey to delete.
+     */
+    where: ListedApiKeyWhereUniqueInput
+  }
+
+  /**
+   * ListedApiKey deleteMany
+   */
+  export type ListedApiKeyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ListedApiKeys to delete
+     */
+    where?: ListedApiKeyWhereInput
+    /**
+     * Limit how many ListedApiKeys to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ListedApiKey without action
+   */
+  export type ListedApiKeyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ListedApiKey
+     */
+    select?: ListedApiKeySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ListedApiKey
+     */
+    omit?: ListedApiKeyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ListedApiKeyInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -17674,6 +18951,21 @@ export namespace Prisma {
   };
 
   export type PromoRedemptionScalarFieldEnum = (typeof PromoRedemptionScalarFieldEnum)[keyof typeof PromoRedemptionScalarFieldEnum]
+
+
+  export const ListedApiKeyScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    provider: 'provider',
+    label: 'label',
+    apiKey: 'apiKey',
+    isActive: 'isActive',
+    balanceCents: 'balanceCents',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ListedApiKeyScalarFieldEnum = (typeof ListedApiKeyScalarFieldEnum)[keyof typeof ListedApiKeyScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -17904,6 +19196,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
     reviewedStartups?: StartupApplicationListRelationFilter
+    listedApiKeys?: ListedApiKeyListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -17924,6 +19217,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionOrderByRelationAggregateInput
     supportTickets?: SupportTicketOrderByRelationAggregateInput
     reviewedStartups?: StartupApplicationOrderByRelationAggregateInput
+    listedApiKeys?: ListedApiKeyOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -17947,6 +19241,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
     reviewedStartups?: StartupApplicationListRelationFilter
+    listedApiKeys?: ListedApiKeyListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -18965,6 +20260,83 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"PromoRedemption"> | Date | string
   }
 
+  export type ListedApiKeyWhereInput = {
+    AND?: ListedApiKeyWhereInput | ListedApiKeyWhereInput[]
+    OR?: ListedApiKeyWhereInput[]
+    NOT?: ListedApiKeyWhereInput | ListedApiKeyWhereInput[]
+    id?: StringFilter<"ListedApiKey"> | string
+    userId?: StringFilter<"ListedApiKey"> | string
+    provider?: StringFilter<"ListedApiKey"> | string
+    label?: StringFilter<"ListedApiKey"> | string
+    apiKey?: StringFilter<"ListedApiKey"> | string
+    isActive?: BoolFilter<"ListedApiKey"> | boolean
+    balanceCents?: IntFilter<"ListedApiKey"> | number
+    createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+    updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type ListedApiKeyOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    label?: SortOrder
+    apiKey?: SortOrder
+    isActive?: SortOrder
+    balanceCents?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type ListedApiKeyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ListedApiKeyWhereInput | ListedApiKeyWhereInput[]
+    OR?: ListedApiKeyWhereInput[]
+    NOT?: ListedApiKeyWhereInput | ListedApiKeyWhereInput[]
+    userId?: StringFilter<"ListedApiKey"> | string
+    provider?: StringFilter<"ListedApiKey"> | string
+    label?: StringFilter<"ListedApiKey"> | string
+    apiKey?: StringFilter<"ListedApiKey"> | string
+    isActive?: BoolFilter<"ListedApiKey"> | boolean
+    balanceCents?: IntFilter<"ListedApiKey"> | number
+    createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+    updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type ListedApiKeyOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    label?: SortOrder
+    apiKey?: SortOrder
+    isActive?: SortOrder
+    balanceCents?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ListedApiKeyCountOrderByAggregateInput
+    _avg?: ListedApiKeyAvgOrderByAggregateInput
+    _max?: ListedApiKeyMaxOrderByAggregateInput
+    _min?: ListedApiKeyMinOrderByAggregateInput
+    _sum?: ListedApiKeySumOrderByAggregateInput
+  }
+
+  export type ListedApiKeyScalarWhereWithAggregatesInput = {
+    AND?: ListedApiKeyScalarWhereWithAggregatesInput | ListedApiKeyScalarWhereWithAggregatesInput[]
+    OR?: ListedApiKeyScalarWhereWithAggregatesInput[]
+    NOT?: ListedApiKeyScalarWhereWithAggregatesInput | ListedApiKeyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ListedApiKey"> | string
+    userId?: StringWithAggregatesFilter<"ListedApiKey"> | string
+    provider?: StringWithAggregatesFilter<"ListedApiKey"> | string
+    label?: StringWithAggregatesFilter<"ListedApiKey"> | string
+    apiKey?: StringWithAggregatesFilter<"ListedApiKey"> | string
+    isActive?: BoolWithAggregatesFilter<"ListedApiKey"> | boolean
+    balanceCents?: IntWithAggregatesFilter<"ListedApiKey"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ListedApiKey"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ListedApiKey"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     email: string
@@ -18983,6 +20355,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -19003,6 +20376,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -19023,6 +20397,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -19043,6 +20418,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -20170,6 +21546,89 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ListedApiKeyCreateInput = {
+    id?: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutListedApiKeysInput
+  }
+
+  export type ListedApiKeyUncheckedCreateInput = {
+    id?: string
+    userId: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ListedApiKeyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutListedApiKeysNestedInput
+  }
+
+  export type ListedApiKeyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListedApiKeyCreateManyInput = {
+    id?: string
+    userId: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ListedApiKeyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListedApiKeyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -20254,6 +21713,12 @@ export namespace Prisma {
     none?: StartupApplicationWhereInput
   }
 
+  export type ListedApiKeyListRelationFilter = {
+    every?: ListedApiKeyWhereInput
+    some?: ListedApiKeyWhereInput
+    none?: ListedApiKeyWhereInput
+  }
+
   export type ApiKeyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -20283,6 +21748,10 @@ export namespace Prisma {
   }
 
   export type StartupApplicationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ListedApiKeyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -21177,6 +22646,50 @@ export namespace Prisma {
     creditsCents?: SortOrder
   }
 
+  export type ListedApiKeyCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    label?: SortOrder
+    apiKey?: SortOrder
+    isActive?: SortOrder
+    balanceCents?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ListedApiKeyAvgOrderByAggregateInput = {
+    balanceCents?: SortOrder
+  }
+
+  export type ListedApiKeyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    label?: SortOrder
+    apiKey?: SortOrder
+    isActive?: SortOrder
+    balanceCents?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ListedApiKeyMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    provider?: SortOrder
+    label?: SortOrder
+    apiKey?: SortOrder
+    isActive?: SortOrder
+    balanceCents?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ListedApiKeySumOrderByAggregateInput = {
+    balanceCents?: SortOrder
+  }
+
   export type ApiKeyCreateNestedManyWithoutUserInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -21239,6 +22752,13 @@ export namespace Prisma {
     connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
   }
 
+  export type ListedApiKeyCreateNestedManyWithoutUserInput = {
+    create?: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput> | ListedApiKeyCreateWithoutUserInput[] | ListedApiKeyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ListedApiKeyCreateOrConnectWithoutUserInput | ListedApiKeyCreateOrConnectWithoutUserInput[]
+    createMany?: ListedApiKeyCreateManyUserInputEnvelope
+    connect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+  }
+
   export type ApiKeyUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -21299,6 +22819,13 @@ export namespace Prisma {
     connectOrCreate?: StartupApplicationCreateOrConnectWithoutReviewedByInput | StartupApplicationCreateOrConnectWithoutReviewedByInput[]
     createMany?: StartupApplicationCreateManyReviewedByInputEnvelope
     connect?: StartupApplicationWhereUniqueInput | StartupApplicationWhereUniqueInput[]
+  }
+
+  export type ListedApiKeyUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput> | ListedApiKeyCreateWithoutUserInput[] | ListedApiKeyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ListedApiKeyCreateOrConnectWithoutUserInput | ListedApiKeyCreateOrConnectWithoutUserInput[]
+    createMany?: ListedApiKeyCreateManyUserInputEnvelope
+    connect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -21435,6 +22962,20 @@ export namespace Prisma {
     deleteMany?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
   }
 
+  export type ListedApiKeyUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput> | ListedApiKeyCreateWithoutUserInput[] | ListedApiKeyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ListedApiKeyCreateOrConnectWithoutUserInput | ListedApiKeyCreateOrConnectWithoutUserInput[]
+    upsert?: ListedApiKeyUpsertWithWhereUniqueWithoutUserInput | ListedApiKeyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ListedApiKeyCreateManyUserInputEnvelope
+    set?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    disconnect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    delete?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    connect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    update?: ListedApiKeyUpdateWithWhereUniqueWithoutUserInput | ListedApiKeyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ListedApiKeyUpdateManyWithWhereWithoutUserInput | ListedApiKeyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ListedApiKeyScalarWhereInput | ListedApiKeyScalarWhereInput[]
+  }
+
   export type ApiKeyUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ApiKeyCreateWithoutUserInput, ApiKeyUncheckedCreateWithoutUserInput> | ApiKeyCreateWithoutUserInput[] | ApiKeyUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ApiKeyCreateOrConnectWithoutUserInput | ApiKeyCreateOrConnectWithoutUserInput[]
@@ -21555,6 +23096,20 @@ export namespace Prisma {
     update?: StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput | StartupApplicationUpdateWithWhereUniqueWithoutReviewedByInput[]
     updateMany?: StartupApplicationUpdateManyWithWhereWithoutReviewedByInput | StartupApplicationUpdateManyWithWhereWithoutReviewedByInput[]
     deleteMany?: StartupApplicationScalarWhereInput | StartupApplicationScalarWhereInput[]
+  }
+
+  export type ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput> | ListedApiKeyCreateWithoutUserInput[] | ListedApiKeyUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ListedApiKeyCreateOrConnectWithoutUserInput | ListedApiKeyCreateOrConnectWithoutUserInput[]
+    upsert?: ListedApiKeyUpsertWithWhereUniqueWithoutUserInput | ListedApiKeyUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ListedApiKeyCreateManyUserInputEnvelope
+    set?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    disconnect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    delete?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    connect?: ListedApiKeyWhereUniqueInput | ListedApiKeyWhereUniqueInput[]
+    update?: ListedApiKeyUpdateWithWhereUniqueWithoutUserInput | ListedApiKeyUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ListedApiKeyUpdateManyWithWhereWithoutUserInput | ListedApiKeyUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ListedApiKeyScalarWhereInput | ListedApiKeyScalarWhereInput[]
   }
 
   export type CreditTransactionCreateNestedManyWithoutWalletInput = {
@@ -21899,6 +23454,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutPromoRedemptionsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPromoRedemptionsInput, UserUpdateWithoutPromoRedemptionsInput>, UserUncheckedUpdateWithoutPromoRedemptionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutListedApiKeysInput = {
+    create?: XOR<UserCreateWithoutListedApiKeysInput, UserUncheckedCreateWithoutListedApiKeysInput>
+    connectOrCreate?: UserCreateOrConnectWithoutListedApiKeysInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutListedApiKeysNestedInput = {
+    create?: XOR<UserCreateWithoutListedApiKeysInput, UserUncheckedCreateWithoutListedApiKeysInput>
+    connectOrCreate?: UserCreateOrConnectWithoutListedApiKeysInput
+    upsert?: UserUpsertWithoutListedApiKeysInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutListedApiKeysInput, UserUpdateWithoutListedApiKeysInput>, UserUncheckedUpdateWithoutListedApiKeysInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -22520,6 +24089,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ListedApiKeyCreateWithoutUserInput = {
+    id?: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ListedApiKeyUncheckedCreateWithoutUserInput = {
+    id?: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ListedApiKeyCreateOrConnectWithoutUserInput = {
+    where: ListedApiKeyWhereUniqueInput
+    create: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput>
+  }
+
+  export type ListedApiKeyCreateManyUserInputEnvelope = {
+    data: ListedApiKeyCreateManyUserInput | ListedApiKeyCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ApiKeyUpsertWithWhereUniqueWithoutUserInput = {
     where: ApiKeyWhereUniqueInput
     update: XOR<ApiKeyUpdateWithoutUserInput, ApiKeyUncheckedUpdateWithoutUserInput>
@@ -22810,6 +24411,37 @@ export namespace Prisma {
     reviewedByUserId?: StringNullableFilter<"StartupApplication"> | string | null
   }
 
+  export type ListedApiKeyUpsertWithWhereUniqueWithoutUserInput = {
+    where: ListedApiKeyWhereUniqueInput
+    update: XOR<ListedApiKeyUpdateWithoutUserInput, ListedApiKeyUncheckedUpdateWithoutUserInput>
+    create: XOR<ListedApiKeyCreateWithoutUserInput, ListedApiKeyUncheckedCreateWithoutUserInput>
+  }
+
+  export type ListedApiKeyUpdateWithWhereUniqueWithoutUserInput = {
+    where: ListedApiKeyWhereUniqueInput
+    data: XOR<ListedApiKeyUpdateWithoutUserInput, ListedApiKeyUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ListedApiKeyUpdateManyWithWhereWithoutUserInput = {
+    where: ListedApiKeyScalarWhereInput
+    data: XOR<ListedApiKeyUpdateManyMutationInput, ListedApiKeyUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ListedApiKeyScalarWhereInput = {
+    AND?: ListedApiKeyScalarWhereInput | ListedApiKeyScalarWhereInput[]
+    OR?: ListedApiKeyScalarWhereInput[]
+    NOT?: ListedApiKeyScalarWhereInput | ListedApiKeyScalarWhereInput[]
+    id?: StringFilter<"ListedApiKey"> | string
+    userId?: StringFilter<"ListedApiKey"> | string
+    provider?: StringFilter<"ListedApiKey"> | string
+    label?: StringFilter<"ListedApiKey"> | string
+    apiKey?: StringFilter<"ListedApiKey"> | string
+    isActive?: BoolFilter<"ListedApiKey"> | boolean
+    balanceCents?: IntFilter<"ListedApiKey"> | number
+    createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+    updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
+  }
+
   export type CreditTransactionCreateWithoutWalletInput = {
     id?: string
     type: $Enums.CreditTransactionType
@@ -22861,6 +24493,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWalletInput = {
@@ -22880,6 +24513,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWalletInput = {
@@ -22947,6 +24581,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWalletInput = {
@@ -22966,6 +24601,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type CreditWalletCreateWithoutTransactionsInput = {
@@ -23037,6 +24673,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -23056,6 +24693,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -23091,6 +24729,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -23110,6 +24749,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutApiKeysInput = {
@@ -23129,6 +24769,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -23148,6 +24789,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -23217,6 +24859,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -23236,6 +24879,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ApiKeyUsageLogUpsertWithWhereUniqueWithoutApiKeyInput = {
@@ -23306,6 +24950,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutApiKeyUsageLogsInput = {
@@ -23325,6 +24970,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutApiKeyUsageLogsInput = {
@@ -23401,6 +25047,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutApiKeyUsageLogsInput = {
@@ -23420,6 +25067,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutPaymentsInput = {
@@ -23439,6 +25087,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentsInput = {
@@ -23458,6 +25107,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentsInput = {
@@ -23493,6 +25143,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentsInput = {
@@ -23512,6 +25163,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSupportTicketsInput = {
@@ -23531,6 +25183,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -23550,6 +25203,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -23585,6 +25239,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -23604,6 +25259,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutReviewedStartupsInput = {
@@ -23623,6 +25279,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewedStartupsInput = {
@@ -23642,6 +25299,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewedStartupsInput = {
@@ -23677,6 +25335,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewedStartupsInput = {
@@ -23696,6 +25355,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCreatedPromosInput = {
@@ -23715,6 +25375,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedPromosInput = {
@@ -23734,6 +25395,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedPromosInput = {
@@ -23793,6 +25455,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedPromosInput = {
@@ -23812,6 +25475,7 @@ export namespace Prisma {
     promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PromoRedemptionUpsertWithWhereUniqueWithoutPromoCodeInput = {
@@ -23880,6 +25544,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPromoRedemptionsInput = {
@@ -23899,6 +25564,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+    listedApiKeys?: ListedApiKeyUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPromoRedemptionsInput = {
@@ -23973,6 +25639,7 @@ export namespace Prisma {
     createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPromoRedemptionsInput = {
@@ -23990,6 +25657,103 @@ export namespace Prisma {
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
     createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
+    listedApiKeys?: ListedApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutListedApiKeysInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletCreateNestedOneWithoutUserInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    payments?: PaymentCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationCreateNestedManyWithoutReviewedByInput
+  }
+
+  export type UserUncheckedCreateWithoutListedApiKeysInput = {
+    id?: string
+    email: string
+    displayName: string
+    passwordHash: string
+    isAdmin?: boolean
+    preferredCurrency?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutUserInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedCreateNestedManyWithoutUserInput
+    wallet?: CreditWalletUncheckedCreateNestedOneWithoutUserInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutUserInput
+    createdPromos?: PromoCodeUncheckedCreateNestedManyWithoutCreatedByInput
+    promoRedemptions?: PromoRedemptionUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    reviewedStartups?: StartupApplicationUncheckedCreateNestedManyWithoutReviewedByInput
+  }
+
+  export type UserCreateOrConnectWithoutListedApiKeysInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutListedApiKeysInput, UserUncheckedCreateWithoutListedApiKeysInput>
+  }
+
+  export type UserUpsertWithoutListedApiKeysInput = {
+    update: XOR<UserUpdateWithoutListedApiKeysInput, UserUncheckedUpdateWithoutListedApiKeysInput>
+    create: XOR<UserCreateWithoutListedApiKeysInput, UserUncheckedCreateWithoutListedApiKeysInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutListedApiKeysInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutListedApiKeysInput, UserUncheckedUpdateWithoutListedApiKeysInput>
+  }
+
+  export type UserUpdateWithoutListedApiKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    payments?: PaymentUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    reviewedStartups?: StartupApplicationUpdateManyWithoutReviewedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutListedApiKeysInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    displayName?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
+    preferredCurrency?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+    apiKeyUsageLogs?: ApiKeyUsageLogUncheckedUpdateManyWithoutUserNestedInput
+    wallet?: CreditWalletUncheckedUpdateOneWithoutUserNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutUserNestedInput
+    createdPromos?: PromoCodeUncheckedUpdateManyWithoutCreatedByNestedInput
+    promoRedemptions?: PromoRedemptionUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     reviewedStartups?: StartupApplicationUncheckedUpdateManyWithoutReviewedByNestedInput
   }
@@ -24093,6 +25857,17 @@ export namespace Prisma {
     expiresAt?: Date | string | null
     appliedAt?: Date | string
     reviewedAt?: Date | string | null
+  }
+
+  export type ListedApiKeyCreateManyUserInput = {
+    id?: string
+    provider: string
+    label: string
+    apiKey: string
+    isActive?: boolean
+    balanceCents?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ApiKeyUpdateWithoutUserInput = {
@@ -24400,6 +26175,39 @@ export namespace Prisma {
     expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     appliedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reviewedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ListedApiKeyUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListedApiKeyUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ListedApiKeyUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    balanceCents?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CreditTransactionCreateManyWalletInput = {

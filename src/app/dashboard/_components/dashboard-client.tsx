@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CreditCard, KeyRound, Plus, Receipt, ShieldCheck, Store } from "lucide-react";
+import { CreditCard, KeyRound, Plus, Receipt, ShieldCheck, Store, DollarSign, Trash2, PiggyBank, Percent } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -65,7 +65,7 @@ type Props = {
   initialKeys: ApiKeyInfo[];
 };
 
-type Page = "keys" | "wallet" | "marketplace" | "logs" | "support";
+type Page = "keys" | "wallet" | "marketplace" | "logs" | "support" | "seller";
 type CheckoutStep = "choose" | "mpesa";
 
 export function DashboardClient(props: Props) {
@@ -108,6 +108,94 @@ export function DashboardClient(props: Props) {
   const [promoError, setPromoError] = React.useState<string | null>(null);
   const [redeemedPromoCredits, setRedeemedPromoCredits] = React.useState<number | null>(null);
   const [showPromoInput, setShowPromoInput] = React.useState(false);
+
+  // Seller Dashboard States
+  const [sellerKeys, setSellerKeys] = React.useState<any[]>([]);
+  const [sellerStats, setSellerStats] = React.useState<{
+    totalEarnedCents: number;
+    activeKeysCount: number;
+    totalKeysCount: number;
+  }>({ totalEarnedCents: 0, activeKeysCount: 0, totalKeysCount: 0 });
+  const [sellerMessage, setSellerMessage] = React.useState<string | null>(null);
+
+  async function refreshSellerData() {
+    setIsBusy(true);
+    try {
+      const [keysRes, statsRes] = await Promise.all([
+        fetch("/api/seller/keys", { cache: "no-store" }).then((r) => r.json() as Promise<{ keys: any[] }>),
+        fetch("/api/seller/stats", { cache: "no-store" }).then((r) => r.json() as Promise<{ stats: any }>),
+      ]);
+      setSellerKeys(keysRes.keys || []);
+      setSellerStats(statsRes.stats || { totalEarnedCents: 0, activeKeysCount: 0, totalKeysCount: 0 });
+    } catch (err) {
+      console.error("Error loading seller data", err);
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  async function handleCreateSellerKey(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (isBusy) return;
+    setIsBusy(true);
+    setSellerMessage(null);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const provider = String(fd.get("provider") ?? "");
+    const label = String(fd.get("label") ?? "").trim();
+    const apiKey = String(fd.get("apiKey") ?? "").trim();
+
+    try {
+      const res = await fetch("/api/seller/keys", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ provider, label, apiKey }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message ?? "Unable to list key.");
+      form.reset();
+      setSellerMessage("API key listed successfully!");
+      await refreshSellerData();
+    } catch (err) {
+      setSellerMessage(err instanceof Error ? err.message : "Unable to list API key.");
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  async function handleToggleSellerKey(id: string, isActive: boolean) {
+    setIsBusy(true);
+    try {
+      const res = await fetch("/api/seller/keys", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id, isActive }),
+      });
+      if (!res.ok) throw new Error("Unable to update key status.");
+      await refreshSellerData();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  async function handleDeleteSellerKey(id: string) {
+    if (!window.confirm("Are you sure you want to delete this listed key? Buyers will no longer be able to route through it.")) return;
+    setIsBusy(true);
+    try {
+      const res = await fetch(`/api/seller/keys?id=${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Unable to delete key.");
+      await refreshSellerData();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsBusy(false);
+    }
+  }
 
   const low = wallet.balanceCents < wallet.lowBalanceCentsThreshold;
 
@@ -456,42 +544,241 @@ export function DashboardClient(props: Props) {
       ) : null}
 
       <div className="mt-8 grid gap-4 lg:grid-cols-[240px_1fr]">
-        <aside className="h-fit rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
-          <NavButton active={page === "keys"} onClick={() => setPage("keys")}>
-            API keys
-          </NavButton>
-          <NavButton active={page === "wallet"} onClick={() => setPage("wallet")}>
-            Wallet
-          </NavButton>
-          <NavButton active={page === "marketplace"} onClick={() => setPage("marketplace")}>
-            Marketplace
-          </NavButton>
-          <NavButton
-            active={page === "logs"}
-            onClick={async () => {
-              setPage("logs");
-              await refreshLogs();
-            }}
-          >
-            Usage logs
-          </NavButton>
-          <NavButton
-            active={page === "support"}
-            onClick={async () => {
-              setPage("support");
-              try {
-                await refreshTickets();
-              } catch (err) {
-                setMpesaMessage(err instanceof Error ? err.message : "Unable to load support tickets.");
-              }
-            }}
-          >
-            Support
-          </NavButton>
+        <aside className="h-fit rounded-3xl border border-zinc-200 bg-white p-3 shadow-sm dark:border-zinc-800 dark:bg-zinc-950 space-y-4">
+          <div>
+            <div className="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-zinc-400">Developer (Buy)</div>
+            <div className="space-y-0.5">
+              <NavButton active={page === "keys"} onClick={() => setPage("keys")}>
+                API keys
+              </NavButton>
+              <NavButton active={page === "wallet"} onClick={() => setPage("wallet")}>
+                Wallet
+              </NavButton>
+              <NavButton active={page === "marketplace"} onClick={() => setPage("marketplace")}>
+                Marketplace
+              </NavButton>
+              <NavButton
+                active={page === "logs"}
+                onClick={async () => {
+                  setPage("logs");
+                  await refreshLogs();
+                }}
+              >
+                Usage logs
+              </NavButton>
+              <NavButton
+                active={page === "support"}
+                onClick={async () => {
+                  setPage("support");
+                  try {
+                    await refreshTickets();
+                  } catch (err) {
+                    setMpesaMessage(err instanceof Error ? err.message : "Unable to load support tickets.");
+                  }
+                }}
+              >
+                Support
+              </NavButton>
+            </div>
+          </div>
+
+          <div className="border-t border-zinc-100 dark:border-zinc-800 my-2" />
+
+          <div>
+            <div className="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-zinc-400">Provider (Sell)</div>
+            <NavButton
+              active={page === "seller"}
+              onClick={async () => {
+                setPage("seller");
+                await refreshSellerData();
+              }}
+            >
+              <span className="flex items-center justify-between w-full">
+                <span>Seller Dashboard</span>
+                <span className="rounded-full bg-emerald-100 dark:bg-emerald-950 px-2 py-0.5 text-[9px] font-semibold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">Earn</span>
+              </span>
+            </NavButton>
+          </div>
         </aside>
 
         <main className="space-y-4">
 
+          {page === "seller" ? (
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-3">
+                <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 border-emerald-200/60 dark:border-emerald-900/40">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-xs font-semibold uppercase tracking-wider text-emerald-800 dark:text-emerald-300 flex items-center justify-between">
+                      Total Earned
+                      <PiggyBank size={16} />
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-3xl font-bold text-emerald-950 dark:text-emerald-50">
+                      {formatCreditsFromCents(sellerStats.totalEarnedCents)}
+                    </div>
+                    <p className="text-[11px] text-emerald-700 dark:text-emerald-400 mt-1">
+                      Directly paid to your master wallet balance.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-950/20 dark:to-blue-950/20 border-indigo-200/60 dark:border-indigo-900/40">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-xs font-semibold uppercase tracking-wider text-indigo-800 dark:text-indigo-300 flex items-center justify-between">
+                      Active Listings
+                      <KeyRound size={16} />
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-3xl font-bold text-indigo-950 dark:text-indigo-50">
+                      {sellerStats.activeKeysCount} <span className="text-sm font-normal text-zinc-500">/ {sellerStats.totalKeysCount} listed</span>
+                    </div>
+                    <p className="text-[11px] text-indigo-700 dark:text-indigo-400 mt-1">
+                      Keys currently processing buyer requests.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20 border-purple-200/60 dark:border-purple-900/40">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="text-xs font-semibold uppercase tracking-wider text-purple-800 dark:text-purple-300 flex items-center justify-between">
+                      Payout Share
+                      <Percent size={16} />
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-3xl font-bold text-purple-950 dark:text-purple-50">
+                      85% <span className="text-sm font-normal text-zinc-500">share</span>
+                    </div>
+                    <p className="text-[11px] text-purple-700 dark:text-purple-400 mt-1">
+                      You receive 85% of Subsplit token charges.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Plus size={18} />
+                    List a new API Key for sale
+                  </CardTitle>
+                  <CardDescription>
+                    Provide your key for OpenAI, Claude, Groq, or Grok. We secure the key and pay you automatically for usage.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form className="space-y-4" onSubmit={handleCreateSellerKey}>
+                    <div className="grid gap-4 sm:grid-cols-3">
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">API Provider</label>
+                        <select
+                          name="provider"
+                          className="h-11 w-full rounded-2xl border border-zinc-200 bg-white px-4 text-sm text-zinc-900 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:focus-visible:ring-zinc-600"
+                        >
+                          <option value="openai">OpenAI (gpt-4, gpt-4o, etc.)</option>
+                          <option value="anthropic">Anthropic Claude (claude-3-5, etc.)</option>
+                          <option value="groq">Groq (llama-3, mixtral, etc.)</option>
+                          <option value="grok">xAI Grok (grok-beta, grok-4, etc.)</option>
+                        </select>
+                      </div>
+
+                      <div className="space-y-1 sm:col-span-2">
+                        <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Key Label</label>
+                        <Input name="label" placeholder="e.g. My OpenAI production key" required />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">API Key (stored securely)</label>
+                      <Input
+                        name="apiKey"
+                        type="password"
+                        placeholder="sk-... or gsk_..."
+                        required
+                        autoComplete="off"
+                      />
+                    </div>
+
+                    <Button type="submit" disabled={isBusy} className="w-full sm:w-auto">
+                      List Key for Sale
+                    </Button>
+                    
+                    {sellerMessage && (
+                      <div className="rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-50">
+                        {sellerMessage}
+                      </div>
+                    )}
+                  </form>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Listed API Keys ({sellerKeys.length})</CardTitle>
+                  <CardDescription>Toggle keys active/inactive or remove them entirely.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                    {sellerKeys.map((k) => (
+                      <div key={k.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 gap-4">
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold">{k.label}</span>
+                            <Badge className="capitalize text-[10px] py-0.5 px-2 font-medium" variant="default">
+                              {k.provider}
+                            </Badge>
+                            {k.isActive ? (
+                              <Badge variant="success">Active</Badge>
+                            ) : (
+                              <Badge variant="warning">Paused</Badge>
+                            )}
+                          </div>
+                          <div className="mt-1 font-mono text-xs text-zinc-500 dark:text-zinc-400">
+                            Key: {k.apiKeyMasked} • Listed {new Date(k.createdAt).toLocaleDateString()}
+                          </div>
+                          <div className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                            <DollarSign size={12} />
+                            Earnings: {formatCreditsFromCents(k.balanceCents)}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2">
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            size="sm"
+                            className="h-9 rounded-full px-4 text-xs font-medium"
+                            disabled={isBusy}
+                            onClick={() => handleToggleSellerKey(k.id, !k.isActive)}
+                          >
+                            {k.isActive ? "Pause" : "Activate"}
+                          </Button>
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            size="sm"
+                            className="h-9 w-9 rounded-full p-0 flex items-center justify-center text-red-600 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40"
+                            disabled={isBusy}
+                            onClick={() => handleDeleteSellerKey(k.id)}
+                            aria-label="Delete key"
+                          >
+                            <Trash2 size={15} />
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
+                    {sellerKeys.length === 0 ? (
+                      <div className="py-8 text-center text-sm text-zinc-600 dark:text-zinc-400">
+                        You have not listed any keys yet. Fill the form above to start earning!
+                      </div>
+                    ) : null}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          ) : null}
 
           {page === "wallet" ? (
             <>

@@ -287,6 +287,18 @@ exports.Prisma.PromoRedemptionScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ListedApiKeyScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  provider: 'provider',
+  label: 'label',
+  apiKey: 'apiKey',
+  isActive: 'isActive',
+  balanceCents: 'balanceCents',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -367,7 +379,8 @@ exports.Prisma.ModelName = {
   StartupApplication: 'StartupApplication',
   AppConfig: 'AppConfig',
   PromoCode: 'PromoCode',
-  PromoRedemption: 'PromoRedemption'
+  PromoRedemption: 'PromoRedemption',
+  ListedApiKey: 'ListedApiKey'
 };
 
 /**

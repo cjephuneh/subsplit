@@ -14,6 +14,7 @@ import {
 import { costCentsForTokens } from "@/server/pricing";
 import { writeApiKeyUsageLog } from "@/server/usage-logs";
 import { createTransactionAndUpdateBalance } from "@/server/credits";
+import { getListedKeyProvider, calculateSellerPayout } from "@/server/seller";
 
 export const runtime = "nodejs";
 
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
       where: { key: body.model },
       select: {
         key: true,
+        provider: true,
         modelType: true,
         supportsChat: true,
         inputCentsPer1kTokens: true,
@@ -58,17 +60,41 @@ export async function POST(req: Request) {
       return jsonError(404, { error: "MODEL_NOT_FOUND", message: "Model is not available for chat." });
     }
 
-    // Build per-model override if configured, otherwise fallback to .env
-    const override: ModelEndpointOverride | null =
-      model.endpointUrl && model.apiKey
-        ? {
-          endpoint: model.endpointUrl,
-          apiKey: model.apiKey,
-          deployment: model.deploymentName ?? body.model,
-        }
-        : null;
+    const providerKey = getListedKeyProvider(model.provider);
 
-    if (override) {
+    // Find if any seller has listed an active key for this provider
+    // In case there are multiple, select one randomly to distribute usage
+    const listedKeys = await prisma.listedApiKey.findMany({
+      where: { provider: providerKey, isActive: true },
+    });
+    
+    const listedKey = listedKeys.length > 0
+      ? listedKeys[Math.floor(Math.random() * listedKeys.length)]
+      : null;
+
+    let override: ModelEndpointOverride | null = null;
+    if (listedKey) {
+      let endpoint = "https://api.openai.com/v1";
+      if (providerKey === "anthropic") endpoint = "https://api.anthropic.com";
+      else if (providerKey === "groq") endpoint = "https://api.groq.com/openai/v1";
+      else if (providerKey === "grok") endpoint = "https://api.x.ai/v1";
+
+      override = {
+        endpoint,
+        apiKey: listedKey.apiKey,
+        deployment: model.deploymentName ?? body.model,
+      };
+      
+      azureDebug = {
+        deployment: model.deploymentName?.trim() || body.model,
+        source: "per_model_endpoint",
+      };
+    } else if (model.endpointUrl && model.apiKey) {
+      override = {
+        endpoint: model.endpointUrl,
+        apiKey: model.apiKey,
+        deployment: model.deploymentName ?? body.model,
+      };
       azureDebug = {
         deployment: model.deploymentName?.trim() || body.model,
         source: "per_model_endpoint",
@@ -141,6 +167,27 @@ export async function POST(req: Request) {
       modelKey: model.key,
       note: `API call: ${model.key}`,
     });
+
+    // Credit the seller if a seller's key was used
+    if (listedKey) {
+      const sellerPayoutCents = calculateSellerPayout(costCents);
+      if (sellerPayoutCents > 0) {
+        await createTransactionAndUpdateBalance({
+          userId: listedKey.userId,
+          type: "TOP_UP",
+          amountCents: sellerPayoutCents,
+          modelKey: model.key,
+          note: `Earned from listed API key (${listedKey.label}) used by buyer`,
+        });
+
+        await prisma.listedApiKey.update({
+          where: { id: listedKey.id },
+          data: {
+            balanceCents: { increment: sellerPayoutCents },
+          },
+        });
+      }
+    }
 
     await writeApiKeyUsageLog({
       apiKeyId: key.id,
