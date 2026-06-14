@@ -11,8 +11,8 @@ export function getListedKeyProvider(modelProvider: string): string {
 }
 
 /**
- * Calculates the seller payout based on an 85% revenue share.
+ * Calculates the seller payout based on a 95% revenue share.
  */
 export function calculateSellerPayout(costCents: number): number {
-  return Math.floor(costCents * 0.85);
+  return Math.floor(costCents * 0.95);
 }

@@ -159,25 +159,29 @@ export async function POST(req: Request) {
       outputCentsPer1k: model.outputCentsPer1kTokens,
     });
 
+    const markupPercent = listedKey?.customMarkupPercent ?? 0;
+    const finalCostCents = Math.ceil(costCents * (1 + markupPercent / 100));
+
     // Direct billing to the user's master wallet
     const { wallet } = await createTransactionAndUpdateBalance({
       userId: key.userId,
       type: "SPEND",
-      amountCents: -costCents,
+      amountCents: -finalCostCents,
       modelKey: model.key,
       note: `API call: ${model.key}`,
     });
 
     // Credit the seller if a seller's key was used
     if (listedKey) {
-      const sellerPayoutCents = calculateSellerPayout(costCents);
+      // 5% goes to Subsplit, 95% goes to the seller
+      const sellerPayoutCents = Math.floor(finalCostCents * 0.95);
       if (sellerPayoutCents > 0) {
         await createTransactionAndUpdateBalance({
           userId: listedKey.userId,
           type: "TOP_UP",
           amountCents: sellerPayoutCents,
           modelKey: model.key,
-          note: `Earned from listed API key (${listedKey.label}) used by buyer`,
+          note: `Earned from listed API key (${listedKey.label}) used by buyer (95% split of KES ${(finalCostCents/100).toFixed(2)})`,
         });
 
         await prisma.listedApiKey.update({

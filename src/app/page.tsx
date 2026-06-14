@@ -29,15 +29,15 @@ function Hero() {
     <section className="relative mx-auto max-w-6xl px-4 pt-16 pb-10 sm:px-6 sm:pt-20">
       <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/70 px-4 py-2 text-sm text-zinc-700 shadow-sm backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-200">
         <Sparkles size={16} aria-hidden="true" />
-        Tokenized AI access, secured.
+        Tokenized AI access & marketplace, secured.
       </div>
       <div className="mt-6 grid gap-10 lg:grid-cols-2 lg:items-center">
         <div className="space-y-6">
-          <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-5xl">
-            Buy AI credits with as low as 100 KES from M-Pesa or bank.
+          <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 dark:text-zinc-50 sm:text-5xl leading-tight">
+            Buy AI credits or sell your unused API keys.
           </h1>
           <p className="max-w-xl text-lg leading-8 text-zinc-700 dark:text-zinc-300">
-            Subsplit provides a drop-in API gateway. Access <span className="font-medium">GPT-4</span>, <span className="font-medium">Claude 3.5 Sonnet</span>, and <span className="font-medium">Grok</span> with a single balance—featuring automatic leak protection and low-balance alerts.
+            Subsplit provides a drop-in API gateway and marketplace. Access <span className="font-medium">GPT-4</span>, <span className="font-medium">Claude 3.5 Sonnet</span>, and <span className="font-medium">Grok</span> with a single balance—or list your developer keys to earn passive income.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link
@@ -49,11 +49,11 @@ function Hero() {
               <ArrowRight size={18} aria-hidden="true" className="transition-transform group-hover:translate-x-0.5" />
             </Link>
             <Link
-              href="/auth/login"
+              href="/sell"
               className="inline-flex h-12 items-center justify-center rounded-full border border-zinc-200 bg-white/70 px-6 text-base font-medium text-zinc-900 shadow-sm backdrop-blur transition-colors hover:bg-white dark:border-zinc-800 dark:bg-zinc-950/60 dark:text-zinc-50 dark:hover:bg-zinc-950"
-              aria-label="Sign in"
+              aria-label="Learn about selling API keys"
             >
-              Sign in
+              Sell API keys
             </Link>
           </div>
           <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -200,7 +200,7 @@ function SellApiKeysCta() {
             </p>
           </div>
           <Link
-            href="/dashboard"
+            href="/sell"
             className="inline-flex h-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-600 to-teal-600 px-6 text-base font-medium text-white transition-all hover:from-emerald-700 hover:to-teal-700 shadow-lg hover:shadow-xl"
           >
             Sell API Keys

@@ -145,12 +145,13 @@ export function DashboardClient(props: Props) {
     const provider = String(fd.get("provider") ?? "");
     const label = String(fd.get("label") ?? "").trim();
     const apiKey = String(fd.get("apiKey") ?? "").trim();
+    const customMarkupPercent = Number(fd.get("customMarkupPercent") ?? 0);
 
     try {
       const res = await fetch("/api/seller/keys", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ provider, label, apiKey }),
+        body: JSON.stringify({ provider, label, apiKey, customMarkupPercent }),
       });
       const json = await res.json();
       if (!res.ok) throw new Error(json.message ?? "Unable to list key.");
@@ -176,6 +177,25 @@ export function DashboardClient(props: Props) {
       await refreshSellerData();
     } catch (err) {
       console.error(err);
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  async function handleUpdateSellerKeyMarkup(id: string, customMarkupPercent: number) {
+    setIsBusy(true);
+    try {
+      const res = await fetch("/api/seller/keys", {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id, customMarkupPercent }),
+      });
+      if (!res.ok) throw new Error("Unable to update markup percentage.");
+      setSellerMessage("Key markup updated successfully!");
+      await refreshSellerData();
+    } catch (err) {
+      console.error(err);
+      setSellerMessage(err instanceof Error ? err.message : "Unable to update markup.");
     } finally {
       setIsBusy(false);
     }
@@ -649,10 +669,10 @@ export function DashboardClient(props: Props) {
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-purple-950 dark:text-purple-50">
-                      85% <span className="text-sm font-normal text-zinc-500">share</span>
+                      95% <span className="text-sm font-normal text-zinc-500">share</span>
                     </div>
                     <p className="text-[11px] text-purple-700 dark:text-purple-400 mt-1">
-                      You receive 85% of Subsplit token charges.
+                      You keep 95% of usage spend; 5% goes to Subsplit.
                     </p>
                   </CardContent>
                 </Card>
@@ -684,9 +704,22 @@ export function DashboardClient(props: Props) {
                         </select>
                       </div>
 
-                      <div className="space-y-1 sm:col-span-2">
+                      <div className="space-y-1">
                         <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Key Label</label>
                         <Input name="label" placeholder="e.g. My OpenAI production key" required />
+                      </div>
+
+                      <div className="space-y-1">
+                        <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Price Markup (%)</label>
+                        <Input
+                          name="customMarkupPercent"
+                          type="number"
+                          min="0"
+                          max="500"
+                          defaultValue="0"
+                          placeholder="e.g. 15 for 15% markup"
+                          required
+                        />
                       </div>
                     </div>
 
@@ -738,9 +771,38 @@ export function DashboardClient(props: Props) {
                           <div className="mt-1 font-mono text-xs text-zinc-500 dark:text-zinc-400">
                             Key: {k.apiKeyMasked} • Listed {new Date(k.createdAt).toLocaleDateString()}
                           </div>
-                          <div className="mt-2 text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                            <DollarSign size={12} />
-                            Earnings: {formatCreditsFromCents(k.balanceCents)}
+                          <div className="mt-2 text-xs flex flex-wrap items-center gap-x-3 gap-y-1 text-zinc-600 dark:text-zinc-400">
+                            <span className="flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400">
+                              <DollarSign size={12} />
+                              Earnings (95% share): {formatCreditsFromCents(k.balanceCents)}
+                            </span>
+                            <span>•</span>
+                            <span className="flex items-center gap-1">
+                              Markup: <span className="font-semibold text-zinc-950 dark:text-zinc-50">{k.customMarkupPercent}%</span>
+                            </span>
+                          </div>
+                          <div className="mt-3 flex flex-wrap items-center gap-2">
+                            <label className="text-[11px] font-medium text-zinc-500">Edit Markup %:</label>
+                            <input
+                              type="number"
+                              min="0"
+                              max="500"
+                              defaultValue={k.customMarkupPercent}
+                              onBlur={async (e) => {
+                                const val = Number(e.target.value);
+                                if (val === k.customMarkupPercent) return;
+                                await handleUpdateSellerKeyMarkup(k.id, val);
+                              }}
+                              onKeyDown={async (e) => {
+                                if (e.key === "Enter") {
+                                  const val = Number((e.target as HTMLInputElement).value);
+                                  await handleUpdateSellerKeyMarkup(k.id, val);
+                                }
+                              }}
+                              className="h-7 w-20 rounded-lg border border-zinc-200 bg-white px-2 text-xs text-zinc-900 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50"
+                              disabled={isBusy}
+                            />
+                            <span className="text-[10px] text-zinc-400">Press Enter or click away to save</span>
                           </div>
                         </div>
 

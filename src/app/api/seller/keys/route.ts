@@ -20,6 +20,7 @@ export async function GET() {
       label: k.label,
       isActive: k.isActive,
       balanceCents: k.balanceCents,
+      customMarkupPercent: k.customMarkupPercent,
       createdAt: k.createdAt,
       apiKeyMasked: k.apiKey.length > 8 ? `${k.apiKey.slice(0, 4)}...${k.apiKey.slice(-4)}` : "...",
     }));
@@ -36,6 +37,7 @@ const CreateBodySchema = z.object({
   provider: z.enum(["openai", "anthropic", "groq", "grok"]),
   label: z.string().min(2).max(40),
   apiKey: z.string().min(5).max(200),
+  customMarkupPercent: z.number().int().min(0).max(500).optional().default(0),
 });
 
 export async function POST(req: Request) {
@@ -50,6 +52,7 @@ export async function POST(req: Request) {
         label: body.label,
         apiKey: body.apiKey,
         isActive: true,
+        customMarkupPercent: body.customMarkupPercent,
       },
     });
 
@@ -61,6 +64,7 @@ export async function POST(req: Request) {
         label: created.label,
         isActive: created.isActive,
         balanceCents: created.balanceCents,
+        customMarkupPercent: created.customMarkupPercent,
         createdAt: created.createdAt,
       },
     });
@@ -79,15 +83,16 @@ export async function POST(req: Request) {
   }
 }
 
-const ToggleBodySchema = z.object({
+const UpdateBodySchema = z.object({
   id: z.string().min(1),
-  isActive: z.boolean(),
+  isActive: z.boolean().optional(),
+  customMarkupPercent: z.number().int().min(0).max(500).optional(),
 });
 
 export async function PUT(req: Request) {
   try {
     const user = await requireSessionUser();
-    const body = await parseJson(req, ToggleBodySchema);
+    const body = await parseJson(req, UpdateBodySchema);
 
     const existing = await prisma.listedApiKey.findUnique({
       where: { id: body.id },
@@ -97,9 +102,13 @@ export async function PUT(req: Request) {
       return jsonError(404, { error: "KEY_NOT_FOUND", message: "Key not found." });
     }
 
+    const dataToUpdate: any = {};
+    if (body.isActive !== undefined) dataToUpdate.isActive = body.isActive;
+    if (body.customMarkupPercent !== undefined) dataToUpdate.customMarkupPercent = body.customMarkupPercent;
+
     const updated = await prisma.listedApiKey.update({
       where: { id: body.id },
-      data: { isActive: body.isActive },
+      data: dataToUpdate,
     });
 
     return Response.json({
@@ -107,6 +116,7 @@ export async function PUT(req: Request) {
       key: {
         id: updated.id,
         isActive: updated.isActive,
+        customMarkupPercent: updated.customMarkupPercent,
       },
     });
   } catch (err) {

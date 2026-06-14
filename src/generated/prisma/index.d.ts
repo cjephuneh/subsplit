@@ -17598,10 +17598,12 @@ export namespace Prisma {
 
   export type ListedApiKeyAvgAggregateOutputType = {
     balanceCents: number | null
+    customMarkupPercent: number | null
   }
 
   export type ListedApiKeySumAggregateOutputType = {
     balanceCents: number | null
+    customMarkupPercent: number | null
   }
 
   export type ListedApiKeyMinAggregateOutputType = {
@@ -17612,6 +17614,7 @@ export namespace Prisma {
     apiKey: string | null
     isActive: boolean | null
     balanceCents: number | null
+    customMarkupPercent: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17624,6 +17627,7 @@ export namespace Prisma {
     apiKey: string | null
     isActive: boolean | null
     balanceCents: number | null
+    customMarkupPercent: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -17636,6 +17640,7 @@ export namespace Prisma {
     apiKey: number
     isActive: number
     balanceCents: number
+    customMarkupPercent: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -17644,10 +17649,12 @@ export namespace Prisma {
 
   export type ListedApiKeyAvgAggregateInputType = {
     balanceCents?: true
+    customMarkupPercent?: true
   }
 
   export type ListedApiKeySumAggregateInputType = {
     balanceCents?: true
+    customMarkupPercent?: true
   }
 
   export type ListedApiKeyMinAggregateInputType = {
@@ -17658,6 +17665,7 @@ export namespace Prisma {
     apiKey?: true
     isActive?: true
     balanceCents?: true
+    customMarkupPercent?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17670,6 +17678,7 @@ export namespace Prisma {
     apiKey?: true
     isActive?: true
     balanceCents?: true
+    customMarkupPercent?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -17682,6 +17691,7 @@ export namespace Prisma {
     apiKey?: true
     isActive?: true
     balanceCents?: true
+    customMarkupPercent?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -17781,6 +17791,7 @@ export namespace Prisma {
     apiKey: string
     isActive: boolean
     balanceCents: number
+    customMarkupPercent: number
     createdAt: Date
     updatedAt: Date
     _count: ListedApiKeyCountAggregateOutputType | null
@@ -17812,6 +17823,7 @@ export namespace Prisma {
     apiKey?: boolean
     isActive?: boolean
     balanceCents?: boolean
+    customMarkupPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -17825,6 +17837,7 @@ export namespace Prisma {
     apiKey?: boolean
     isActive?: boolean
     balanceCents?: boolean
+    customMarkupPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -17838,6 +17851,7 @@ export namespace Prisma {
     apiKey?: boolean
     isActive?: boolean
     balanceCents?: boolean
+    customMarkupPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -17851,11 +17865,12 @@ export namespace Prisma {
     apiKey?: boolean
     isActive?: boolean
     balanceCents?: boolean
+    customMarkupPercent?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ListedApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "provider" | "label" | "apiKey" | "isActive" | "balanceCents" | "createdAt" | "updatedAt", ExtArgs["result"]["listedApiKey"]>
+  export type ListedApiKeyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "provider" | "label" | "apiKey" | "isActive" | "balanceCents" | "customMarkupPercent" | "createdAt" | "updatedAt", ExtArgs["result"]["listedApiKey"]>
   export type ListedApiKeyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -17879,6 +17894,7 @@ export namespace Prisma {
       apiKey: string
       isActive: boolean
       balanceCents: number
+      customMarkupPercent: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["listedApiKey"]>
@@ -18312,6 +18328,7 @@ export namespace Prisma {
     readonly apiKey: FieldRef<"ListedApiKey", 'String'>
     readonly isActive: FieldRef<"ListedApiKey", 'Boolean'>
     readonly balanceCents: FieldRef<"ListedApiKey", 'Int'>
+    readonly customMarkupPercent: FieldRef<"ListedApiKey", 'Int'>
     readonly createdAt: FieldRef<"ListedApiKey", 'DateTime'>
     readonly updatedAt: FieldRef<"ListedApiKey", 'DateTime'>
   }
@@ -18961,6 +18978,7 @@ export namespace Prisma {
     apiKey: 'apiKey',
     isActive: 'isActive',
     balanceCents: 'balanceCents',
+    customMarkupPercent: 'customMarkupPercent',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -20271,6 +20289,7 @@ export namespace Prisma {
     apiKey?: StringFilter<"ListedApiKey"> | string
     isActive?: BoolFilter<"ListedApiKey"> | boolean
     balanceCents?: IntFilter<"ListedApiKey"> | number
+    customMarkupPercent?: IntFilter<"ListedApiKey"> | number
     createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
     updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -20284,6 +20303,7 @@ export namespace Prisma {
     apiKey?: SortOrder
     isActive?: SortOrder
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -20300,6 +20320,7 @@ export namespace Prisma {
     apiKey?: StringFilter<"ListedApiKey"> | string
     isActive?: BoolFilter<"ListedApiKey"> | boolean
     balanceCents?: IntFilter<"ListedApiKey"> | number
+    customMarkupPercent?: IntFilter<"ListedApiKey"> | number
     createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
     updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -20313,6 +20334,7 @@ export namespace Prisma {
     apiKey?: SortOrder
     isActive?: SortOrder
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ListedApiKeyCountOrderByAggregateInput
@@ -20333,6 +20355,7 @@ export namespace Prisma {
     apiKey?: StringWithAggregatesFilter<"ListedApiKey"> | string
     isActive?: BoolWithAggregatesFilter<"ListedApiKey"> | boolean
     balanceCents?: IntWithAggregatesFilter<"ListedApiKey"> | number
+    customMarkupPercent?: IntWithAggregatesFilter<"ListedApiKey"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ListedApiKey"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ListedApiKey"> | Date | string
   }
@@ -21553,6 +21576,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutListedApiKeysInput
@@ -21566,6 +21590,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21577,6 +21602,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutListedApiKeysNestedInput
@@ -21590,6 +21616,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21602,6 +21629,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21613,6 +21641,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21625,6 +21654,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22654,12 +22684,14 @@ export namespace Prisma {
     apiKey?: SortOrder
     isActive?: SortOrder
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ListedApiKeyAvgOrderByAggregateInput = {
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
   }
 
   export type ListedApiKeyMaxOrderByAggregateInput = {
@@ -22670,6 +22702,7 @@ export namespace Prisma {
     apiKey?: SortOrder
     isActive?: SortOrder
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -22682,12 +22715,14 @@ export namespace Prisma {
     apiKey?: SortOrder
     isActive?: SortOrder
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type ListedApiKeySumOrderByAggregateInput = {
     balanceCents?: SortOrder
+    customMarkupPercent?: SortOrder
   }
 
   export type ApiKeyCreateNestedManyWithoutUserInput = {
@@ -24096,6 +24131,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24107,6 +24143,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24438,6 +24475,7 @@ export namespace Prisma {
     apiKey?: StringFilter<"ListedApiKey"> | string
     isActive?: BoolFilter<"ListedApiKey"> | boolean
     balanceCents?: IntFilter<"ListedApiKey"> | number
+    customMarkupPercent?: IntFilter<"ListedApiKey"> | number
     createdAt?: DateTimeFilter<"ListedApiKey"> | Date | string
     updatedAt?: DateTimeFilter<"ListedApiKey"> | Date | string
   }
@@ -25866,6 +25904,7 @@ export namespace Prisma {
     apiKey: string
     isActive?: boolean
     balanceCents?: number
+    customMarkupPercent?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26184,6 +26223,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26195,6 +26235,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26206,6 +26247,7 @@ export namespace Prisma {
     apiKey?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     balanceCents?: IntFieldUpdateOperationsInput | number
+    customMarkupPercent?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

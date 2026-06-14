@@ -295,6 +295,7 @@ exports.Prisma.ListedApiKeyScalarFieldEnum = {
   apiKey: 'apiKey',
   isActive: 'isActive',
   balanceCents: 'balanceCents',
+  customMarkupPercent: 'customMarkupPercent',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

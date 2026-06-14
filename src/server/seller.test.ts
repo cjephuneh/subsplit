@@ -25,15 +25,15 @@ describe("seller helpers", () => {
   });
 
   describe("calculateSellerPayout", () => {
-    it("Happy Path: calculates exactly 85% of cost", () => {
-      expect(calculateSellerPayout(100)).toBe(85);
-      expect(calculateSellerPayout(200)).toBe(170);
+    it("Happy Path: calculates exactly 95% of cost", () => {
+      expect(calculateSellerPayout(100)).toBe(95);
+      expect(calculateSellerPayout(200)).toBe(190);
     });
 
     it("Edge Case: uses floor rounding on decimal cents", () => {
-      expect(calculateSellerPayout(1)).toBe(0); // 0.85 -> 0
-      expect(calculateSellerPayout(5)).toBe(4); // 4.25 -> 4
-      expect(calculateSellerPayout(10)).toBe(8); // 8.5 -> 8
+      expect(calculateSellerPayout(1)).toBe(0); // 0.95 -> 0
+      expect(calculateSellerPayout(5)).toBe(4); // 4.75 -> 4
+      expect(calculateSellerPayout(10)).toBe(9); // 9.5 -> 9
     });
   });
 });
